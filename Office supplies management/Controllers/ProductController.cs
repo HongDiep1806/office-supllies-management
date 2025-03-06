@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Office_supplies_management.DTOs.Product;
+using Office_supplies_management.Features.Product.Queries;
 using Office_supplies_management.Features.Products.Commands;
 using Office_supplies_management.Features.Products.Queries;
 using System.Threading.Tasks;
@@ -26,6 +27,12 @@ namespace Office_supplies_management.Controllers
             var query = new GetAllProductsQuery();
             var products = await _mediator.Send(query);
             return Ok(products);
+        }
+
+        [HttpGet("allproductsincludedeleted")]
+        public async Task<IActionResult> AllProducts()
+        {
+            return Ok(await _mediator.Send(new AllProductsQuery()));
         }
 
         [HttpGet("{id}")]

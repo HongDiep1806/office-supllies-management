@@ -9,5 +9,8 @@ public interface IBaseRepository<T> where T : BaseEntity
     Task CreateAsync(T entity);
     Task<bool> UpdateAsync(int id,T entity);
     Task<bool> DeleteAsync(int id);
-    Task<bool> AddRanges (List<T> ranges);  
+    Task<bool> DeleteForever(int id);
+    Task<bool> AddRanges (List<T> ranges);
+    Task<int> Count();
+    Task<List<T>> AllAsync();   
 }

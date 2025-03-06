@@ -4,6 +4,7 @@ using Office_supplies_management.DTOs.Product;
 using Office_supplies_management.DTOs.Request;
 using Office_supplies_management.Models;
 using Office_supplies_management.Repositories;
+using System.Net;
 
 namespace Office_supplies_management.Services
 {
@@ -50,8 +51,19 @@ namespace Office_supplies_management.Services
 
         public async Task<RequestDto> GetByID(int id)
         {
-           var request = await _requestRepository.GetByIdAsync(id);
-            return _mapper.Map<RequestDto>(request);
+            var request = await _requestRepository.GetByIdAsync(id);
+            var productsInRequest = await _productRequestService.GetByRequestID(request.RequestID);
+            var requestDto = _mapper.Map<RequestDto>(request);
+            requestDto.Product_Requests = productsInRequest;
+            if (productsInRequest.Count > 0)
+            {
+                Console.WriteLine("co san pham ne");
+            }
+            else
+            {
+                Console.WriteLine("khong co san pham");
+            }
+            return requestDto;
         }
 
         public async Task<List<RequestDto>> GetByUserID(int userId)
@@ -61,9 +73,41 @@ namespace Office_supplies_management.Services
             return _mapper.Map<List<RequestDto>>(requestsOfUser);
         }
 
-        public Task<RequestDto> Update(RequestDto updateRequest)
+        public async Task<bool> Update(UpdateRequestDto updateRequest)
         {
-            throw new NotImplementedException();
+            var currentRequest = await GetByID(updateRequest.RequestID);
+            var prs = await _productRequestService.GetByRequestID(updateRequest.RequestID);
+            if (prs != null)
+            {
+                foreach (var pr in prs)
+                {
+                    await _productRequestService.DeleteForever(pr.Product_RequestID);
+                }
+                var productRequests = updateRequest.Products
+                                               .Select(p => new Product_Request
+                                               {
+                                                   RequestID=updateRequest.RequestID,
+                                                   ProductID = p.ProductID,
+                                                   Quantity = p.Quantity,
+                                                   
+                                               }).ToList();
+                await _productRequestService.AddRanges(productRequests);
+            }
+            else
+            {
+                return false;   
+            }
+            return await _requestRepository.UpdateAsync(updateRequest.RequestID, _mapper.Map<Models.Request>(updateRequest));
+         }
+
+        public async Task<bool> DeleteByID(int id)
+        {
+            return await _requestRepository.DeleteAsync(id);
+        }
+
+        public Task<int> Count()
+        {
+            return _requestRepository.Count();
         }
     }
 }

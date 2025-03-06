@@ -11,6 +11,7 @@ namespace Office_supplies_management.Mappings
             CreateMap<RequestDto, Request>();
             CreateMap<Request, RequestDto>();
             CreateMap<CreateRequestDto, Request>();
+            CreateMap<UpdateRequestDto, Request>();
         }
     }
 }

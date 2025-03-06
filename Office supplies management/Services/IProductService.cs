@@ -6,8 +6,9 @@ namespace Office_supplies_management.Services
 {
     public interface IProductService
     {
-        Task<List<ProductRequestDto>> GetAll();
-        Task<ProductRequestDto> GetById(int id);
+        Task<List<ProductDto>> GetAll();
+        Task<List<ProductDto>> AllItems();
+        Task<ProductDto> GetById(int id);
         Task<bool> Create(CreateProductDto request);
         Task<bool> Delete(int productId);
         Task<bool> Update(UpdateProductDto request);

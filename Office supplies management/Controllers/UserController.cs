@@ -37,6 +37,13 @@ namespace Office_supplies_management.Controllers
             var user = await _mediator.Send(query);
             return Ok(user);
         }
+        [HttpGet("getbyid/{id}")]
+        public async Task<IActionResult> GetById (int id)
+        {
+            var query = new GetUserByIdQuery(id);   
+            var user = await _mediator.Send(query); 
+            return Ok(user);
+        }
 
     }
 }

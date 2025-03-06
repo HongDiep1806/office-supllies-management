@@ -8,7 +8,7 @@ using Office_supplies_management.DTOs.Product;
 
 namespace Office_supplies_management.Features.Products.Handlers
 {
-    public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, List<ProductRequestDto>>
+    public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, List<ProductDto>>
     {
         private readonly IProductService _productService;
         public GetAllProductsQueryHandler(IProductService productService)
@@ -17,7 +17,7 @@ namespace Office_supplies_management.Features.Products.Handlers
            
         }
 
-        public async Task<List<ProductRequestDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+        public async Task<List<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
             return await _productService.GetAll();
         }

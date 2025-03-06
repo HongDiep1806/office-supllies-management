@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Office_supplies_management.Features.Products.Queries
 {
-    public class GetAllProductsQuery : IRequest<List<ProductRequestDto>>
+    public class GetAllProductsQuery : IRequest<List<ProductDto>>
     {
     }
 }

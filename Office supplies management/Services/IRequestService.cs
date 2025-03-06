@@ -8,6 +8,8 @@ namespace Office_supplies_management.Services
         Task<RequestDto> Create(CreateRequestDto createRequest);
         Task<List<RequestDto>> GetAll ();   
         Task<RequestDto> GetByID(int id);
-        Task<RequestDto> Update(RequestDto updateRequest);
+        Task<bool> Update(UpdateRequestDto updateRequest);
+        Task<bool> DeleteByID(int id);
+        Task<int> Count();
     }
 }

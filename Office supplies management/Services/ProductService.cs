@@ -32,17 +32,16 @@ namespace Office_supplies_management.Services
 
         }
 
-        public async Task<List<ProductRequestDto>> GetAll()
+        public async Task<List<ProductDto>> GetAll()
         {
             var products = await _productRepository.GetAllAsync();
-            var results = products.Where(p => p.IsDeleted == false).ToList();
-            return _mapper.Map<List<ProductRequestDto>>(results);
+            return _mapper.Map<List<ProductDto>>(products);
         }
 
-        public async Task<ProductRequestDto> GetById(int id)
+        public async Task<ProductDto> GetById(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
-            return _mapper.Map<ProductRequestDto>(product);
+            return _mapper.Map<ProductDto>(product);
         }
 
         public async Task<bool> Update(UpdateProductDto dto)
@@ -64,6 +63,12 @@ namespace Office_supplies_management.Services
                 return true;
             }
             return false;
+        }
+
+        public async Task<List<ProductDto>> AllItems()
+        {
+            var products = await _productRepository.AllAsync();
+            return _mapper.Map<List<ProductDto>>(products);
         }
     }
 }

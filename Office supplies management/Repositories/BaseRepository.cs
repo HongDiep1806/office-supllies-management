@@ -20,7 +20,14 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 
     public async Task<List<T>> GetAllAsync()
     {
-        return await _context.Set<T>().ToListAsync();
+        var allitems = await _context.Set<T>().ToListAsync();
+        return allitems.Where(a => a.IsDeleted==false).ToList();
+    }
+
+    public async Task<int> Count()
+    {
+        var allitems = await _context.Set<T>().ToListAsync();
+        return allitems.Count();
     }
 
     public async Task CreateAsync(T entity)
@@ -68,7 +75,21 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 
     public async Task<bool> AddRanges(List<T> ranges)
     {
-        await _context.AddRangeAsync(ranges);
+        await _context.Set<T>().AddRangeAsync(ranges);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<List<T>> AllAsync()
+    {
+        var allitems = await _context.Set<T>().ToListAsync();
+        return allitems;
+    }
+
+    public async Task<bool> DeleteForever(int id)
+    {
+        var entity = await GetByIdAsync(id);
+         _context.Set<T>().Remove(entity); 
         await _context.SaveChangesAsync();
         return true;
     }

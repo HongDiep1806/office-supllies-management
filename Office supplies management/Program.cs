@@ -68,9 +68,9 @@ namespace Office_supplies_management
 
             // Configure database context
             builder.Services.AddDbContext<Context>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
+     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+         sqlOptions => sqlOptions.CommandTimeout(180))); // 180 seconds timeout
+
 
             // Register repositories and services
             builder.Services.AddScoped<IBaseRepository<Product>, BaseRepository<Product>>();

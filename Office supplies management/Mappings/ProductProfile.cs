@@ -8,7 +8,7 @@ namespace Office_supplies_management.Mappings
     {
         public ProductProfile()
         {
-            CreateMap<Product, ProductRequestDto>();
+            CreateMap<Product, ProductDto>();
             CreateMap<CreateProductDto, Product>();
             CreateMap<UpdateProductDto, Product>();
         }

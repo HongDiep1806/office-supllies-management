@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Office_supplies_management.DTOs.Request;
 using Office_supplies_management.Features.Request.Commands;
@@ -18,6 +19,7 @@ namespace Office_supplies_management.Controllers
         {
             _mediator = mediator;
         }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateRequestDto request)
         {
@@ -29,9 +31,12 @@ namespace Office_supplies_management.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRequestsByUserID(int id)
         {
+            // if user role has "Leader" in it, return all requests for user within same department of the leader
+            // get user role by id first
             var requests = await _mediator.Send(new GetRequestsByUserIDQuery(id));
             return Ok(requests);
         }
+
         [HttpGet("count")]
         public async Task<IActionResult> GetRequestNumber()
         {
@@ -39,6 +44,7 @@ namespace Office_supplies_management.Controllers
             var number = await _mediator.Send(query);
             return Ok(number);
         }
+
         [HttpGet("getbyid/{id}")]
         public async Task<IActionResult> GetRequestByID(int id)
         {
@@ -46,6 +52,7 @@ namespace Office_supplies_management.Controllers
             var request = await _mediator.Send(query);
             return Ok(request);
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -60,17 +67,27 @@ namespace Office_supplies_management.Controllers
                 return BadRequest();
             }
         }
+
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateRequestDto updateRequestDto)
         {
-            var commmand = new UpdateRequestCommand(updateRequestDto);
-            var result = await _mediator.Send(commmand);
+            var command = new UpdateRequestCommand(updateRequestDto);
+            var result = await _mediator.Send(command);
             if (result)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
+        [HttpGet("department/{departmentName}")]
+        [Authorize(Policy = "DepartmentQuery")]
+        public async Task<IActionResult> GetRequestsByDepartment(string departmentName)
+        {
+            var query = new GetRequestsByDepartmentQuery(departmentName);
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
+        }
+
     }
 }
-    

@@ -41,15 +41,37 @@ namespace Office_supplies_management
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
                 };
+
+                // 🛠️ Add this logging code to check if `sub` is available
+                options.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context =>
+                    {
+                        Console.WriteLine("✅ Token Validated Successfully");
+                        foreach (var claim in context.Principal.Claims)
+                        {
+                            Console.WriteLine($"Claim: {claim.Type} => {claim.Value}");
+                        }
+                        return Task.CompletedTask;
+                    },
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine($"❌ Authentication Failed: {context.Exception.Message}");
+                        return Task.CompletedTask;
+                    }
+                };
             });
+
+
             builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireFinanceEmployee", policy =>
                     policy.RequireClaim("Permission", "CanCreateProduct"));
                 options.AddPolicy("AllRolesCanAccess", policy =>
                     policy.RequireClaim("Permission", "CanViewProduct"));
+                options.AddPolicy("DepartmentQuery", policy =>
+                    policy.RequireClaim("Permission", "ViewUsersDepartment"));
             });
-
 
             builder.Services.AddMediatR(cfg => cfg.AsScoped(), typeof(Program).Assembly);
 
@@ -60,23 +82,20 @@ namespace Office_supplies_management
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            //
             builder.Services.AddAutoMapper(typeof(ProductProfile));
             builder.Services.AddAutoMapper(typeof(UserProfile));
             builder.Services.AddAutoMapper(typeof(RequestProfile));
 
-
             // Configure database context
             builder.Services.AddDbContext<Context>(options =>
-     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-         sqlOptions => sqlOptions.CommandTimeout(180))); // 180 seconds timeout
-
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                    sqlOptions => sqlOptions.CommandTimeout(180))); // 180 seconds timeout
 
             // Register repositories and services
             builder.Services.AddScoped<IBaseRepository<Product>, BaseRepository<Product>>();
             builder.Services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
-            builder.Services.AddScoped<IBaseRepository<UserType>, BaseRepository<UserType>>();  
-            builder.Services.AddScoped<IBaseRepository<UserType_Permission>, BaseRepository<UserType_Permission>>(); 
+            builder.Services.AddScoped<IBaseRepository<UserType>, BaseRepository<UserType>>();
+            builder.Services.AddScoped<IBaseRepository<UserType_Permission>, BaseRepository<UserType_Permission>>();
             builder.Services.AddScoped<IBaseRepository<Permission>, BaseRepository<Permission>>();
             builder.Services.AddScoped<IBaseRepository<Request>, BaseRepository<Request>>();
             builder.Services.AddScoped<IBaseRepository<Product_Request>, BaseRepository<Product_Request>>();
@@ -98,7 +117,6 @@ namespace Office_supplies_management
             builder.Services.AddScoped<IRequestService, RequestService>();
             builder.Services.AddScoped<IProduct_RequestService, Product_RequestService>();
 
-
             // Configure CORS
             builder.Services.AddCors(options =>
             {
@@ -110,15 +128,14 @@ namespace Office_supplies_management
                 });
             });
 
-            //
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Office Supplies API", Version = "v1" });
 
-                // Cấu hình JWT trong Swagger
+                // Configure JWT in Swagger
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = "Nhập token vào ô bên dưới (không cần chữ 'Bearer ' phía trước)",
+                    Description = "Enter token in the text input below (do not include 'Bearer ' prefix)",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.Http,
@@ -126,25 +143,21 @@ namespace Office_supplies_management
                 });
 
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
-            },
-            Array.Empty<string>()
-        }
-    });
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
-
-
 
             var app = builder.Build();
 
             // Use CORS
             app.UseCors("AllowSpecificOrigin");
-
-           
 
             // Configure the HTTP request pipeline
             if (app.Environment.IsDevelopment())
@@ -162,7 +175,6 @@ namespace Office_supplies_management
             // Authentication and Authorization
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             // Map controllers (API endpoints)
             app.MapControllers();

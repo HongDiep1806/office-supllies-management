@@ -5,6 +5,7 @@ using Office_supplies_management.DTOs.Request;
 using Office_supplies_management.Features.Request.Commands;
 using Office_supplies_management.Features.Request.Queries;
 using Office_supplies_management.Models;
+using Office_supplies_management.Services;
 using System.Formats.Asn1;
 using System.Security.Cryptography.Xml;
 
@@ -26,6 +27,13 @@ namespace Office_supplies_management.Controllers
             var command = new AddRequestCommand(request);
             var createdRequest = await _mediator.Send(command);
             return Ok(createdRequest);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllRequest()
+        {
+            var query = new GetAllRequestQuery();
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
         }
 
         [HttpGet("{id}")]
@@ -87,6 +95,20 @@ namespace Office_supplies_management.Controllers
             var query = new GetRequestsByDepartmentQuery(departmentName);
             var requests = await _mediator.Send(query);
             return Ok(requests);
+        }
+        [HttpPut("approveByDepLeader/{requestId}")]
+        public async Task<IActionResult> ApproveRequestByDepLeader(int requestId)
+        {
+            var command = new ApproveRequestByDepLeaderCommand(requestId);  
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest("Can not find request by id");
+            }
         }
 
     }

@@ -144,41 +144,24 @@ namespace Office_supplies_management.Services
         public async Task<List<RequestDto>> GetApprovedRequestsByDepLeader()
         {
             var requests = await _requestRepository.GetAllAsync();
-            var approvedRequests = requests.Where(r => r.IsApprovedByDepLead).ToList();
+            var approvedRequests = requests.Where(r => r.IsProcessedByDepLead==true && r.IsApprovedByDepLead == true).ToList();
             return _mapper.Map<List<RequestDto>>(approvedRequests);
         }
 
-        public async Task<bool> ApproveRequestSupLead(int requestId, int userId)
+        public async Task<bool> ApproveByFinEmployee(int requestId)
         {
             var requestEntity = await _requestRepository.GetByIdAsync(requestId);
-            if (requestEntity == null || requestEntity.UserID != userId)
-            {
-                return false;
-            }
-
-            requestEntity.IsApprovedBySupLead = true;
-            return await _requestRepository.UpdateAsync(requestId, requestEntity);
-        }
-
-        public async Task<bool> ApproveRequestSupLead(ApproveRequestSupLeadCommand command)
-        {
-            var requestEntity = await _requestRepository.GetByIdAsync(command.RequestId);
             if (requestEntity == null)
             {
                 return false;
             }
 
-            // Check if the request is already approved by the department leader
-            if (!requestEntity.IsApprovedByDepLead)
-            {
-                return false;
-            }
-
-            // Allow Finance Management Employee to approve the request
             requestEntity.IsApprovedBySupLead = true;
-            return await _requestRepository.UpdateAsync(command.RequestId, requestEntity);
+            await _requestRepository.UpdateAsync(requestId, requestEntity);
+            return true;
         }
-        public async Task<List<RequestDto>> GetAllRequestsForSupLeader()
+
+        public async Task<List<RequestDto>> GetAllRequestsForFinEmployee()
         {
             var requests = await _requestRepository.GetAllAsync();
             return _mapper.Map<List<RequestDto>>(requests);

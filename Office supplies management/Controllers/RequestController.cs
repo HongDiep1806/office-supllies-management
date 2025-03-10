@@ -6,8 +6,9 @@ using Office_supplies_management.Features.Request.Commands;
 using Office_supplies_management.Features.Request.Queries;
 using Office_supplies_management.Models;
 using System.Formats.Asn1;
+using System.Security.Claims;
 using System.Security.Cryptography.Xml;
-
+using System.IdentityModel.Tokens.Jwt;
 namespace Office_supplies_management.Controllers
 {
     [Route("/[controller]")]
@@ -88,6 +89,25 @@ namespace Office_supplies_management.Controllers
             var requests = await _mediator.Send(query);
             return Ok(requests);
         }
+        [HttpPost("approve-request/{requestId}")]
+        [Authorize(Policy = "DepartmentQuery")]
+        public async Task<IActionResult> ApproveRequestDepLeader(int requestId)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier) ??
+                              User.FindFirstValue(JwtRegisteredClaimNames.Sub);
 
+            if (userIdClaim == null || !int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid User ID in token.");
+            }
+
+            var command = new ApproveRequestDepLeaderCommand(requestId, userId);
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok("Request approved successfully.");
+            }
+            return BadRequest("Failed to approve request.");
+        }
     }
 }

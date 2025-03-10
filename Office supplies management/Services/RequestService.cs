@@ -116,6 +116,17 @@ namespace Office_supplies_management.Services
             var requestsByDepartment = requests.Where(r => r.User.Department == department).ToList();
             return _mapper.Map<List<RequestDto>>(requestsByDepartment);
         }
+        public async Task<bool> ApproveRequestDepLeader(int requestId, int userId)
+        {
+            var requestEntity = await _requestRepository.GetByIdAsync(requestId);
+            if (requestEntity == null || requestEntity.UserID != userId)
+            {
+                return false;
+            }
+
+            requestEntity.IsApprovedByDepLead = true;
+            return await _requestRepository.UpdateAsync(requestId, requestEntity);
+        }
     }
 }
 

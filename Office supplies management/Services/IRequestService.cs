@@ -11,7 +11,7 @@ namespace Office_supplies_management.Services
         Task<bool> Update(UpdateRequestDto updateRequest);
         Task<bool> DeleteByID(int id);
         Task<int> Count();
-        Task<List<RequestDto>> GetByDepartment(string department);
-        Task<bool> ApproveByDepLeader(int requestID);
+        //Task<List<RequestDto>> GetByDepartment(string department);
+        //Task<bool> ApproveByDepLeader(int requestID);
     }
 }

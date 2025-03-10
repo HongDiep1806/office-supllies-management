@@ -13,5 +13,6 @@ public interface IRequestService
     Task<List<RequestDto>> GetApprovedRequestsByDepLeader();
     Task<bool> ApproveRequestDepLeader(int requestId, int userId);
     Task<bool> ApproveRequestSupLead(int requestId, int userId);
-    Task<bool> ApproveRequestSupLead(ApproveRequestSupLeadCommand command); // Added missing method
+    Task<bool> ApproveRequestSupLead(ApproveRequestSupLeadCommand command);
+    Task<List<RequestDto>> GetAllRequestsForSupLeader(); // Add this method
 }

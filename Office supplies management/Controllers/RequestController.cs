@@ -150,6 +150,13 @@ namespace Office_supplies_management.Controllers
             }
             return BadRequest(new { message = "Approval failed. Ensure the user has the correct role and the request exists." });
         }
+        [HttpGet("all-requests")]
+        [Authorize(Policy = "RequireSupLeaderRole")] // Change the authorization policy
+        public async Task<IActionResult> GetAllRequestsForSupLeader()
+        {
+            var requests = await _requestService.GetAllRequestsForSupLeader();
+            return Ok(requests);
+        }
 
 
 

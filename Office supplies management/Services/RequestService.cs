@@ -153,6 +153,12 @@ namespace Office_supplies_management.Services
             requestEntity.IsApprovedBySupLead = true;
             return await _requestRepository.UpdateAsync(command.RequestId, requestEntity);
         }
+        public async Task<List<RequestDto>> GetAllRequestsForSupLeader()
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            return _mapper.Map<List<RequestDto>>(requests);
+        }
+
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Office_supplies_management.DTOs.Request;
+using Office_supplies_management.Features.Request.Commands;
 
 namespace Office_supplies_management.Services
 {
@@ -13,5 +14,8 @@ namespace Office_supplies_management.Services
         Task<int> Count();
         Task<List<RequestDto>> GetByDepartment(string department);
         Task<bool> ApproveByDepLeader(int requestID);
+        Task<List<RequestDto>> GetApprovedRequestsByDepLeader();
+        Task<bool> ApproveByFinEmployee(int requestId);
+        Task<List<RequestDto>> GetAllRequestsForFinEmployee(); 
     }
 }

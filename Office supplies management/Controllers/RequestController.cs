@@ -7,6 +7,8 @@ using Office_supplies_management.Features.Request.Queries;
 using Office_supplies_management.Models;
 using Office_supplies_management.Services;
 using System.Formats.Asn1;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography.Xml;
 
 namespace Office_supplies_management.Controllers
@@ -110,6 +112,54 @@ namespace Office_supplies_management.Controllers
                 return BadRequest("Can not find request by id");
             }
         }
+
+        [HttpPut("approveRequestByFinEmployee/{requestId}")]
+        //[Authorize(Policy = "RequireFinanceEmployee")]
+        public async Task<IActionResult> ApproveRequestSupLead(int requestId)
+        {
+            var command = new ApproveRequestFinEmployeeCommand(requestId);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+        //[HttpPost("approve-request-byDepLead/{requestId}")]
+        //[Authorize(Policy = "DepartmentQuery")]
+        //public async Task<IActionResult> ApproveRequestDepLeader(int requestId)
+        //{
+        //    var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier) ??
+        //                      User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+
+        //    if (userIdClaim == null || !int.TryParse(userIdClaim, out var userId))
+        //    {
+        //        return Unauthorized("Invalid User ID in token.");
+        //    }
+
+        //    var command = new ApproveRequestDepLeaderCommand(requestId, userId);
+        //    var result = await _mediator.Send(command);
+        //    if (result)
+        //    {
+        //        return Ok("Request approved successfully.");
+        //    }
+        //    return BadRequest("Failed to approve request.");
+        //}
+
+        [HttpGet("approved-requests-list")]
+        [Authorize(Policy = "RequireFinanceEmployee")]
+        public async Task<IActionResult> GetApprovedRequestsByDepLeader()
+        {
+            var query = new GetApprovedRequestsQuery();
+            var approvedRequests = await _mediator.Send(query);
+            return Ok(approvedRequests);
+        }
+
+        [HttpGet("all-requests")]
+        [Authorize(Policy = "RequireSupLeaderRole")] // Change the authorization policy
+        public async Task<IActionResult> GetAllRequestsForSupLeader()
+        {
+            var query = new GetAllRequestsForFinEmployeeQuery();
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
+        }
+
 
     }
 }

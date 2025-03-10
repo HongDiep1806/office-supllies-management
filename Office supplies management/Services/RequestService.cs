@@ -107,7 +107,7 @@ namespace Office_supplies_management.Services
         public async Task<bool> ApproveRequestDepLeader(int requestId, int userId)
         {
             var requestEntity = await _requestRepository.GetByIdAsync(requestId);
-            if (requestEntity == null || requestEntity.UserID != userId)
+            if (requestEntity == null)
             {
                 return false;
             }

@@ -2,11 +2,9 @@
 using Office_supplies_management.DTOs.Product;
 using Office_supplies_management.DTOs.ProductRequest;
 using Office_supplies_management.DTOs.Request;
-using Office_supplies_management.Models;
 using Office_supplies_management.Repositories;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Office_supplies_management.Services
@@ -16,6 +14,7 @@ namespace Office_supplies_management.Services
         private readonly IRequestRepository _requestRepository;
         private readonly IProduct_RequestService _productRequestService;
         private readonly IMapper _mapper;
+
         public RequestService(IRequestRepository requestRepository, IMapper mapper, IProduct_RequestService productRequestService)
         {
             _requestRepository = requestRepository;
@@ -25,23 +24,20 @@ namespace Office_supplies_management.Services
 
         public async Task<RequestDto> Create(CreateRequestDto createRequest)
         {
-            var newRequest = new Models.Request
+            var newRequest = new RequestDto
             {
                 UserID = createRequest.UserID,
                 RequestCode = createRequest.RequestCode,
                 TotalPrice = createRequest.TotalPrice,
+                Product_Requests = createRequest.Products
+                                                .Select(p => new ProductRequestDto
+                                                {
+                                                    ProductID = p.ProductID,
+                                                    Quantity = p.Quantity
+                                                }).ToList()
             };
-            await _requestRepository.CreateAsync(newRequest);
-            var productRequests = createRequest.Products
-                                               .Select(p => new Product_Request
-                                               {
-                                                   RequestID = newRequest.RequestID,
-                                                   ProductID = p.ProductID,
-                                                   Quantity = p.Quantity
-                                               }).ToList();
-            await _productRequestService.AddRanges(productRequests);
-            newRequest.Product_Requests = productRequests;
-            return _mapper.Map<RequestDto>(newRequest);
+            await _requestRepository.CreateAsync(_mapper.Map<Models.Request>(newRequest));
+            return newRequest;
         }
 
         public async Task<List<RequestDto>> GetAll()
@@ -56,14 +52,6 @@ namespace Office_supplies_management.Services
             var productsInRequest = await _productRequestService.GetByRequestID(request.RequestID);
             var requestDto = _mapper.Map<RequestDto>(request);
             requestDto.Product_Requests = productsInRequest;
-            if (productsInRequest.Count > 0)
-            {
-                Console.WriteLine("co san pham ne");
-            }
-            else
-            {
-                Console.WriteLine("khong co san pham");
-            }
             return requestDto;
         }
 
@@ -85,13 +73,12 @@ namespace Office_supplies_management.Services
                     await _productRequestService.DeleteForever(pr.Product_RequestID);
                 }
                 var productRequests = updateRequest.Products
-                                               .Select(p => new Product_Request
+                                               .Select(p => new ProductRequestDto
                                                {
-                                                   RequestID = updateRequest.RequestID,
                                                    ProductID = p.ProductID,
                                                    Quantity = p.Quantity,
                                                }).ToList();
-                await _productRequestService.AddRanges(productRequests);
+                await _productRequestService.AddRanges(_mapper.Map<List<Models.Product_Request>>(productRequests));
             }
             else
             {
@@ -116,6 +103,62 @@ namespace Office_supplies_management.Services
             var requestsByDepartment = requests.Where(r => r.User.Department == department).ToList();
             return _mapper.Map<List<RequestDto>>(requestsByDepartment);
         }
+
+        public async Task<bool> ApproveRequestDepLeader(int requestId, int userId)
+        {
+            var requestEntity = await _requestRepository.GetByIdAsync(requestId);
+            if (requestEntity == null)
+            {
+                return false;
+            }
+
+            requestEntity.IsApprovedByDepLead = true;
+            return await _requestRepository.UpdateAsync(requestId, requestEntity);
+        }
+
+        public async Task<List<RequestDto>> GetApprovedRequestsByDepLeader()
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            var approvedRequests = requests.Where(r => r.IsApprovedByDepLead).ToList();
+            return _mapper.Map<List<RequestDto>>(approvedRequests);
+        }
+
+        public async Task<bool> ApproveRequestSupLead(int requestId, int userId)
+        {
+            var requestEntity = await _requestRepository.GetByIdAsync(requestId);
+            if (requestEntity == null || requestEntity.UserID != userId)
+            {
+                return false;
+            }
+
+            requestEntity.IsApprovedBySupLead = true;
+            return await _requestRepository.UpdateAsync(requestId, requestEntity);
+        }
+
+        public async Task<bool> ApproveRequestSupLead(ApproveRequestSupLeadCommand command)
+        {
+            var requestEntity = await _requestRepository.GetByIdAsync(command.RequestId);
+            if (requestEntity == null)
+            {
+                return false;
+            }
+
+            // Check if the request is already approved by the department leader
+            if (!requestEntity.IsApprovedByDepLead)
+            {
+                return false;
+            }
+
+            // Allow Finance Management Employee to approve the request
+            requestEntity.IsApprovedBySupLead = true;
+            return await _requestRepository.UpdateAsync(command.RequestId, requestEntity);
+        }
+        public async Task<List<RequestDto>> GetAllRequestsForSupLeader()
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            return _mapper.Map<List<RequestDto>>(requests);
+        }
+
+
     }
 }
-

@@ -71,7 +71,11 @@ namespace Office_supplies_management
                     policy.RequireClaim("Permission", "CanViewProduct"));
                 options.AddPolicy("DepartmentQuery", policy =>
                     policy.RequireClaim("Permission", "ViewUsersDepartment"));
+                options.AddPolicy("RequireSupLeaderRole", policy =>
+                    policy.RequireClaim("Permission", "ViewAllRequests")); // Ensure this policy is correctly set
             });
+
+
 
             builder.Services.AddMediatR(cfg => cfg.AsScoped(), typeof(Program).Assembly);
 

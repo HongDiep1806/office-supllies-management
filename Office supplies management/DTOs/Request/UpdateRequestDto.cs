@@ -7,9 +7,10 @@ namespace Office_supplies_management.DTOs.Request
         public int RequestID { get; set; }
         public int TotalPrice { get; set; }
         public string RequestCode { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
+        public bool IsApprovedByDepLead { get; set; } // Add this property
+        public bool IsApprovedBySupLead { get; set; }
         public int UserID { get; set; }
         public List<ProductRequestDto> Products { get; set; }
-
     }
 }

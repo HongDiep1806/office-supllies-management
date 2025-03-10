@@ -2,6 +2,7 @@
 using Office_supplies_management.DTOs.Product;
 using Office_supplies_management.DTOs.ProductRequest;
 using Office_supplies_management.DTOs.Request;
+using Office_supplies_management.Features.Request.Commands;
 using Office_supplies_management.Models;
 using Office_supplies_management.Repositories;
 using System.Collections.Generic;
@@ -125,21 +126,6 @@ namespace Office_supplies_management.Services
                 }
             }
             return _mapper.Map<List<RequestDto>>(requestOfUsersInDepartment);
-
-            //var requestsByDepartment = requests.Where(r => r.User.Department.ToLower().Equals(department.ToLower()))
-            //    .Select(p => new RequestDto
-            //    {
-            //        RequestID = p.RequestID,
-            //        CreatedDate = p.CreatedDate,
-            //        IsApprovedByDepLead = p.IsApprovedByDepLead,
-            //        IsApprovedBySupLead = p.IsApprovedBySupLead,
-            //        IsProcessedByDepLead = p.IsProcessedByDepLead,
-            //        RequestCode = p.RequestCode,
-            //        TotalPrice = p.TotalPrice,
-            //        UserID = p.UserID,
-            //    }).ToList();
-            //return requestsByDepartment;
-            //return _mapper.Map<List<RequestDto>>(requestsByDepartment);
         }
 
         public async Task<bool> ApproveByDepLeader(int requestID)
@@ -154,6 +140,50 @@ namespace Office_supplies_management.Services
             }
             return false;
         }
+
+        public async Task<List<RequestDto>> GetApprovedRequestsByDepLeader()
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            var approvedRequests = requests.Where(r => r.IsApprovedByDepLead).ToList();
+            return _mapper.Map<List<RequestDto>>(approvedRequests);
+        }
+
+        public async Task<bool> ApproveRequestSupLead(int requestId, int userId)
+        {
+            var requestEntity = await _requestRepository.GetByIdAsync(requestId);
+            if (requestEntity == null || requestEntity.UserID != userId)
+            {
+                return false;
+            }
+
+            requestEntity.IsApprovedBySupLead = true;
+            return await _requestRepository.UpdateAsync(requestId, requestEntity);
+        }
+
+        public async Task<bool> ApproveRequestSupLead(ApproveRequestSupLeadCommand command)
+        {
+            var requestEntity = await _requestRepository.GetByIdAsync(command.RequestId);
+            if (requestEntity == null)
+            {
+                return false;
+            }
+
+            // Check if the request is already approved by the department leader
+            if (!requestEntity.IsApprovedByDepLead)
+            {
+                return false;
+            }
+
+            // Allow Finance Management Employee to approve the request
+            requestEntity.IsApprovedBySupLead = true;
+            return await _requestRepository.UpdateAsync(command.RequestId, requestEntity);
+        }
+        public async Task<List<RequestDto>> GetAllRequestsForSupLeader()
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            return _mapper.Map<List<RequestDto>>(requests);
+        }
+
     }
 }
 

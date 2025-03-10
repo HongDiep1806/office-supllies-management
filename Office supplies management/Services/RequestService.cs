@@ -15,12 +15,14 @@ namespace Office_supplies_management.Services
     {
         private readonly IRequestRepository _requestRepository;
         private readonly IProduct_RequestService _productRequestService;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public RequestService(IRequestRepository requestRepository, IMapper mapper, IProduct_RequestService productRequestService)
+        public RequestService(IUserRepository userRepository,IRequestRepository requestRepository, IMapper mapper, IProduct_RequestService productRequestService)
         {
             _requestRepository = requestRepository;
             _mapper = mapper;
             _productRequestService = productRequestService;
+            _userRepository = userRepository;   
         }
 
         public async Task<RequestDto> Create(CreateRequestDto createRequest)
@@ -113,8 +115,31 @@ namespace Office_supplies_management.Services
         public async Task<List<RequestDto>> GetByDepartment(string department)
         {
             var requests = await _requestRepository.GetAllAsync();
-            var requestsByDepartment = requests.Where(r => r.User.Department == department).ToList();
-            return _mapper.Map<List<RequestDto>>(requestsByDepartment);
+            var requestOfUsersInDepartment = new List<Request>();
+            foreach (var request in requests)
+            {
+                var user = await _userRepository.GetByIdAsync(request.UserID);
+                if(user.Department.ToLower().Equals(department.ToLower()))
+                {
+                    requestOfUsersInDepartment.Add(request);
+                }
+            }
+            return _mapper.Map<List<RequestDto>>(requestOfUsersInDepartment);
+
+            //var requestsByDepartment = requests.Where(r => r.User.Department.ToLower().Equals(department.ToLower()))
+            //    .Select(p => new RequestDto
+            //    {
+            //        RequestID = p.RequestID,
+            //        CreatedDate = p.CreatedDate,
+            //        IsApprovedByDepLead = p.IsApprovedByDepLead,
+            //        IsApprovedBySupLead = p.IsApprovedBySupLead,
+            //        IsProcessedByDepLead = p.IsProcessedByDepLead,
+            //        RequestCode = p.RequestCode,
+            //        TotalPrice = p.TotalPrice,
+            //        UserID = p.UserID,
+            //    }).ToList();
+            //return requestsByDepartment;
+            //return _mapper.Map<List<RequestDto>>(requestsByDepartment);
         }
 
         public async Task<bool> ApproveByDepLeader(int requestID)
@@ -122,7 +147,9 @@ namespace Office_supplies_management.Services
             var request = await _requestRepository.GetByIdAsync(requestID);
             if (request != null)
             {
+                request.IsProcessedByDepLead = true;
                 request.IsApprovedByDepLead = true;
+                await _requestRepository.UpdateAsync(requestID, request);
                 return true;
             }
             return false;

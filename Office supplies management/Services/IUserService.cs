@@ -12,6 +12,7 @@ namespace Office_supplies_management.Services
         //Task<bool> Delete(DeleteProductRequest request);
         //Task<bool> Update(UpdateProductRequest request);
         Task<UserDto> GetById(int id);
+        Task<List<UserDto>> GetUsersByDepartment(string department);
         Task<List<PermissionDto>> GetAllPermissions(int userTypeID);
     }
 }

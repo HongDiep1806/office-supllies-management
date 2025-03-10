@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Office_supplies_management.Services
 {
-    public class JwtService:IJwtService
+    public class JwtService : IJwtService
     {
         private readonly string _secret;
         private readonly string _issuer;
@@ -31,32 +31,40 @@ namespace Office_supplies_management.Services
 
         public async Task<string> GenerateToken(int userId)
         {
-            var currentUser = _mapper.Map<User>( await _userService.GetById(userId));
+            var currentUser = _mapper.Map<User>(await _userService.GetById(userId));
             var userType = _mapper.Map<UserType>(await _usertypeService.GetById(currentUser.UserTypeID));
             var permissions = await _userService.GetAllPermissions(userType.UserTypeID);
 
             var claims = new List<Claim>
             {
-            new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, currentUser.Email),
-            new Claim(JwtRegisteredClaimNames.Name, currentUser.FullName),
-            new Claim("Role", userType.Type),           
-        };
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()), // Use NameIdentifier
+                new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()), // Keep both for compatibility
+                 // Check if this value is valid
+                new Claim(JwtRegisteredClaimNames.Email, currentUser.Email),
+                new Claim(JwtRegisteredClaimNames.Name, currentUser.FullName),
+                new Claim("Role", userType.Type),
+                new Claim("Department", currentUser.Department)
+            };
+
             foreach (var permission in permissions)
             {
                 claims.Add(new Claim("Permission", permission.Description));
             }
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secret));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(
-                _issuer,
-                _audience,
-                claims,
-                expires: DateTime.UtcNow.AddMinutes(_expiryMinutes),
-                signingCredentials: creds
-            );
+            var token = new JwtSecurityToken(_issuer, _audience, claims,
+                expires: DateTime.UtcNow.AddMinutes(_expiryMinutes), signingCredentials: creds);
+
+            // **Log the claims to debug**
+            Console.WriteLine("Generated JWT Claims:");
+            foreach (var claim in claims)
+            {
+                Console.WriteLine($"{claim.Type}: {claim.Value}");
+            }
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
     }
 }

@@ -1,9 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Office_supplies_management.DTOs.User;
 using Office_supplies_management.Features.Request.Commands;
 using Office_supplies_management.Features.Request.Queries;
 using Office_supplies_management.Features.User.Queries;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Office_supplies_management.Controllers
 {
@@ -12,10 +15,12 @@ namespace Office_supplies_management.Controllers
     public class UserController : ControllerBase
     {
         private readonly IMediator _mediator;
+
         public UserController(IMediator mediator)
         {
             _mediator = mediator;
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -23,6 +28,7 @@ namespace Office_supplies_management.Controllers
             var users = await _mediator.Send(query);
             return Ok(users);
         }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateUserDto request)
         {
@@ -37,13 +43,49 @@ namespace Office_supplies_management.Controllers
             var user = await _mediator.Send(query);
             return Ok(user);
         }
+
         [HttpGet("getbyid/{id}")]
-        public async Task<IActionResult> GetById (int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var query = new GetUserByIdQuery(id);   
-            var user = await _mediator.Send(query); 
+            var query = new GetUserByIdQuery(id);
+            var user = await _mediator.Send(query);
             return Ok(user);
         }
+
+        [HttpGet("department")]
+        [Authorize(Policy = "DepartmentQuery")]
+        public async Task<IActionResult> GetUsersByDepartment()
+        {
+            // Log the raw token received
+            var authHeader = Request.Headers["Authorization"].ToString();
+            Console.WriteLine($"Received Authorization Header: {authHeader}");
+
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier) ??
+                  User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+
+
+            if (userIdClaim == null)
+            {
+                Console.WriteLine("JWT Sub claim is missing.");
+                return Unauthorized("User ID claim is missing in token.");
+            }
+
+            if (!int.TryParse(userIdClaim, out var userId))
+            {
+                Console.WriteLine($"Invalid JWT Sub claim format: {userIdClaim}");
+                return Unauthorized("Invalid User ID format in token.");
+            }
+
+            Console.WriteLine($"Extracted User ID from JWT: {userId}");
+
+            var query = new GetUsersByDepartmentQuery(userId);
+            var users = await _mediator.Send(query);
+            return Ok(users);
+        }
+
+
+
+
 
     }
 }

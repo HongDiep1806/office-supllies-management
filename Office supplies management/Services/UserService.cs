@@ -12,6 +12,7 @@ namespace Office_supplies_management.Services
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IUserType_PermissionService _userTypePermissionService;
+
         public UserService(IUserType_PermissionService userTypePermissionService, IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
@@ -31,7 +32,6 @@ namespace Office_supplies_management.Services
         {
             var users = await _userRepository.GetAllAsync();
             return _mapper.Map<List<UserDto>>(users);
-
         }
 
         public async Task<List<PermissionDto>> GetAllPermissions(int userTypeId)
@@ -52,14 +52,30 @@ namespace Office_supplies_management.Services
             {
                 throw new Exception("khong tim dc user"); // Trả về null thay vì gây lỗi mapping
             }
-            Console.WriteLine("ID: "+currentUser.UserID);
+            Console.WriteLine("ID: " + currentUser.UserID);
             return _mapper.Map<UserDto>(currentUser);
         }
 
         public async Task<UserDto> GetById(int id)
         {
+            Console.WriteLine($"🔍 Fetching user by ID: {id}");
             var user = await _userRepository.GetByIdAsync(id);
+
+            if (user == null)
+            {
+                Console.WriteLine($"❌ User not found for ID: {id}");
+                throw new Exception("User not found");
+            }
+
             return _mapper.Map<UserDto>(user);
+        }
+
+
+        public async Task<List<UserDto>> GetUsersByDepartment(string department)
+        {
+            var users = await _userRepository.GetAllAsync();
+            var usersInDepartment = users.Where(u => u.Department == department).ToList();
+            return _mapper.Map<List<UserDto>>(usersInDepartment);
         }
     }
 }

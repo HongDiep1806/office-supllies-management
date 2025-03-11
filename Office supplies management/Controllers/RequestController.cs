@@ -8,6 +8,7 @@ using Office_supplies_management.Models;
 using Office_supplies_management.Services;
 using System.Formats.Asn1;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection.Metadata;
 using System.Security.Claims;
 using System.Security.Cryptography.Xml;
 
@@ -159,7 +160,34 @@ namespace Office_supplies_management.Controllers
             var requests = await _mediator.Send(query);
             return Ok(requests);
         }
-
+        [HttpPut("notapproveByDepLeader/{requestId}")]
+        public async Task<IActionResult> NotApproveRequestByDepLeader(int requestId)
+        {
+            var command = new NotApproveRequestByDepLeaderCommand(requestId);
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest("Can not find request by id");
+            }
+        }
+        [HttpPut("notapproveByFinEmployee/{requestId}")]
+        public async Task<IActionResult> NotApproveRequestByFinEmployee(int requestId)
+        {
+            var command = new NotApproveRequestByFinEmployeeCommand(requestId);
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest("Can not find request by id");
+            }
+        }
 
     }
 }

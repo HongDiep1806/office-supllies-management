@@ -12,5 +12,7 @@ namespace Office_supplies_management.Models
         [InverseProperty("Summary")]
         public ICollection<Request> Requests { get; set; } = new List<Request>();
         public int TotalPrice { get; set; }
+        public bool IsProcessedBySupLead { get; set; } = false;
+        public bool IsApprovedBySupLead { get; set; } = false ;
     }
 }

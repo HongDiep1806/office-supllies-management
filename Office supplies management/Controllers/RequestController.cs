@@ -122,26 +122,6 @@ namespace Office_supplies_management.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-        //[HttpPost("approve-request-byDepLead/{requestId}")]
-        //[Authorize(Policy = "DepartmentQuery")]
-        //public async Task<IActionResult> ApproveRequestDepLeader(int requestId)
-        //{
-        //    var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier) ??
-        //                      User.FindFirstValue(JwtRegisteredClaimNames.Sub);
-
-        //    if (userIdClaim == null || !int.TryParse(userIdClaim, out var userId))
-        //    {
-        //        return Unauthorized("Invalid User ID in token.");
-        //    }
-
-        //    var command = new ApproveRequestDepLeaderCommand(requestId, userId);
-        //    var result = await _mediator.Send(command);
-        //    if (result)
-        //    {
-        //        return Ok("Request approved successfully.");
-        //    }
-        //    return BadRequest("Failed to approve request.");
-        //}
 
         [HttpGet("approved-requests-list")]
         [Authorize(Policy = "RequireFinanceEmployee")]

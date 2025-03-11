@@ -16,6 +16,8 @@ namespace Office_supplies_management.Services
         Task<bool> ApproveByDepLeader(int requestID);
         Task<List<RequestDto>> GetApprovedRequestsByDepLeader();
         Task<bool> ApproveByFinEmployee(int requestId);
-        Task<List<RequestDto>> GetAllRequestsForFinEmployee(); 
+        Task<List<RequestDto>> GetAllRequestsForFinEmployee();
+        Task<bool> NotApproveRequestByDepLeader(int requestId);
+        Task<bool> NotApproveRequestByFinEmployee(int requestId);
     }
 }

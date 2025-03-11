@@ -14,11 +14,21 @@ namespace Office_supplies_management.DAL
         public DbSet<UserType> UserTypes { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<UserType_Permission> UserTypes_Permissions { get; set; }
+        public DbSet<Summary> Summaries { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product_Request>()
-                .Property(p => p.Product_RequestID)
-                .ValueGeneratedOnAdd(); // Prevents EF Core from treating it as an identity column
+                 .Property(p => p.Product_RequestID)
+                 .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Request>()
+                .HasOne(r => r.Summary)
+                .WithMany(s => s.Requests)
+                .HasForeignKey(r => r.SummaryID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            base.OnModelCreating(modelBuilder);
         }
 
 

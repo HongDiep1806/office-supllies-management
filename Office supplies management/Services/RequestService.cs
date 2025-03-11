@@ -144,7 +144,7 @@ namespace Office_supplies_management.Services
         public async Task<List<RequestDto>> GetApprovedRequestsByDepLeader()
         {
             var requests = await _requestRepository.GetAllAsync();
-            var approvedRequests = requests.Where(r => r.IsProcessedByDepLead==true && r.IsApprovedByDepLead == true).ToList();
+            var approvedRequests = requests.Where(r => r.IsApprovedByDepLead == true).ToList();
             return _mapper.Map<List<RequestDto>>(approvedRequests);
         }
 
@@ -166,7 +166,30 @@ namespace Office_supplies_management.Services
             var requests = await _requestRepository.GetAllAsync();
             return _mapper.Map<List<RequestDto>>(requests);
         }
-
+        public async Task<bool> NotApproveRequestByDepLeader(int requestID)
+        {
+            var request = await _requestRepository.GetByIdAsync(requestID);
+            if (request != null)
+            {
+                request.IsProcessedByDepLead = true;
+                request.IsApprovedByDepLead = false;
+                await _requestRepository.UpdateAsync(requestID, request);
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> NotApproveRequestByFinEmployee(int requestID)
+        {
+            var request = await _requestRepository.GetByIdAsync(requestID);
+            if (request != null)
+            {
+                request.IsProcessedByDepLead = false;
+                request.IsApprovedByDepLead = true;
+                await _requestRepository.UpdateAsync(requestID, request);
+                return true;
+            }
+            return false;
+        }
     }
 }
 

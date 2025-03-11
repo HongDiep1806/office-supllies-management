@@ -10,5 +10,6 @@
         public UserType UserType { get; set; }
         public ICollection<Request> Requests { get; set; }
         public string Department { get; set; } = string.Empty;
+        public ICollection<Summary> Summaries { get; set; }
     }
 }

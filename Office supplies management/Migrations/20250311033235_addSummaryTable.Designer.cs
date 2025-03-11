@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Office_supplies_management.DAL;
 
@@ -11,9 +12,11 @@ using Office_supplies_management.DAL;
 namespace Office_supplies_management.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250311033235_addSummaryTable")]
+    partial class addSummaryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,9 +133,6 @@ namespace Office_supplies_management.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SummaryID")
-                        .HasColumnType("int");
-
                     b.Property<int>("TotalPrice")
                         .HasColumnType("int");
 
@@ -140,8 +140,6 @@ namespace Office_supplies_management.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("RequestID");
-
-                    b.HasIndex("SummaryID");
 
                     b.HasIndex("UserID");
 
@@ -297,18 +295,11 @@ namespace Office_supplies_management.Migrations
 
             modelBuilder.Entity("Office_supplies_management.Models.Request", b =>
                 {
-                    b.HasOne("Office_supplies_management.Models.Summary", "Summary")
-                        .WithMany("Requests")
-                        .HasForeignKey("SummaryID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("Office_supplies_management.Models.User", "User")
                         .WithMany("Requests")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Summary");
 
                     b.Navigation("User");
                 });
@@ -377,11 +368,6 @@ namespace Office_supplies_management.Migrations
             modelBuilder.Entity("Office_supplies_management.Models.Request", b =>
                 {
                     b.Navigation("Product_Requests");
-                });
-
-            modelBuilder.Entity("Office_supplies_management.Models.Summary", b =>
-                {
-                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("Office_supplies_management.Models.User", b =>

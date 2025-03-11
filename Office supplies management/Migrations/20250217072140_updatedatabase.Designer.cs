@@ -117,7 +117,7 @@ namespace Office_supplies_management.Migrations
                     b.Property<bool>("IsApprovedByDepLead")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsApprovedBySupLead")
+                    b.Property<bool>("IsApprovedByFinLead")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")

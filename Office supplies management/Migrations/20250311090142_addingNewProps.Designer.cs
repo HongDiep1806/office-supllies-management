@@ -12,8 +12,8 @@ using Office_supplies_management.DAL;
 namespace Office_supplies_management.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250305072328_updatedb")]
-    partial class updatedb
+    [Migration("20250311090142_addingNewProps")]
+    partial class addingNewProps
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,15 +120,24 @@ namespace Office_supplies_management.Migrations
                     b.Property<bool>("IsApprovedByDepLead")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsApprovedByFinLead")
+                    b.Property<bool>("IsApprovedBySupLead")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsProcessedByDepLead")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSummaryBeApproved")
+                        .HasColumnType("bit");
+
                     b.Property<string>("RequestCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SummaryID")
+                        .HasColumnType("int");
 
                     b.Property<int>("TotalPrice")
                         .HasColumnType("int");
@@ -138,9 +147,47 @@ namespace Office_supplies_management.Migrations
 
                     b.HasKey("RequestID");
 
+                    b.HasIndex("SummaryID");
+
                     b.HasIndex("UserID");
 
                     b.ToTable("Requests");
+                });
+
+            modelBuilder.Entity("Office_supplies_management.Models.Summary", b =>
+                {
+                    b.Property<int>("SummaryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SummaryID"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiredTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsApprovedBySupLead")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsProcessedBySupLead")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("TotalPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("SummaryID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Summaries");
                 });
 
             modelBuilder.Entity("Office_supplies_management.Models.User", b =>
@@ -262,8 +309,26 @@ namespace Office_supplies_management.Migrations
 
             modelBuilder.Entity("Office_supplies_management.Models.Request", b =>
                 {
+                    b.HasOne("Office_supplies_management.Models.Summary", "Summary")
+                        .WithMany("Requests")
+                        .HasForeignKey("SummaryID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("Office_supplies_management.Models.User", "User")
                         .WithMany("Requests")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Summary");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Office_supplies_management.Models.Summary", b =>
+                {
+                    b.HasOne("Office_supplies_management.Models.User", "User")
+                        .WithMany("Summaries")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -326,9 +391,16 @@ namespace Office_supplies_management.Migrations
                     b.Navigation("Product_Requests");
                 });
 
+            modelBuilder.Entity("Office_supplies_management.Models.Summary", b =>
+                {
+                    b.Navigation("Requests");
+                });
+
             modelBuilder.Entity("Office_supplies_management.Models.User", b =>
                 {
                     b.Navigation("Requests");
+
+                    b.Navigation("Summaries");
                 });
 
             modelBuilder.Entity("Office_supplies_management.Models.UserType", b =>

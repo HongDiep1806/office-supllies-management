@@ -1,8 +1,13 @@
-﻿
+﻿// File: Services/SummaryService.cs
 using AutoMapper;
+using Office_supplies_management.DTOs.Request;
 using Office_supplies_management.DTOs.Summary;
 using Office_supplies_management.Models;
 using Office_supplies_management.Repositories;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging; // Add logging
 
 namespace Office_supplies_management.Services
 {
@@ -10,13 +15,19 @@ namespace Office_supplies_management.Services
     {
         private readonly ISummaryRepository _summaryRepository;
         private readonly IRequestRepository _requestRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public SummaryService(ISummaryRepository summaryRepository, IRequestRepository requestRepository, IMapper mapper)
+        private readonly ILogger<SummaryService> _logger; // Add logger
+
+        public SummaryService(ISummaryRepository summaryRepository, IRequestRepository requestRepository, IUserRepository userRepository, IMapper mapper, ILogger<SummaryService> logger)
         {
             _summaryRepository = summaryRepository;
             _requestRepository = requestRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
+            _logger = logger; // Initialize logger
         }
+
         public async Task<SummaryDto> CreateSummary(CreateSummaryDto createSummaryDto)
         {
             var requests = await _requestRepository.GetAllAsync();
@@ -25,16 +36,107 @@ namespace Office_supplies_management.Services
             {
                 UserID = createSummaryDto.UserID,
                 Requests = requestsOfSummary,
-                TotalPrice = requestsOfSummary.Sum(r => r.TotalPrice)
+                TotalPrice = requestsOfSummary.Sum(r => r.TotalPrice),
+                IsProcessedBySupLead = true,
             };
 
-           await _summaryRepository.CreateAsync(newSummary);
+            await _summaryRepository.CreateAsync(newSummary);
             foreach (var request in requestsOfSummary)
             {
                 request.SummaryID = newSummary.SummaryID;
                 await _requestRepository.UpdateAsync(request.RequestID, request);
             }
             return _mapper.Map<SummaryDto>(newSummary);
+        }
+
+        public async Task<bool> UpdateSummary(UpdateSummaryDto updateSummaryDto)
+        {
+            var summary = await _summaryRepository.GetByIdAsync(updateSummaryDto.SummaryID);
+            if (summary == null)
+            {
+                return false;
+            }
+
+            summary.IsProcessedBySupLead = updateSummaryDto.IsProcessedBySupLead;
+            summary.IsApprovedBySupLead = updateSummaryDto.IsApprovedBySupLead;
+            await _summaryRepository.UpdateAsync(summary.SummaryID, summary);
+            return true;
+        }
+
+        public async Task<List<SummaryDto>> GetAllSummaries()
+        {
+            var summaries = await _summaryRepository.GetAllAsync();
+            return _mapper.Map<List<SummaryDto>>(summaries);
+        }
+
+        public async Task<List<SummaryDto>> GetSummariesByUserId(int userId)
+        {
+            var summaries = await _summaryRepository.GetAllAsync();
+            var userSummaries = summaries.Where(s => s.UserID == userId).ToList();
+            return _mapper.Map<List<SummaryDto>>(userSummaries);
+        }
+
+        public async Task<SummaryDto> GetSummaryById(int summaryId)
+        {
+            var summary = await _summaryRepository.GetByIdAsync(summaryId);
+            return _mapper.Map<SummaryDto>(summary);
+        }
+
+        public async Task<List<DepartmentUsageReportDto>> GetDepartmentUsageReport(string department, DateTime startDate, DateTime endDate)
+        {
+            _logger.LogInformation("Fetching summaries between {StartDate} and {EndDate}", startDate, endDate);
+            var summaries = await _summaryRepository.GetAllAsync();
+            var filteredSummaries = summaries
+                .Where(s => s.CreatedDate.Date >= startDate.Date && s.CreatedDate.Date <= endDate.Date && s.IsApprovedBySupLead)
+                .ToList();
+
+            _logger.LogInformation("Found {Count} summaries in the date range", filteredSummaries.Count);
+            foreach (var summary in filteredSummaries)
+            {
+                _logger.LogInformation("SummaryID: {SummaryID}, CreatedDate: {CreatedDate}, IsApprovedBySupLead: {IsApprovedBySupLead}", summary.SummaryID, summary.CreatedDate, summary.IsApprovedBySupLead);
+            }
+
+            var summaryIds = filteredSummaries.Select(s => s.SummaryID).ToList();
+
+            var users = await _userRepository.GetAllAsync();
+            var userIds = users
+                .Where(u => u.Department == department)
+                .Select(u => u.UserID)
+                .ToList();
+
+            _logger.LogInformation("Found {Count} users in the department {Department}", userIds.Count, department);
+
+            var requests = await _requestRepository.GetAllAsync();
+            var filteredRequests = requests
+                .Where(r => userIds.Contains(r.UserID) && summaryIds.Contains(r.SummaryID ?? 0))
+                .ToList();
+
+            _logger.LogInformation("Found {Count} requests matching the criteria", filteredRequests.Count);
+            foreach (var request in filteredRequests)
+            {
+                _logger.LogInformation("RequestID: {RequestID}, UserID: {UserID}, SummaryID: {SummaryID}, TotalPrice: {TotalPrice}", request.RequestID, request.UserID, request.SummaryID, request.TotalPrice);
+            }
+
+            var report = filteredRequests
+                .GroupBy(r => r.User.Department)
+                .Select(g => new DepartmentUsageReportDto
+                {
+                    Department = g.Key,
+                    TotalAmount = g.Sum(r => r.TotalPrice)
+                })
+                .ToList();
+
+            return report;
+        }
+
+        public async Task<List<SummaryDto>> GetSummariesByDateRange(DateTime startDate, DateTime endDate)
+        {
+            var summaries = await _summaryRepository.GetAllAsync();
+            var filteredSummaries = summaries
+                .Where(s => s.CreatedDate.Date >= startDate && s.CreatedDate.Date <= endDate)
+                .ToList();
+
+            return _mapper.Map<List<SummaryDto>>(filteredSummaries);
         }
     }
 }

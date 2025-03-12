@@ -82,7 +82,17 @@ namespace Office_supplies_management.Controllers
             var users = await _mediator.Send(query);
             return Ok(users);
         }
-
+        [HttpGet("unique-departments")]
+        public async Task<IActionResult> GetUniqueDepartments()
+        {
+            var query = new GetUniqueDepartmentsQuery();
+            var departments = await _mediator.Send(query);
+            if (departments != null && departments.Any())
+            {
+                return Ok(departments);
+            }
+            return NotFound();
+        }
 
 
 

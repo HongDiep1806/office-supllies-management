@@ -17,5 +17,6 @@ namespace Office_supplies_management.Services
         Task<List<DepartmentUsageReportDto>> GetDepartmentUsageReport(string department, DateTime startDate, DateTime endDate);
         Task<List<SummaryDto>> GetSummariesByDateRange(DateTime startDate, DateTime endDate);
         Task<List<RequestDto>> GetRequestsBySummaryId(int summaryId); // Add this method
+        
     }
 }

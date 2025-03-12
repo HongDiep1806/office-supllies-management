@@ -14,5 +14,6 @@ namespace Office_supplies_management.Services
         Task<UserDto> GetById(int id);
         Task<List<UserDto>> GetUsersByDepartment(string department);
         Task<List<PermissionDto>> GetAllPermissions(int userTypeID);
+        Task<List<string>> GetUniqueDepartments();
     }
 }

@@ -136,5 +136,12 @@ namespace Office_supplies_management.Controllers
             }
             return Ok(requests);
         }
+        [HttpGet("department-costs")]
+        public async Task<IActionResult> GetDepartmentCosts([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        {
+            var query = new GetDepartmentCostsQuery { StartDate = startDate, EndDate = endDate };
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
     }
 }

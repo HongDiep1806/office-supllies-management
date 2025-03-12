@@ -144,5 +144,49 @@ namespace Office_supplies_management.Services
             var filteredRequests = requests.Where(r => r.SummaryID == summaryId).ToList();
             return _mapper.Map<List<RequestDto>>(filteredRequests);
         }
+        public async Task<List<DepartmentCostDto>> GetDepartmentCosts(DateTime startDate, DateTime endDate)
+        {
+            // Get all unique departments
+            var users = await _userRepository.GetAllAsync();
+            var departments = users.Select(u => u.Department).Distinct().ToList();
+
+            // Get all requests where the summary is approved and within the date range
+            var requests = await _requestRepository.GetAllAsync();
+            var filteredRequests = requests
+                .Where(r => r.SummaryID.HasValue && r.IsSummaryBeApproved && r.CreatedDate.Date >= startDate && r.CreatedDate.Date <= endDate)
+                .ToList();
+
+            // Log the filtered requests
+            foreach (var request in filteredRequests)
+            {
+                _logger.LogInformation("RequestID: {RequestID}, UserID: {UserID}, Department: {Department}, CreatedDate: {CreatedDate}, TotalPrice: {TotalPrice}",
+                    request.RequestID, request.UserID, request.User?.Department, request.CreatedDate, request.TotalPrice);
+            }
+
+            // Pair each request to the department of the user who made the request and sum the cost
+            var departmentCosts = filteredRequests
+                .GroupBy(r => r.User?.Department ?? "Unknown")
+                .Select(g => new DepartmentCostDto
+                {
+                    Department = g.Key,
+                    Cost = g.Sum(r => r.TotalPrice)
+                })
+                .ToList();
+
+            // Ensure all departments are included in the result, even if they have no requests
+            foreach (var department in departments)
+            {
+                if (!departmentCosts.Any(dc => dc.Department == department))
+                {
+                    departmentCosts.Add(new DepartmentCostDto
+                    {
+                        Department = department,
+                        Cost = 0
+                    });
+                }
+            }
+
+            return departmentCosts;
+        }
     }
 }

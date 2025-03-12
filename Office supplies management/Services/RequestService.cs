@@ -33,6 +33,7 @@ namespace Office_supplies_management.Services
                 UserID = createRequest.UserID,
                 RequestCode = createRequest.RequestCode,
                 TotalPrice = createRequest.TotalPrice,
+                IsProcessedByDepLead = true
             };
             await _requestRepository.CreateAsync(newRequest);
             var productRequests = createRequest.Products

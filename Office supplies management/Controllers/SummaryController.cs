@@ -1,8 +1,9 @@
-﻿// File: Controllers/SummaryController.cs
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Office_supplies_management.DTOs.Request;
 using Office_supplies_management.DTOs.Summary;
+using Office_supplies_management.Features.Request.Commands;
 using Office_supplies_management.Features.Summary.Commands;
 using Office_supplies_management.Features.Summary.Queries;
 using System.Threading.Tasks;
@@ -45,6 +46,18 @@ namespace Office_supplies_management.Controllers
             return BadRequest();
         }
 
+        [HttpPut("update-request-status")]
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        public async Task<IActionResult> UpdateRequestStatus([FromBody] UpdateRequestStatusCommand command)
+        {
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
         [HttpGet]
         //[Authorize(Policy = "RequireSupLeaderRole")]
         public async Task<IActionResult> GetAllSummaries()
@@ -71,6 +84,7 @@ namespace Office_supplies_management.Controllers
             }
             return NotFound();
         }
+
         [HttpGet("{summaryId}")]
         //[Authorize(Policy = "RequireFinanceEmployee")]
         //[Authorize(Policy = "RequireSupLeaderRole")]
@@ -84,6 +98,7 @@ namespace Office_supplies_management.Controllers
             }
             return NotFound();
         }
+
         [HttpGet("report")]
         //[Authorize(Policy = "RequireFinanceEmployee")]
         public async Task<IActionResult> GetDepartmentUsageReport([FromQuery] string department, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
@@ -96,6 +111,7 @@ namespace Office_supplies_management.Controllers
             }
             return NotFound();
         }
+
         [HttpGet("summariesByDateRange")]
         //[Authorize(Policy = "RequireFinanceEmployee")]
         public async Task<IActionResult> GetSummariesByDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
@@ -107,6 +123,18 @@ namespace Office_supplies_management.Controllers
                 return Ok(summaries);
             }
             return NotFound();
+        }
+
+        [HttpGet("{summaryId}/requests")]
+        public async Task<ActionResult<List<RequestDto>>> GetRequestsBySummaryId(int summaryId)
+        {
+            var query = new GetRequestsBySummaryIdQuery(summaryId);
+            var requests = await _mediator.Send(query);
+            if (requests == null || requests.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(requests);
         }
     }
 }

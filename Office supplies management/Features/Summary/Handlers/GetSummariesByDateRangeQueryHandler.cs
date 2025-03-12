@@ -2,6 +2,7 @@
 using MediatR;
 using Office_supplies_management.Features.Summary.Queries;
 using Office_supplies_management.DTOs.Summary;
+using Office_supplies_management.Services; // Added missing using directive
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

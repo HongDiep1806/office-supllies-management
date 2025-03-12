@@ -1,6 +1,7 @@
 // File: Features/Summary/Handlers/GetDepartmentUsageReportQueryHandler.cs
 using MediatR;
 using Office_supplies_management.Features.Summary.Queries;
+using Office_supplies_management.Services; // Add this using directive
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
@@ -23,4 +24,3 @@ namespace Office_supplies_management.Features.Summary.Handlers
         }
     }
 }
-

@@ -138,5 +138,11 @@ namespace Office_supplies_management.Services
 
             return _mapper.Map<List<SummaryDto>>(filteredSummaries);
         }
+        public async Task<List<RequestDto>> GetRequestsBySummaryId(int summaryId)
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            var filteredRequests = requests.Where(r => r.SummaryID == summaryId).ToList();
+            return _mapper.Map<List<RequestDto>>(filteredRequests);
+        }
     }
 }

@@ -190,6 +190,22 @@ namespace Office_supplies_management.Services
             }
             return false;
         }
+        public async Task UpdateRequestStatus(int summaryID, bool isProcessedBySupLead, bool isApprovedBySupLead)
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            var requestsToUpdate = requests.Where(r => r.SummaryID == summaryID).ToList();
+
+            foreach (var request in requestsToUpdate)
+            {
+                request.IsSummaryBeProcessed = isProcessedBySupLead;
+                request.IsSummaryBeApproved = isApprovedBySupLead;
+            }
+
+            foreach (var request in requestsToUpdate)
+            {
+                await _requestRepository.UpdateAsync(request.RequestID, request);
+            }
+        }
     }
 }
 

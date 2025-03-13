@@ -17,6 +17,7 @@ namespace Office_supplies_management.DTOs.Request
         public int UserID { get; set; }
         public int? SummaryID { get; set; }
         public List<ProductRequestDto> Product_Requests { get; set; }
+        public int? SummaryID { get; set; }
 
     }
 }

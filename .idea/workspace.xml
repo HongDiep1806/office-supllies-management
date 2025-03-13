@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="125956a9-e647-407e-81bd-0cf2ad5f9335" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Office supplies management/Features/Request/Commands/NotApproveRequestByDepLeaderCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Office supplies management/Features/Request/Commands/NotApproveRequestByFinEmployeeCommand .cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Office supplies management/Features/Request/Handlers/NotApproveRequestByDepLeaderHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Office supplies management/Features/Request/Handlers/NotApproveRequestByFinEmployeHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/.vs/Office supplies management/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/.vs/Office supplies management/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/.vs/Office supplies management/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/.vs/Office supplies management/v17/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/.vs/Office supplies management/v17/DocumentLayout.backup.json" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/.vs/Office supplies management/v17/DocumentLayout.backup.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/.vs/Office supplies management/v17/DocumentLayout.json" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/.vs/Office supplies management/v17/DocumentLayout.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/Controllers/RequestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/Controllers/RequestController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/Services/IRequestService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/Services/IRequestService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/Services/RequestService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/Services/RequestService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/obj/Debug/net8.0/Office supplies management.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/obj/Debug/net8.0/Office supplies management.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/obj/Debug/net8.0/Office supplies management.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/obj/Debug/net8.0/Office supplies management.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/obj/Debug/net8.0/Office supplies management.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/obj/Debug/net8.0/Office supplies management.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/obj/Debug/net8.0/Office supplies management.csproj.AssemblyReference.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/obj/Office supplies management.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/obj/Office supplies management.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/obj/Office supplies management.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/obj/Office supplies management.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Office supplies management/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Office supplies management/obj/project.nuget.cache" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="toan_dev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "HongDiep1806"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/HongDiep1806/office-supllies-management.git",
+    "accountId": "b2452764-91dd-4beb-bee4-8704add861cb"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2u9fuQaaToWTkTO20Y63GPw46QY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging diep",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/Intership Project/office-supllies-management",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="125956a9-e647-407e-81bd-0cf2ad5f9335" name="Changes" comment="" />
+      <created>1741665932968</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1741665932968</updated>
+      <workItem from="1741665934163" duration="521000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

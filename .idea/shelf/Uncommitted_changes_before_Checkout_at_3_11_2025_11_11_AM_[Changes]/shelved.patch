@@ -1,0 +1,13 @@
+Index: Office supplies management/obj/Debug/net8.0/Office supplies management.AssemblyInfoInputs.cache
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>602c20701bb5fbb484c1cae01944f5a9fe16c5d3142a64fe8ffeb88ebf5c6176\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Office supplies management/obj/Debug/net8.0/Office supplies management.AssemblyInfoInputs.cache b/Office supplies management/obj/Debug/net8.0/Office supplies management.AssemblyInfoInputs.cache
+--- a/Office supplies management/obj/Debug/net8.0/Office supplies management.AssemblyInfoInputs.cache	(revision 06db0b3f414f75f6786310596a2c4caf3d1ed901)
++++ b/Office supplies management/obj/Debug/net8.0/Office supplies management.AssemblyInfoInputs.cache	(date 1741666039305)
+@@ -1,1 +1,1 @@
+-602c20701bb5fbb484c1cae01944f5a9fe16c5d3142a64fe8ffeb88ebf5c6176
++6f9ff5273b373bb4d080461aa9a59a57b7ca69387db9329243e7a1d58d914b8f

@@ -10,8 +10,10 @@ using System.Formats.Asn1;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection.Metadata;
 using System.Security.Claims;
+using System.Security.Claims;
 using System.Security.Cryptography.Xml;
-
+using System.IdentityModel.Tokens.Jwt;
+using Office_supplies_management.Services;
 namespace Office_supplies_management.Controllers
 {
     [Route("/[controller]")]
@@ -102,7 +104,7 @@ namespace Office_supplies_management.Controllers
         [HttpPut("approveByDepLeader/{requestId}")]
         public async Task<IActionResult> ApproveRequestByDepLeader(int requestId)
         {
-            var command = new ApproveRequestByDepLeaderCommand(requestId);  
+            var command = new ApproveRequestByDepLeaderCommand(requestId);
             var result = await _mediator.Send(command);
             if (result)
             {
@@ -168,6 +170,72 @@ namespace Office_supplies_management.Controllers
                 return BadRequest("Can not find request by id");
             }
         }
+
+        [HttpPost("approve-request/{requestId}")]
+        [Authorize(Policy = "DepartmentQuery")]
+        public async Task<IActionResult> ApproveRequestDepLeader(int requestId)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier) ??
+                              User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+
+            if (userIdClaim == null || !int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid User ID in token.");
+            }
+
+            var command = new ApproveRequestDepLeaderCommand(requestId, userId);
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok("Request approved successfully.");
+            }
+            return BadRequest("Failed to approve request.");
+        }
+
+        [HttpGet("approved-requests-list")]
+        [Authorize(Policy = "RequireFinanceEmployee")]
+        public async Task<IActionResult> GetApprovedRequestsByDepLeader()
+        {
+            var query = new GetApprovedRequestsQuery();
+            var approvedRequests = await _mediator.Send(query);
+            return Ok(approvedRequests);
+        }
+
+        [HttpPost("approve-sup-lead/{requestId}")]
+        [Authorize(Policy = "RequireFinanceEmployee")]
+        public async Task<IActionResult> ApproveRequestSupLead(int requestId)
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier) ??
+                              User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+
+            if (userIdClaim == null || !int.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized("Invalid User ID in token.");
+            }
+
+            var userRole = User.FindFirstValue("Role"); // Use the correct claim type for role
+            if (string.IsNullOrEmpty(userRole) || userRole != "Finance Management Employee")
+            {
+                return BadRequest("User role is missing or incorrect.");
+            }
+
+            var command = new ApproveRequestSupLeadCommand(requestId, userId, userRole);
+            var result = await _requestService.ApproveRequestSupLead(command);
+            if (result)
+            {
+                return Ok(new { message = "Request approved by supervisor leader." });
+            }
+            return BadRequest(new { message = "Approval failed. Ensure the user has the correct role and the request exists." });
+        }
+        [HttpGet("all-requests")]
+        [Authorize(Policy = "RequireSupLeaderRole")] // Change the authorization policy
+        public async Task<IActionResult> GetAllRequestsForSupLeader()
+        {
+            var requests = await _requestService.GetAllRequestsForSupLeader();
+            return Ok(requests);
+        }
+
+
 
     }
 }

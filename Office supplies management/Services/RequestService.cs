@@ -23,7 +23,7 @@ namespace Office_supplies_management.Services
             _requestRepository = requestRepository;
             _mapper = mapper;
             _productRequestService = productRequestService;
-            _userRepository = userRepository;   
+            _userRepository = userRepository;
         }
 
         public async Task<RequestDto> Create(CreateRequestDto createRequest)
@@ -33,6 +33,7 @@ namespace Office_supplies_management.Services
                 UserID = createRequest.UserID,
                 RequestCode = createRequest.RequestCode,
                 TotalPrice = createRequest.TotalPrice,
+                IsProcessedByDepLead = true
             };
             await _requestRepository.CreateAsync(newRequest);
             var productRequests = createRequest.Products
@@ -189,6 +190,22 @@ namespace Office_supplies_management.Services
                 return true;
             }
             return false;
+        }
+        public async Task UpdateRequestStatus(int summaryID, bool isProcessedBySupLead, bool isApprovedBySupLead)
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            var requestsToUpdate = requests.Where(r => r.SummaryID == summaryID).ToList();
+
+            foreach (var request in requestsToUpdate)
+            {
+                request.IsSummaryBeProcessed = isProcessedBySupLead;
+                request.IsSummaryBeApproved = isApprovedBySupLead;
+            }
+
+            foreach (var request in requestsToUpdate)
+            {
+                await _requestRepository.UpdateAsync(request.RequestID, request);
+            }
         }
     }
 }

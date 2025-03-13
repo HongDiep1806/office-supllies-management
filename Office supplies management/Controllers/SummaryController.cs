@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Office_supplies_management.DTOs.Summary;
 using Office_supplies_management.Features.Summary.Commands;
+using Office_supplies_management.Features.Summary.Queries;
 
 namespace Office_supplies_management.Controllers
 {
@@ -25,6 +26,14 @@ namespace Office_supplies_management.Controllers
                 return Ok(newSummary);
             }
             return BadRequest();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var query = new GetAllSummariesQuery();
+            var summaries = await _mediator.Send(query);
+            return Ok(summaries);
         }
     }
 }

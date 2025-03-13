@@ -15,6 +15,7 @@ namespace Office_supplies_management.DTOs.Request
         public bool IsSummaryBeProcessed {  get; set; }
         public bool IsSummaryBeApproved {  get; set; }
         public int UserID { get; set; }
+        public int? SummaryID { get; set; }
         public List<ProductRequestDto> Product_Requests { get; set; }
 
     }

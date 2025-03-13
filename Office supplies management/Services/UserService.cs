@@ -78,12 +78,12 @@ namespace Office_supplies_management.Services
             var usersInDepartment = users.Where(u => u.Department == department).ToList();
             return _mapper.Map<List<UserDto>>(usersInDepartment);
         }
-
-
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<List<string>> GetUniqueDepartments()
         {
-            var user = await _userRepository.GetByIdAsync(id);
-            return user;
+            var users = await _userRepository.GetAllAsync();
+            var departments = users.Select(u => u.Department).Distinct().ToList();
+            return departments;
         }
+
     }
 }

@@ -1,18 +1,24 @@
 ﻿using Office_supplies_management.DTOs.Request;
+using Office_supplies_management.Features.Request.Commands;
 
-public interface IRequestService
+namespace Office_supplies_management.Services
 {
-    Task<List<RequestDto>> GetByUserID(int userId);
-    Task<RequestDto> Create(CreateRequestDto createRequest);
-    Task<List<RequestDto>> GetAll();
-    Task<RequestDto> GetByID(int id);
-    Task<bool> Update(UpdateRequestDto updateRequest);
-    Task<bool> DeleteByID(int id);
-    Task<int> Count();
-    Task<List<RequestDto>> GetByDepartment(string department);
-    Task<List<RequestDto>> GetApprovedRequestsByDepLeader();
-    Task<bool> ApproveRequestDepLeader(int requestId, int userId);
-    Task<bool> ApproveRequestSupLead(int requestId, int userId);
-    Task<bool> ApproveRequestSupLead(ApproveRequestSupLeadCommand command);
-    Task<List<RequestDto>> GetAllRequestsForSupLeader(); // Add this method
+    public interface IRequestService
+    {
+        Task<List<RequestDto>> GetByUserID(int userId);
+        Task<RequestDto> Create(CreateRequestDto createRequest);
+        Task<List<RequestDto>> GetAll();
+        Task<RequestDto> GetByID(int id);
+        Task<bool> Update(UpdateRequestDto updateRequest);
+        Task<bool> DeleteByID(int id);
+        Task<int> Count();
+        Task<List<RequestDto>> GetByDepartment(string department);
+        Task<bool> ApproveByDepLeader(int requestID);
+        Task<List<RequestDto>> GetApprovedRequestsByDepLeader();
+        Task<bool> ApproveByFinEmployee(int requestId);
+        Task<List<RequestDto>> GetAllRequestsForFinEmployee();
+        Task<bool> NotApproveRequestByDepLeader(int requestId);
+        Task<bool> NotApproveRequestByFinEmployee(int requestId);
+        Task UpdateRequestStatus(int summaryID, bool isProcessedBySupLead, bool isApprovedBySupLead);
+    }
 }

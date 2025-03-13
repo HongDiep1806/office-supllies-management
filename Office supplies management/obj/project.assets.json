@@ -5166,11 +5166,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\vpp_4\\Office supplies management\\Office supplies management.csproj",
+      "projectUniqueName": "E:\\vpp_6\\Office supplies management\\Office supplies management.csproj",
       "projectName": "Office supplies management",
-      "projectPath": "E:\\vpp_4\\Office supplies management\\Office supplies management.csproj",
+      "projectPath": "E:\\vpp_6\\Office supplies management\\Office supplies management.csproj",
       "packagesPath": "C:\\Users\\doduc\\.nuget\\packages\\",
-      "outputPath": "E:\\vpp_4\\Office supplies management\\obj\\",
+      "outputPath": "E:\\vpp_6\\Office supplies management\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -63,6 +63,7 @@ namespace Office_supplies_management
             });
 
 
+
             builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireFinanceEmployee", policy =>
@@ -89,6 +90,8 @@ namespace Office_supplies_management
             builder.Services.AddAutoMapper(typeof(ProductProfile));
             builder.Services.AddAutoMapper(typeof(UserProfile));
             builder.Services.AddAutoMapper(typeof(RequestProfile));
+            builder.Services.AddAutoMapper(typeof(SummaryProfile));
+
 
             // Configure database context
             builder.Services.AddDbContext<Context>(options =>
@@ -111,6 +114,7 @@ namespace Office_supplies_management
             builder.Services.AddScoped<IUserTypeRepository, UserTypeRepository>();
             builder.Services.AddScoped<IRequestRepository, RequestRepository>();
             builder.Services.AddScoped<IProduct_RequestRepository, Product_RequestRepository>();
+            builder.Services.AddScoped<ISummaryRepository, SummaryRepository>();    
 
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IUserService, UserService>();
@@ -120,6 +124,7 @@ namespace Office_supplies_management
             builder.Services.AddScoped<IJwtService, JwtService>();
             builder.Services.AddScoped<IRequestService, RequestService>();
             builder.Services.AddScoped<IProduct_RequestService, Product_RequestService>();
+            builder.Services.AddScoped<ISummaryService, SummaryService>();
 
             // Configure CORS
             builder.Services.AddCors(options =>

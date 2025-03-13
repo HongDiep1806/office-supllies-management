@@ -2,6 +2,7 @@
 using Office_supplies_management.DTOs.Product;
 using Office_supplies_management.DTOs.ProductRequest;
 using Office_supplies_management.DTOs.Request;
+using Office_supplies_management.Features.Request.Commands;
 using Office_supplies_management.Models;
 using Office_supplies_management.Repositories;
 using System.Collections.Generic;
@@ -15,12 +16,14 @@ namespace Office_supplies_management.Services
     {
         private readonly IRequestRepository _requestRepository;
         private readonly IProduct_RequestService _productRequestService;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public RequestService(IRequestRepository requestRepository, IMapper mapper, IProduct_RequestService productRequestService)
+        public RequestService(IUserRepository userRepository,IRequestRepository requestRepository, IMapper mapper, IProduct_RequestService productRequestService)
         {
             _requestRepository = requestRepository;
             _mapper = mapper;
             _productRequestService = productRequestService;
+            _userRepository = userRepository;
         }
 
         public async Task<RequestDto> Create(CreateRequestDto createRequest)
@@ -30,6 +33,7 @@ namespace Office_supplies_management.Services
                 UserID = createRequest.UserID,
                 RequestCode = createRequest.RequestCode,
                 TotalPrice = createRequest.TotalPrice,
+                IsProcessedByDepLead = true
             };
             await _requestRepository.CreateAsync(newRequest);
             var productRequests = createRequest.Products
@@ -108,6 +112,100 @@ namespace Office_supplies_management.Services
         public Task<int> Count()
         {
             return _requestRepository.Count();
+        }
+
+        public async Task<List<RequestDto>> GetByDepartment(string department)
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            var requestOfUsersInDepartment = new List<Request>();
+            foreach (var request in requests)
+            {
+                var user = await _userRepository.GetByIdAsync(request.UserID);
+                if(user.Department.ToLower().Equals(department.ToLower()))
+                {
+                    requestOfUsersInDepartment.Add(request);
+                }
+            }
+            return _mapper.Map<List<RequestDto>>(requestOfUsersInDepartment);
+        }
+
+        public async Task<bool> ApproveByDepLeader(int requestID)
+        {
+            var request = await _requestRepository.GetByIdAsync(requestID);
+            if (request != null)
+            {
+                request.IsProcessedByDepLead = true;
+                request.IsApprovedByDepLead = true;
+                await _requestRepository.UpdateAsync(requestID, request);
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<List<RequestDto>> GetApprovedRequestsByDepLeader()
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            var approvedRequests = requests.Where(r => r.IsApprovedByDepLead == true).ToList();
+            return _mapper.Map<List<RequestDto>>(approvedRequests);
+        }
+
+        public async Task<bool> ApproveByFinEmployee(int requestId)
+        {
+            var requestEntity = await _requestRepository.GetByIdAsync(requestId);
+            if (requestEntity == null)
+            {
+                return false;
+            }
+
+            requestEntity.IsApprovedBySupLead = true;
+            await _requestRepository.UpdateAsync(requestId, requestEntity);
+            return true;
+        }
+
+        public async Task<List<RequestDto>> GetAllRequestsForFinEmployee()
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            return _mapper.Map<List<RequestDto>>(requests);
+        }
+        public async Task<bool> NotApproveRequestByDepLeader(int requestID)
+        {
+            var request = await _requestRepository.GetByIdAsync(requestID);
+            if (request != null)
+            {
+                request.IsProcessedByDepLead = true;
+                request.IsApprovedByDepLead = false;
+                await _requestRepository.UpdateAsync(requestID, request);
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> NotApproveRequestByFinEmployee(int requestID)
+        {
+            var request = await _requestRepository.GetByIdAsync(requestID);
+            if (request != null)
+            {
+                request.IsProcessedByDepLead = false;
+                request.IsApprovedByDepLead = true;
+                await _requestRepository.UpdateAsync(requestID, request);
+                return true;
+            }
+            return false;
+        }
+        public async Task UpdateRequestStatus(int summaryID, bool isProcessedBySupLead, bool isApprovedBySupLead)
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            var requestsToUpdate = requests.Where(r => r.SummaryID == summaryID).ToList();
+
+            foreach (var request in requestsToUpdate)
+            {
+                request.IsSummaryBeProcessed = isProcessedBySupLead;
+                request.IsSummaryBeApproved = isApprovedBySupLead;
+            }
+
+            foreach (var request in requestsToUpdate)
+            {
+                await _requestRepository.UpdateAsync(request.RequestID, request);
+            }
         }
     }
 }

@@ -5,7 +5,11 @@ using Office_supplies_management.DTOs.Request;
 using Office_supplies_management.Features.Request.Commands;
 using Office_supplies_management.Features.Request.Queries;
 using Office_supplies_management.Models;
+using Office_supplies_management.Services;
 using System.Formats.Asn1;
+using System.IdentityModel.Tokens.Jwt;
+using System.Reflection.Metadata;
+using System.Security.Claims;
 using System.Security.Claims;
 using System.Security.Cryptography.Xml;
 using System.IdentityModel.Tokens.Jwt;
@@ -17,12 +21,9 @@ namespace Office_supplies_management.Controllers
     public class RequestController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IRequestService _requestService;
-
-        public RequestController(IMediator mediator, IRequestService requestService)
+        public RequestController(IMediator mediator)
         {
             _mediator = mediator;
-            _requestService = requestService;
         }
 
         [HttpPost]
@@ -31,6 +32,13 @@ namespace Office_supplies_management.Controllers
             var command = new AddRequestCommand(request);
             var createdRequest = await _mediator.Send(command);
             return Ok(createdRequest);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllRequest()
+        {
+            var query = new GetAllRequestQuery();
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
         }
 
         [HttpGet("{id}")]
@@ -92,6 +100,75 @@ namespace Office_supplies_management.Controllers
             var query = new GetRequestsByDepartmentQuery(departmentName);
             var requests = await _mediator.Send(query);
             return Ok(requests);
+        }
+        [HttpPut("approveByDepLeader/{requestId}")]
+        public async Task<IActionResult> ApproveRequestByDepLeader(int requestId)
+        {
+            var command = new ApproveRequestByDepLeaderCommand(requestId);
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest("Can not find request by id");
+            }
+        }
+
+        [HttpPut("approveRequestByFinEmployee/{requestId}")]
+        //[Authorize(Policy = "RequireFinanceEmployee")]
+        public async Task<IActionResult> ApproveRequestSupLead(int requestId)
+        {
+            var command = new ApproveRequestFinEmployeeCommand(requestId);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpGet("approved-requests-list")]
+        [Authorize(Policy = "RequireFinanceEmployee")]
+        public async Task<IActionResult> GetApprovedRequestsByDepLeader()
+        {
+            var query = new GetApprovedRequestsQuery();
+            var approvedRequests = await _mediator.Send(query);
+            return Ok(approvedRequests);
+        }
+
+        [HttpGet("all-requests")]
+        [Authorize(Policy = "RequireSupLeaderRole")] // Change the authorization policy
+        public async Task<IActionResult> GetAllRequestsForSupLeader()
+        {
+            var query = new GetAllRequestsForFinEmployeeQuery();
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
+        }
+        [HttpPut("notapproveByDepLeader/{requestId}")]
+        public async Task<IActionResult> NotApproveRequestByDepLeader(int requestId)
+        {
+            var command = new NotApproveRequestByDepLeaderCommand(requestId);
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest("Can not find request by id");
+            }
+        }
+        [HttpPut("notapproveByFinEmployee/{requestId}")]
+        public async Task<IActionResult> NotApproveRequestByFinEmployee(int requestId)
+        {
+            var command = new NotApproveRequestByFinEmployeeCommand(requestId);
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest("Can not find request by id");
+            }
         }
 
         [HttpPost("approve-request/{requestId}")]

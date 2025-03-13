@@ -1,11 +1,8 @@
 using MediatR;
+using Office_supplies_management.DTOs.ProductRequest;
+using Office_supplies_management.DTOs.Request;
 using Office_supplies_management.Features.Request.Commands;
 using Office_supplies_management.Services;
-using Office_supplies_management.DTOs.Request; // Add this using directive
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Office_supplies_management.DTOs.ProductRequest;
 
 namespace Office_supplies_management.Features.Request.Handlers
 {
@@ -27,7 +24,7 @@ namespace Office_supplies_management.Features.Request.Handlers
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var user = await _userService.GetByIdAsync(request.UserId);
+            var user = await _userService.GetById(request.UserId);
             if (user == null)
             {
                 throw new InvalidOperationException("User not found.");
@@ -63,5 +60,5 @@ namespace Office_supplies_management.Features.Request.Handlers
             return result;
         }
     }
-    
+
 }

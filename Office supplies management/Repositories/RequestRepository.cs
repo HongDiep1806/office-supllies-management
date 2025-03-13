@@ -14,7 +14,7 @@ namespace Office_supplies_management.Repositories
         {
         }
 
-       
+
     }
 }
 

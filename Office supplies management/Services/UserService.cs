@@ -85,5 +85,9 @@ namespace Office_supplies_management.Services
             return departments;
         }
 
+        public Task<User> GetByIdAsync(int id)
+        {
+            return _userRepository.GetByIdAsync(id);
+        }
     }
 }

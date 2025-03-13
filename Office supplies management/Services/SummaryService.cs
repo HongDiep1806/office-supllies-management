@@ -17,12 +17,14 @@ namespace Office_supplies_management.Services
         private readonly IRequestRepository _requestRepository;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public SummaryService(ISummaryRepository summaryRepository, IRequestRepository requestRepository, IMapper mapper)
+        private readonly ILogger<SummaryService> _logger;
+        public SummaryService(IUserRepository userRepository, ISummaryRepository summaryRepository, IRequestRepository requestRepository, IMapper mapper, ILogger<SummaryService> logger)
         {
             _summaryRepository = summaryRepository;
             _requestRepository = requestRepository;
             _userRepository = userRepository;
             _mapper = mapper;
+            _logger = logger;
         }
         public async Task<SummaryDto> CreateSummary(CreateSummaryDto createSummaryDto)
         {
@@ -191,5 +193,6 @@ namespace Office_supplies_management.Services
             return _mapper.Map < List<SummaryDto>>(summaries);
 
         }
+
     }
 }

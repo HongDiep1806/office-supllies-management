@@ -5,6 +5,7 @@ using Office_supplies_management.DTOs.Request;
 using Office_supplies_management.DTOs.Summary;
 using Office_supplies_management.Features.Request.Commands;
 using Office_supplies_management.Features.Summary.Commands;
+using Office_supplies_management.Features.Summary.Queries;
 
 namespace Office_supplies_management.Controllers
 {
@@ -19,7 +20,7 @@ namespace Office_supplies_management.Controllers
             _mediator = mediator;
         }
         [HttpPost]
-        [Authorize(Policy = "RequireFinanceEmployee")]
+        //[Authorize(Policy = "RequireFinanceEmployee")]
         public async Task<IActionResult> Create([FromBody] CreateSummaryDto createSummaryDto)
         {
             var command = new AddSummaryCommand(createSummaryDto);
@@ -63,18 +64,18 @@ namespace Office_supplies_management.Controllers
             return BadRequest();
         }
 
-        [HttpGet]
-        //[Authorize(Policy = "RequireSupLeaderRole")]
-        public async Task<IActionResult> GetAllSummaries()
-        {
-            var query = new GetAllSummariesQuery();
-            var summaries = await _mediator.Send(query);
-            if (summaries != null && summaries.Any())
-            {
-                return Ok(summaries);
-            }
-            return NotFound();
-        }
+        //[HttpGet]
+        ////[Authorize(Policy = "RequireSupLeaderRole")]
+        //public async Task<IActionResult> GetAllSummaries()
+        //{
+        //    var query = new GetAllSummariesQuery();
+        //    var summaries = await _mediator.Send(query);
+        //    if (summaries != null && summaries.Any())
+        //    {
+        //        return Ok(summaries);
+        //    }
+        //    return NotFound();
+        //}
 
         [HttpGet("user/{userId}")]
         //[Authorize(Policy = "RequireFinanceEmployee")]

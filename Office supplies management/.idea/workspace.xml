@@ -41,7 +41,6 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "diep-2",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "E:/Intership Project/office-supllies-management/Office supplies management",
@@ -53,6 +52,21 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Office supplies management" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Office supplies management" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -72,6 +86,7 @@
       <workItem from="1741666489388" duration="210000" />
       <workItem from="1741836102038" duration="253000" />
       <workItem from="1741836539409" duration="832000" />
+      <workItem from="1741837996296" duration="530000" />
     </task>
     <task id="LOCAL-00001" summary="push">
       <option name="closed" value="true" />

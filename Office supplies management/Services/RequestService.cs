@@ -23,7 +23,7 @@ namespace Office_supplies_management.Services
             _requestRepository = requestRepository;
             _mapper = mapper;
             _productRequestService = productRequestService;
-            _userRepository = userRepository;   
+            _userRepository = userRepository;
         }
 
         public async Task<RequestDto> Create(CreateRequestDto createRequest)

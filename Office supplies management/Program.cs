@@ -76,6 +76,8 @@ namespace Office_supplies_management
                     policy.RequireClaim("Permission", "ViewAllRequests")); // Ensure this policy is correctly set
             });
 
+
+
             builder.Services.AddMediatR(cfg => cfg.AsScoped(), typeof(Program).Assembly);
 
             // Add services to the container

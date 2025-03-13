@@ -14,12 +14,7 @@ namespace Office_supplies_management.Repositories
         {
         }
 
-        //public async Task<List<Request>> GetRequestsByDepartmentAsync(string department, CancellationToken cancellationToken)
-        //{
-        //    return await _context.Requests
-        //        .Where(r => r.User.Department == department)
-        //        .ToListAsync(cancellationToken);
-        //}
+
     }
 }
 

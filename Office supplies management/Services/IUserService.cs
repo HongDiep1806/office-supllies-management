@@ -6,6 +6,7 @@ namespace Office_supplies_management.Services
 {
     public interface IUserService
     {
+        Task<User> GetByIdAsync(int id);
         Task<List<UserDto>> GetAll();
         Task<UserDto> Create(CreateUserDto request);
         Task<UserDto> GetByEmail (string email);

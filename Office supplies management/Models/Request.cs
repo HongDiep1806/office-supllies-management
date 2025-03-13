@@ -11,6 +11,8 @@ namespace Office_supplies_management.Models
         public bool IsProcessedByDepLead { get; set; }
         public bool IsApprovedByDepLead { get; set; }
         public bool IsApprovedBySupLead { get; set; }
+        public bool IsSummaryBeProcessed { get; set; } = false;
+        public bool IsSummaryBeApproved { get; set; } = false;
         public ICollection <Product_Request> Product_Requests { get; set; }
         public int UserID { get; set; }
         public User User { get; set; }

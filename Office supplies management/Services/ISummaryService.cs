@@ -5,5 +5,6 @@ namespace Office_supplies_management.Services
     public interface ISummaryService
     {
         Task<SummaryDto> CreateSummary(CreateSummaryDto createSummaryDto);
+        Task<List<SummaryDto>> GetAll();
     }
 }

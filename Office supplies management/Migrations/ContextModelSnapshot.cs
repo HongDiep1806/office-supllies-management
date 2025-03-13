@@ -126,6 +126,12 @@ namespace Office_supplies_management.Migrations
                     b.Property<bool>("IsProcessedByDepLead")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsSummaryBeApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSummaryBeProcessed")
+                        .HasColumnType("bit");
+
                     b.Property<string>("RequestCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

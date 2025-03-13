@@ -120,7 +120,7 @@ namespace Office_supplies_management.Migrations
                     b.Property<bool>("IsApprovedByDepLead")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsApprovedBySupLead")
+                    b.Property<bool>("IsApprovedByFinLead")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
@@ -165,7 +165,7 @@ namespace Office_supplies_management.Migrations
                     b.Property<DateTime>("ExpiredTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsApprovedBySupLead")
+                    b.Property<bool>("IsApprovedByFinLead")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")

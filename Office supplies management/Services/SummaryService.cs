@@ -36,5 +36,12 @@ namespace Office_supplies_management.Services
             }
             return _mapper.Map<SummaryDto>(newSummary);
         }
+
+        public async Task<List<SummaryDto>> GetAll()
+        {
+            var summaries = await _summaryRepository.GetAllInclude(s => s.Requests);
+            return _mapper.Map < List<SummaryDto>>(summaries);
+
+        }
     }
 }

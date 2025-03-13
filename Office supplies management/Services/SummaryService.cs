@@ -42,6 +42,7 @@ namespace Office_supplies_management.Services
             foreach (var request in requestsOfSummary)
             {
                 request.SummaryID = newSummary.SummaryID;
+                request.IsCollectedInSummary = true;
                 await _requestRepository.UpdateAsync(request.RequestID, request);
             }
             return _mapper.Map<SummaryDto>(newSummary);
@@ -76,8 +77,9 @@ namespace Office_supplies_management.Services
 
         public async Task<SummaryDto> GetSummaryById(int summaryId)
         {
-            var summary = await _summaryRepository.GetByIdAsync(summaryId);
-            return _mapper.Map<SummaryDto>(summary);
+            var summaries = await _summaryRepository.GetAllInclude( s => s.Requests);
+            var currentSummary = summaries.FirstOrDefault(s => s.SummaryID == summaryId);
+            return _mapper.Map<SummaryDto>(currentSummary);
         }
 
         public async Task<List<DepartmentUsageReportDto>> GetDepartmentUsageReport(string department, DateTime startDate, DateTime endDate)

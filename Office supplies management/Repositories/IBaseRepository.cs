@@ -14,5 +14,6 @@ public interface IBaseRepository<T> where T : BaseEntity
     Task<bool> DeleteForever(int id);
     Task<bool> AddRanges (List<T> ranges);
     Task<int> Count();
-    Task<List<T>> AllAsync();   
+    Task<List<T>> AllAsync();
+    Task<T> GetByIdIncludeAsync(object key, params Expression<Func<T, object>>[] includes);
 }

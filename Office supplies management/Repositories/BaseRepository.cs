@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Office_supplies_management.DAL;
 using Office_supplies_management.Models;
 using System.Collections.Generic;
@@ -105,5 +106,18 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
         }
 
         return await query.ToListAsync();
+    }
+
+    public async Task<T> GetByIdIncludeAsync(object key, params Expression<Func<T, object>>[] includes)
+    {
+        IQueryable<T> query = _context.Set<T>();
+
+        foreach (var include in includes)
+        {
+            query = query.Include(include);
+        }
+
+        var entity = await _context.Set<T>().FindAsync(key);
+        return entity;
     }
 }

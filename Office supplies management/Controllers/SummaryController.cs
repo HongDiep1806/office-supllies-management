@@ -149,5 +149,13 @@ namespace Office_supplies_management.Controllers
             var result = await _mediator.Send(query);
             return Ok(result);
         }
+
+        [HttpGet("approved-summaries-with-requests")]
+        public async Task<IActionResult> GetApprovedSummariesWithRequests()
+        {
+            var query = new GetApprovedSummariesWithRequestsQuery();
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
     }
 }

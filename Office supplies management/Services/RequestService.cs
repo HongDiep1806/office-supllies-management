@@ -207,6 +207,55 @@ namespace Office_supplies_management.Services
                 await _requestRepository.UpdateAsync(request.RequestID, request);
             }
         }
+        public async Task<List<RequestDto>> GetCollectedRequests()
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            var collectedRequests = requests.Where(r => (r.IsCollectedInSummary && r.IsSummaryBeApproved && r.IsSummaryBeProcessed)).ToList();
+            var collectedRequestDtos = new List<RequestDto>();
+
+            // Log the request IDs that pass the filter
+            Console.WriteLine("Request IDs that pass the filter:");
+            foreach (var request in collectedRequests)
+            {
+                Console.WriteLine(request.RequestID);
+            }
+
+            foreach (var request in collectedRequests)
+            {
+                var productsInRequest = await _productRequestService.GetByRequestID(request.RequestID);
+                var requestDto = _mapper.Map<RequestDto>(request);
+                requestDto.Product_Requests = productsInRequest;
+                collectedRequestDtos.Add(requestDto);
+            }
+
+            return collectedRequestDtos;
+        }
+        public async Task<List<RequestDto>> GetRequestsInApprovedSummary()
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            var approvedSummaryRequests = requests.Where(r => r.IsSummaryBeApproved).ToList();
+            var approvedSummaryRequestDtos = new List<RequestDto>();
+
+            foreach (var request in approvedSummaryRequests)
+            {
+                var productsInRequest = await _productRequestService.GetByRequestID(request.RequestID);
+                var requestDto = _mapper.Map<RequestDto>(request);
+                requestDto.Product_Requests = productsInRequest;
+                approvedSummaryRequestDtos.Add(requestDto);
+            }
+
+            return approvedSummaryRequestDtos;
+        }
+
+
+
+
+
+
+
+
+
+
     }
 }
 

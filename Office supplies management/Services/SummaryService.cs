@@ -195,6 +195,27 @@ namespace Office_supplies_management.Services
             return _mapper.Map < List<SummaryDto>>(summaries);
 
         }
+        public async Task<Dictionary<int, List<RequestDto>>> GetApprovedSummariesWithRequests()
+        {
+            var approvedSummaries = await GetApprovedSummariesAsync();
+            var result = new Dictionary<int, List<RequestDto>>();
+
+            foreach (var summary in approvedSummaries)
+            {
+                var requests = await GetRequestsBySummaryId(summary.SummaryID);
+                result.Add(summary.SummaryID, requests);
+            }
+
+            return result;
+        }
+
+        private async Task<List<Summary>> GetApprovedSummariesAsync()
+        {
+            var summaries = await _summaryRepository.GetAllAsync();
+            return summaries.Where(s => s.IsApprovedBySupLead).ToList();
+        }
+        
+
 
     }
 }

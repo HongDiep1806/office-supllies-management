@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Office_supplies_management.DAL;
 using Office_supplies_management.Models;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
@@ -92,5 +94,30 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
          _context.Set<T>().Remove(entity); 
         await _context.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<List<T>> GetAllInclude(params Expression<Func<T, object>>[] includes)
+    {
+        IQueryable<T> query = _context.Set<T>();
+
+        foreach (var include in includes)
+        {
+            query = query.Include(include);
+        }
+
+        return await query.ToListAsync();
+    }
+
+    public async Task<T> GetByIdIncludeAsync(object key, params Expression<Func<T, object>>[] includes)
+    {
+        IQueryable<T> query = _context.Set<T>();
+
+        foreach (var include in includes)
+        {
+            query = query.Include(include);
+        }
+
+        var entity = await _context.Set<T>().FindAsync(key);
+        return entity;
     }
 }

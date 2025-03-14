@@ -1,0 +1,22 @@
+<changelist name="Uncommitted_changes_before_Update_at_3_11_2025_11_12_AM_[Changes]" date="1741666344614" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_11_2025_11_12_AM_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 3/11/2025 11:12 AM [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="Office supplies management/.vs/Office supplies management/v17/.suo" />
+    <option name="AFTER_PATH" value="Office supplies management/.vs/Office supplies management/v17/.suo" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_11_2025_11_12_AM_[Changes]/.suo" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Office supplies management/obj/Debug/net8.0/Office supplies management.csproj.AssemblyReference.cache" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Office supplies management/.vs/Office supplies management/DesignTimeBuild/.dtbcache.v2" />
+    <option name="AFTER_PATH" value="Office supplies management/.vs/Office supplies management/DesignTimeBuild/.dtbcache.v2" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_11_2025_11_12_AM_[Changes]/.dtbcache.v2" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Office supplies management/obj/Debug/net8.0/Office supplies management.assets.cache" />
+    <option name="AFTER_PATH" value="Office supplies management/obj/Debug/net8.0/Office supplies management.assets.cache" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_11_2025_11_12_AM_[Changes]/Office supplies management.assets.cache" />
+  </binary>
+</changelist>

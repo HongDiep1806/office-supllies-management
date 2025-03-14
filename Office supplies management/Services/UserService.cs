@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Office_supplies_management.DAL;
 using Office_supplies_management.DTOs.Permission;
 using Office_supplies_management.DTOs.Product;
 using Office_supplies_management.DTOs.User;
@@ -76,6 +77,17 @@ namespace Office_supplies_management.Services
             var users = await _userRepository.GetAllAsync();
             var usersInDepartment = users.Where(u => u.Department == department).ToList();
             return _mapper.Map<List<UserDto>>(usersInDepartment);
+        }
+        public async Task<List<string>> GetUniqueDepartments()
+        {
+            var users = await _userRepository.GetAllAsync();
+            var departments = users.Select(u => u.Department).Distinct().ToList();
+            return departments;
+        }
+
+        public Task<User> GetByIdAsync(int id)
+        {
+            return _userRepository.GetByIdAsync(id);
         }
     }
 }

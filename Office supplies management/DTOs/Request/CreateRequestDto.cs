@@ -10,5 +10,6 @@ namespace Office_supplies_management.DTOs.Request
         public string RequestCode { get; set; }
         public int UserID { get; set; }
         public List<ProductRequestDto> Products { get; set; }
+        public bool IsProcessedByDepLead { get; set; }
     }
 }

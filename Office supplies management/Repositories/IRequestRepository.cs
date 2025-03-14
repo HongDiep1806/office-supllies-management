@@ -7,7 +7,6 @@ namespace Office_supplies_management.Repositories
 {
     public interface IRequestRepository : IBaseRepository<Request>
     {
-        Task<List<Request>> GetRequestsByDepartmentAsync(string departmentName, CancellationToken cancellationToken);
     }
 }
 

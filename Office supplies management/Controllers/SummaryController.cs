@@ -111,11 +111,7 @@ namespace Office_supplies_management.Controllers
         {
             var query = new GetDepartmentUsageReportQuery { Department = department, StartDate = startDate, EndDate = endDate };
             var report = await _mediator.Send(query);
-            if (report != 0)
-            {
-                return Ok(report);
-            }
-            return NotFound();
+            return Ok(report);
         }
 
         [HttpGet("summariesByDateRange")]

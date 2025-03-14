@@ -223,11 +223,18 @@ namespace Office_supplies_management.Services
 
             foreach (var summary in filteredSummaries)
             {
-                var requests = await GetRequestsBySummaryId(summary.SummaryID);
+                var requests = await GetRequestsBySummaryIdWithProductDetails(summary.SummaryID);
                 result.Add(summary.SummaryID, requests);
             }
 
             return result;
+        }
+
+        private async Task<List<RequestDto>> GetRequestsBySummaryIdWithProductDetails(int summaryId)
+        {
+            var requests = await _requestRepository.GetAllInclude(r => r.Product_Requests);
+            var filteredRequests = requests.Where(r => r.SummaryID == summaryId).ToList();
+            return _mapper.Map<List<RequestDto>>(filteredRequests);
         }
 
     }

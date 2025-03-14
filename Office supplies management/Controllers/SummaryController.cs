@@ -157,5 +157,16 @@ namespace Office_supplies_management.Controllers
             var result = await _mediator.Send(query);
             return Ok(result);
         }
+        
+
+        [HttpGet("summaries-with-requests")]
+        public async Task<IActionResult> GetSummariesWithRequestsByDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        {
+            var query = new GetSummariesWithRequestsByDateRangeQuery(startDate, endDate);
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+
     }
 }

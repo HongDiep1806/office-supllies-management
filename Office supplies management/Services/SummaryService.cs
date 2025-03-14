@@ -35,7 +35,7 @@ namespace Office_supplies_management.Services
                 UserID = createSummaryDto.UserID,
                 Requests = requestsOfSummary,
                 TotalPrice = requestsOfSummary.Sum(r => r.TotalPrice),
-                IsProcessedBySupLead = true,
+                //IsProcessedBySupLead = true,
             };
 
            await _summaryRepository.CreateAsync(newSummary);

@@ -246,6 +246,15 @@ namespace Office_supplies_management.Services
 
             return approvedSummaryRequestDtos;
         }
+        public async Task<List<RequestDto>> GetRequestsInDateRange(DateTime startDate, DateTime endDate)
+        {
+            var requests = await _requestRepository.GetAllInclude(r => r.Product_Requests);
+            var filteredRequests = requests
+                .Where(r => r.CreatedDate.Date >= startDate && r.CreatedDate.Date <= endDate && r.IsSummaryBeApproved)
+                .ToList();
+
+            return _mapper.Map<List<RequestDto>>(filteredRequests);
+        }
 
 
 

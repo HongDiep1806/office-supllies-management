@@ -14,6 +14,7 @@ using System.Security.Claims;
 using System.Security.Cryptography.Xml;
 using System.IdentityModel.Tokens.Jwt;
 using Office_supplies_management.Services;
+using Office_supplies_management.Queries;
 namespace Office_supplies_management.Controllers
 {
     [Route("/[controller]")]
@@ -190,6 +191,20 @@ namespace Office_supplies_management.Controllers
                 return Ok("Request approved successfully.");
             }
             return BadRequest("Failed to approve request.");
+        }
+        //[HttpGet("getCollectedRequests")]
+        //public async Task<IActionResult> GetCollectedRequests()
+        //{
+        //    var query = new GetCollectedRequestsQuery();
+        //    var requests = await _mediator.Send(query);
+        //    return Ok(requests);
+        //}
+        [HttpGet("requests-in-approved-summary")]
+        public async Task<IActionResult> GetRequestsInApprovedSummary()
+        {
+            var query = new GetRequestsInApprovedSummaryQuery();
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
         }
 
         //[HttpGet("approved-requests-list")]

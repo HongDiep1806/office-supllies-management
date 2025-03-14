@@ -20,5 +20,7 @@ namespace Office_supplies_management.Services
         Task<bool> NotApproveRequestByDepLeader(int requestId);
         Task<bool> NotApproveRequestByFinEmployee(int requestId);
         Task UpdateRequestStatus(int summaryID, bool isProcessedBySupLead, bool isApprovedBySupLead);
+        Task<List<RequestDto>> GetCollectedRequests(); // Add this method
+        Task<List<RequestDto>> GetRequestsInApprovedSummary(); // New method
     }
 }

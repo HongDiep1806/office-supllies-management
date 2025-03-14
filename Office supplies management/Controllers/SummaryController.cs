@@ -41,7 +41,7 @@ namespace Office_supplies_management.Controllers
         }
 
         [HttpPut("update")]
-        [Authorize(Policy = "RequireSupLeaderRole")]
+        //[Authorize(Policy = "RequireSupLeaderRole")]
         public async Task<IActionResult> UpdateSummary([FromBody] UpdateSummaryCommand command)
         {
             var result = await _mediator.Send(command);
@@ -52,17 +52,17 @@ namespace Office_supplies_management.Controllers
             return BadRequest();
         }
 
-        [HttpPut("update-request-status")]
-        [Authorize(Policy = "RequireSupLeaderRole")]
-        public async Task<IActionResult> UpdateRequestStatus([FromBody] UpdateRequestStatusCommand command)
-        {
-            var result = await _mediator.Send(command);
-            if (result)
-            {
-                return Ok();
-            }
-            return BadRequest();
-        }
+        //[HttpPut("update-request-status")]
+        //[Authorize(Policy = "RequireSupLeaderRole")]
+        //public async Task<IActionResult> UpdateRequestStatus([FromBody] UpdateRequestStatusCommand command)
+        //{
+        //    var result = await _mediator.Send(command);
+        //    if (result)
+        //    {
+        //        return Ok();
+        //    }
+        //    return BadRequest();
+        //}
 
         //[HttpGet]
         ////[Authorize(Policy = "RequireSupLeaderRole")]
@@ -146,6 +146,14 @@ namespace Office_supplies_management.Controllers
         public async Task<IActionResult> GetDepartmentCosts([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
             var query = new GetDepartmentCostsQuery { StartDate = startDate, EndDate = endDate };
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpGet("approved-summaries-with-requests")]
+        public async Task<IActionResult> GetApprovedSummariesWithRequests()
+        {
+            var query = new GetApprovedSummariesWithRequestsQuery();
             var result = await _mediator.Send(query);
             return Ok(result);
         }

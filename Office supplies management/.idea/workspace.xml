@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42234554-21e3-4bd9-9ce9-237aa6bb3708" name="Changes" comment="push merge 13/03" />
+    <list default="true" id="42234554-21e3-4bd9-9ce9-237aa6bb3708" name="Changes" comment="push merge 14/03" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,6 +41,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;test-1103&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;E:/Intership Project/office-supllies-management/Office supplies management&quot;,
@@ -72,6 +73,9 @@
       <workItem from="1741836102038" duration="253000" />
       <workItem from="1741836539409" duration="832000" />
       <workItem from="1741837996296" duration="530000" />
+      <workItem from="1741921211542" duration="1367000" />
+      <workItem from="1741937664402" duration="53000" />
+      <workItem from="1741945451666" duration="36000" />
     </task>
     <task id="LOCAL-00001" summary="push">
       <option name="closed" value="true" />
@@ -97,15 +101,35 @@
       <option name="project" value="LOCAL" />
       <updated>1741836983764</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="push merge 14/03">
+      <option name="closed" value="true" />
+      <created>1741921321202</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1741921321202</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="push" />
     <MESSAGE value="push merge 13/03" />
-    <option name="LAST_COMMIT_MESSAGE" value="push merge 13/03" />
+    <MESSAGE value="push merge 14/03" />
+    <option name="LAST_COMMIT_MESSAGE" value="push merge 14/03" />
   </component>
 </project>

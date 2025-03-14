@@ -159,7 +159,7 @@ namespace Office_supplies_management.Controllers
         }
         
 
-        [HttpGet("summaries-with-requests")]
+        [HttpGet("summaries-with-requests-date-range")]
         public async Task<IActionResult> GetSummariesWithRequestsByDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
             var query = new GetSummariesWithRequestsByDateRangeQuery(startDate, endDate);

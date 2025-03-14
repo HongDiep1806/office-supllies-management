@@ -218,7 +218,7 @@ namespace Office_supplies_management.Services
         public async Task<Dictionary<int, List<RequestDto>>> GetSummariesWithRequestsByDateRange(DateTime startDate, DateTime endDate)
         {
             var summaries = await _summaryRepository.GetAllAsync();
-            var filteredSummaries = summaries.Where(s => s.CreatedDate.Date >= startDate && s.CreatedDate.Date <= endDate).ToList();
+            var filteredSummaries = summaries.Where(s => s.CreatedDate.Date >= startDate && s.CreatedDate.Date <= endDate && s.IsApprovedBySupLead).ToList();
             var result = new Dictionary<int, List<RequestDto>>();
 
             foreach (var summary in filteredSummaries)

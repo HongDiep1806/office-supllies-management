@@ -15,6 +15,7 @@ namespace Office_supplies_management.Services
         Task<List<SummaryDto>> GetSummariesByDateRange(DateTime startDate, DateTime endDate);
         Task<List<RequestDto>> GetRequestsBySummaryId(int summaryId); // Add this method
         Task<List<DepartmentCostDto>> GetDepartmentCosts(DateTime startDate, DateTime endDate);
-
+        Task<Dictionary<int, List<RequestDto>>> GetApprovedSummariesWithRequests();
+        
     }
 }

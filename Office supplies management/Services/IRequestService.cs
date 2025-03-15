@@ -22,5 +22,6 @@ namespace Office_supplies_management.Services
         Task UpdateRequestStatus(int summaryID, bool isProcessedBySupLead, bool isApprovedBySupLead);
         Task<List<RequestDto>> GetCollectedRequests(); // Add this method
         Task<List<RequestDto>> GetRequestsInApprovedSummary(); // New method
+        Task<List<RequestDto>> GetRequestsInDateRange(DateTime startDate, DateTime endDate);
     }
 }

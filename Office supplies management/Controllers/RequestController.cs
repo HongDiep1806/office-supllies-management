@@ -206,6 +206,13 @@ namespace Office_supplies_management.Controllers
             var requests = await _mediator.Send(query);
             return Ok(requests);
         }
+        [HttpGet("requests-in-date-range")]
+        public async Task<IActionResult> GetRequestsInDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        {
+            var query = new GetRequestsInDateRangeQuery { StartDate = startDate, EndDate = endDate };
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
+        }
 
         //[HttpGet("approved-requests-list")]
         //[Authorize(Policy = "RequireFinanceEmployee")]

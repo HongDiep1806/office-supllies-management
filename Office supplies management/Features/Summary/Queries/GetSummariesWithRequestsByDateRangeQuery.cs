@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Office_supplies_management.Features.Summary.Queries
 {
-    public class GetSummariesWithRequestsByDateRangeQuery : IRequest<Dictionary<int, List<RequestDto>>>
+    public class GetSummariesWithRequestsByDateRangeQuery : IRequest<List<RequestDto>>
     {
         public DateTime StartDate { get; }
         public DateTime EndDate { get; }

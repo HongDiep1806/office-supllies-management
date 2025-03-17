@@ -57,11 +57,11 @@ namespace Office_supplies_management.Services
                 expires: DateTime.UtcNow.AddMinutes(_expiryMinutes), signingCredentials: creds);
 
             // **Log the claims to debug**
-            Console.WriteLine("Generated JWT Claims:");
-            foreach (var claim in claims)
-            {
-                Console.WriteLine($"{claim.Type}: {claim.Value}");
-            }
+            //Console.WriteLine("Generated JWT Claims:");
+            //foreach (var claim in claims)
+            //{
+            //    Console.WriteLine($"{claim.Type}: {claim.Value}");
+            //}
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

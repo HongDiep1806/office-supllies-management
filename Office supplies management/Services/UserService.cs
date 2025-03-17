@@ -53,18 +53,18 @@ namespace Office_supplies_management.Services
             {
                 throw new Exception("khong tim dc user"); // Trả về null thay vì gây lỗi mapping
             }
-            Console.WriteLine("ID: " + currentUser.UserID);
+            //Console.WriteLine("ID: " + currentUser.UserID);
             return _mapper.Map<UserDto>(currentUser);
         }
 
         public async Task<UserDto> GetById(int id)
         {
-            Console.WriteLine($"🔍 Fetching user by ID: {id}");
+            //Console.WriteLine($"🔍 Fetching user by ID: {id}");
             var user = await _userRepository.GetByIdAsync(id);
 
             if (user == null)
             {
-                Console.WriteLine($"❌ User not found for ID: {id}");
+                //Console.WriteLine($"❌ User not found for ID: {id}");
                 throw new Exception("User not found");
             }
 

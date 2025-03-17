@@ -58,7 +58,7 @@ namespace Office_supplies_management.Controllers
         {
             // Log the raw token received
             var authHeader = Request.Headers["Authorization"].ToString();
-            Console.WriteLine($"Received Authorization Header: {authHeader}");
+            //Console.WriteLine($"Received Authorization Header: {authHeader}");
 
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier) ??
                   User.FindFirstValue(JwtRegisteredClaimNames.Sub);
@@ -66,17 +66,17 @@ namespace Office_supplies_management.Controllers
 
             if (userIdClaim == null)
             {
-                Console.WriteLine("JWT Sub claim is missing.");
+                //Console.WriteLine("JWT Sub claim is missing.");
                 return Unauthorized("User ID claim is missing in token.");
             }
 
             if (!int.TryParse(userIdClaim, out var userId))
             {
-                Console.WriteLine($"Invalid JWT Sub claim format: {userIdClaim}");
+                //Console.WriteLine($"Invalid JWT Sub claim format: {userIdClaim}");
                 return Unauthorized("Invalid User ID format in token.");
             }
 
-            Console.WriteLine($"Extracted User ID from JWT: {userId}");
+            //Console.WriteLine($"Extracted User ID from JWT: {userId}");
 
             var query = new GetUsersByDepartmentQuery(userId);
             var users = await _mediator.Send(query);

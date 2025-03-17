@@ -84,17 +84,17 @@ namespace Office_supplies_management.Services
 
         public async Task<List<DepartmentUsageReportDto>> GetDepartmentUsageReport(string department, DateTime startDate, DateTime endDate)
         {
-            _logger.LogInformation("Fetching summaries between {StartDate} and {EndDate}", startDate, endDate);
+            //_logger.LogInformation("Fetching summaries between {StartDate} and {EndDate}", startDate, endDate);
             var summaries = await _summaryRepository.GetAllAsync();
             var filteredSummaries = summaries
                 .Where(s => s.CreatedDate.Date >= startDate.Date && s.CreatedDate.Date <= endDate.Date && s.IsApprovedBySupLead)
                 .ToList();
 
-            _logger.LogInformation("Found {Count} summaries in the date range", filteredSummaries.Count);
-            foreach (var summary in filteredSummaries)
-            {
-                _logger.LogInformation("SummaryID: {SummaryID}, CreatedDate: {CreatedDate}, IsApprovedBySupLead: {IsApprovedBySupLead}", summary.SummaryID, summary.CreatedDate, summary.IsApprovedBySupLead);
-            }
+            //_logger.LogInformation("Found {Count} summaries in the date range", filteredSummaries.Count);
+            //foreach (var summary in filteredSummaries)
+            //{
+            //    _logger.LogInformation("SummaryID: {SummaryID}, CreatedDate: {CreatedDate}, IsApprovedBySupLead: {IsApprovedBySupLead}", summary.SummaryID, summary.CreatedDate, summary.IsApprovedBySupLead);
+            //}
 
             var summaryIds = filteredSummaries.Select(s => s.SummaryID).ToList();
 
@@ -104,18 +104,18 @@ namespace Office_supplies_management.Services
                 .Select(u => u.UserID)
                 .ToList();
 
-            _logger.LogInformation("Found {Count} users in the department {Department}", userIds.Count, department);
+            //_logger.LogInformation("Found {Count} users in the department {Department}", userIds.Count, department);
 
             var requests = await _requestRepository.GetAllAsync();
             var filteredRequests = requests
                 .Where(r => userIds.Contains(r.UserID) && summaryIds.Contains(r.SummaryID ?? 0))
                 .ToList();
 
-            _logger.LogInformation("Found {Count} requests matching the criteria", filteredRequests.Count);
-            foreach (var request in filteredRequests)
-            {
-                _logger.LogInformation("RequestID: {RequestID}, UserID: {UserID}, SummaryID: {SummaryID}, TotalPrice: {TotalPrice}", request.RequestID, request.UserID, request.SummaryID, request.TotalPrice);
-            }
+            //_logger.LogInformation("Found {Count} requests matching the criteria", filteredRequests.Count);
+            //foreach (var request in filteredRequests)
+            //{
+            //    _logger.LogInformation("RequestID: {RequestID}, UserID: {UserID}, SummaryID: {SummaryID}, TotalPrice: {TotalPrice}", request.RequestID, request.UserID, request.SummaryID, request.TotalPrice);
+            //}
 
             var report = filteredRequests
                 .GroupBy(r => r.User.Department)
@@ -157,11 +157,11 @@ namespace Office_supplies_management.Services
                 .ToList();
 
             // Log the filtered requests
-            foreach (var request in filteredRequests)
-            {
-                _logger.LogInformation("RequestID: {RequestID}, UserID: {UserID}, Department: {Department}, CreatedDate: {CreatedDate}, TotalPrice: {TotalPrice}",
-                    request.RequestID, request.UserID, request.User?.Department, request.CreatedDate, request.TotalPrice);
-            }
+            //foreach (var request in filteredRequests)
+            //{
+            //    _logger.LogInformation("RequestID: {RequestID}, UserID: {UserID}, Department: {Department}, CreatedDate: {CreatedDate}, TotalPrice: {TotalPrice}",
+            //        request.RequestID, request.UserID, request.User?.Department, request.CreatedDate, request.TotalPrice);
+            //}
 
             // Pair each request to the department of the user who made the request and sum the cost
             var departmentCosts = filteredRequests

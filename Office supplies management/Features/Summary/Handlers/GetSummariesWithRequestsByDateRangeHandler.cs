@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Office_supplies_management.Features.Summary.Handlers
 {
-    public class GetSummariesWithRequestsByDateRangeHandler : IRequestHandler<GetSummariesWithRequestsByDateRangeQuery, Dictionary<int, List<RequestDto>>>
+    public class GetSummariesWithRequestsByDateRangeHandler : IRequestHandler<GetSummariesWithRequestsByDateRangeQuery, List<RequestDto>>
     {
         private readonly ISummaryService _summaryService;
 
@@ -17,7 +17,7 @@ namespace Office_supplies_management.Features.Summary.Handlers
             _summaryService = summaryService;
         }
 
-        public async Task<Dictionary<int, List<RequestDto>>> Handle(GetSummariesWithRequestsByDateRangeQuery request, CancellationToken cancellationToken)
+        public async Task<List<RequestDto>> Handle(GetSummariesWithRequestsByDateRangeQuery request, CancellationToken cancellationToken)
         {
             return await _summaryService.GetSummariesWithRequestsByDateRange(request.StartDate, request.EndDate);
         }

@@ -10,8 +10,8 @@ namespace Office_supplies_management.DTOs.User
         public int UserTypeID { get; set; }
         public bool IsDeleted { get; set; } = false;
         public string Department {  get; set; }
-        public bool IsProcessedByDepLead { get; set; } = false;
-        public bool IsApprovedByDepLead { get; set; } = false;
-        public bool IsApprovedBySupLead { get; set; } = false;
+        //public bool IsProcessedByDepLead { get; set; } = false;
+        //public bool IsApprovedByDepLead { get; set; } = false;
+        //public bool IsApprovedBySupLead { get; set; } = false;
     }
 }

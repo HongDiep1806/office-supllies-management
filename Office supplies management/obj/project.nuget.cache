@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "Euy/ZT7zY/o=",
+  "success": true,
+  "projectFilePath": "E:\\Intership Project\\2303 OSBE\\office-supllies-management\\Office supplies management\\Office supplies management.csproj",
+=======
   "dgSpecHash": "wfZFB55T+xQ=",
   "success": true,
   "projectFilePath": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Office supplies management.csproj",
+>>>>>>> cc4a445815e83f4f60916e17d7d352e27c11307e
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

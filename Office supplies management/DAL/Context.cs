@@ -15,6 +15,7 @@ namespace Office_supplies_management.DAL
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<UserType_Permission> UserTypes_Permissions { get; set; }
         public DbSet<Summary> Summaries { get; set; }
+        public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product_Request>()

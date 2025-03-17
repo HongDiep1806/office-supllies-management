@@ -3,6 +3,50 @@
   "WorkspaceRootPath": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\features\\user\\handlers\\getusernamebyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:features\\user\\handlers\\getusernamebyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\features\\user\\queries\\getusernamebyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:features\\user\\queries\\getusernamebyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\dal\\context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:dal\\context.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\permissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\permissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\passwordhashingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\passwordhashingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -39,10 +83,6 @@
       "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:features\\request\\handlers\\addrequestcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -55,16 +95,8 @@
       "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\usertypeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\permissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\permissionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\features\\authenticateuser\\handlers\\authenticateusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:features\\authenticateuser\\handlers\\authenticateusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -79,20 +111,12 @@
       "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\iusertypeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\passwordhashingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\passwordhashingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\product_requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\product_requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:services\\requestservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\services\\summaryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -189,6 +213,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\models\\permission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:models\\permission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|e:\\intership project\\office-supllies-management\\office supplies management\\migrations\\20250317075336_lastupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4644CE59-202D-4F8B-B679-7CC2A1C04863}|Office supplies management.csproj|solutionrelative:migrations\\20250317075336_lastupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -210,300 +238,116 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Office supplies management.http",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Office supplies management.http",
-              "RelativeDocumentMoniker": "Office supplies management.http",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Office supplies management.http",
-              "RelativeToolTip": "Office supplies management.http",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-03-17T01:44:21.426Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "appsettings.Development.json",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\appsettings.Development.json",
-              "RelativeToolTip": "appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-17T01:44:19.343Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-17T01:44:16.641Z",
-              "EditorCaption": ""
+              "Title": "GetUserNameByIdQueryHandler.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\User\\Handlers\\GetUserNameByIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "Features\\User\\Handlers\\GetUserNameByIdQueryHandler.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\User\\Handlers\\GetUserNameByIdQueryHandler.cs",
+              "RelativeToolTip": "Features\\User\\Handlers\\GetUserNameByIdQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T07:58:50.177Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "CountRequestsQueryHandler.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\CountRequestsQueryHandler.cs",
-              "RelativeDocumentMoniker": "Features\\Request\\Handlers\\CountRequestsQueryHandler.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\CountRequestsQueryHandler.cs",
-              "RelativeToolTip": "Features\\Request\\Handlers\\CountRequestsQueryHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "GetUserNameByIdQuery.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\User\\Queries\\GetUserNameByIdQuery.cs",
+              "RelativeDocumentMoniker": "Features\\User\\Queries\\GetUserNameByIdQuery.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\User\\Queries\\GetUserNameByIdQuery.cs",
+              "RelativeToolTip": "Features\\User\\Queries\\GetUserNameByIdQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T01:29:45.425Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAF4AAAAAAAAAAAAowGIAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T02:57:35.192Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T07:58:01.392Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "ApproveRequestSupLeadHandler.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestSupLeadHandler.cs",
-              "RelativeDocumentMoniker": "Features\\Request\\Handlers\\ApproveRequestSupLeadHandler.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestSupLeadHandler.cs",
-              "RelativeToolTip": "Features\\Request\\Handlers\\ApproveRequestSupLeadHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\IUserService.cs",
+              "RelativeDocumentMoniker": "Services\\IUserService.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\IUserService.cs",
+              "RelativeToolTip": "Services\\IUserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T01:29:41.876Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T07:54:46.781Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ApproveRequestFinEmployeeCommandHandler.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestFinEmployeeCommandHandler.cs",
-              "RelativeDocumentMoniker": "Features\\Request\\Handlers\\ApproveRequestFinEmployeeCommandHandler.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestFinEmployeeCommandHandler.cs",
-              "RelativeToolTip": "Features\\Request\\Handlers\\ApproveRequestFinEmployeeCommandHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\UserRepository.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "Repositories\\UserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T01:29:38.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T07:47:53.945Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ApproveRequestDepLeaderCommandHandler.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestDepLeaderCommandHandler.cs",
-              "RelativeDocumentMoniker": "Features\\Request\\Handlers\\ApproveRequestDepLeaderCommandHandler.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestDepLeaderCommandHandler.cs",
-              "RelativeToolTip": "Features\\Request\\Handlers\\ApproveRequestDepLeaderCommandHandler.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T01:29:30.895Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AddRequestCommandHandler.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\AddRequestCommandHandler.cs",
-              "RelativeDocumentMoniker": "Features\\Request\\Handlers\\AddRequestCommandHandler.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\AddRequestCommandHandler.cs",
-              "RelativeToolTip": "Features\\Request\\Handlers\\AddRequestCommandHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T01:29:29.14Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T01:28:06Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "AuthenticateUserCommandHandler.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\AuthenticateUser\\Handlers\\AuthenticateUserCommandHandler.cs",
-              "RelativeDocumentMoniker": "Features\\AuthenticateUser\\Handlers\\AuthenticateUserCommandHandler.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\AuthenticateUser\\Handlers\\AuthenticateUserCommandHandler.cs",
-              "RelativeToolTip": "Features\\AuthenticateUser\\Handlers\\AuthenticateUserCommandHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T01:27:23.234Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "PermissionService.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\PermissionService.cs",
-              "RelativeDocumentMoniker": "Services\\PermissionService.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\PermissionService.cs",
-              "RelativeToolTip": "Services\\PermissionService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T08:48:24.265Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "UserTypeService.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\UserTypeService.cs",
-              "RelativeDocumentMoniker": "Services\\UserTypeService.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\UserTypeService.cs",
-              "RelativeToolTip": "Services\\UserTypeService.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAABMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T08:43:52.523Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "UserType_PermissionService.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\UserType_PermissionService.cs",
-              "RelativeDocumentMoniker": "Services\\UserType_PermissionService.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\UserType_PermissionService.cs",
-              "RelativeToolTip": "Services\\UserType_PermissionService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T08:45:05.578Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 0,
               "Title": "UserController.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAADgv00AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACYAAAAAAAAAAAAgwD4AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-14T06:16:39.48Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "JWTService.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\JWTService.cs",
-              "RelativeDocumentMoniker": "Services\\JWTService.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\JWTService.cs",
-              "RelativeToolTip": "Services\\JWTService.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAYwDsAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T08:43:17.544Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "PasswordHashingService.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\PasswordHashingService.cs",
-              "RelativeDocumentMoniker": "Services\\PasswordHashingService.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\PasswordHashingService.cs",
-              "RelativeToolTip": "Services\\PasswordHashingService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T08:48:26.33Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "IUserTypeService.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\IUserTypeService.cs",
-              "RelativeDocumentMoniker": "Services\\IUserTypeService.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\IUserTypeService.cs",
-              "RelativeToolTip": "Services\\IUserTypeService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T08:48:31.991Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 2,
               "Title": "UserService.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
               "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\UserService.cs",
               "RelativeToolTip": "Services\\UserService.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAmwDsAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAiwF4AAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T04:34:54.483Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T04:34:54.483Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "IUserType_PermissionService.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\IUserType_PermissionService.cs",
-              "RelativeDocumentMoniker": "Services\\IUserType_PermissionService.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\IUserType_PermissionService.cs",
-              "RelativeToolTip": "Services\\IUserType_PermissionService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 53,
+              "Title": "20250317075336_lastupdate.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Migrations\\20250317075336_lastupdate.cs",
+              "RelativeDocumentMoniker": "Migrations\\20250317075336_lastupdate.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Migrations\\20250317075336_lastupdate.cs",
+              "RelativeToolTip": "Migrations\\20250317075336_lastupdate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T08:48:33.694Z"
+              "WhenOpened": "2025-03-17T07:53:36.914Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Product_RequestService.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\Product_RequestService.cs",
-              "RelativeDocumentMoniker": "Services\\Product_RequestService.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\Product_RequestService.cs",
-              "RelativeToolTip": "Services\\Product_RequestService.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "Context.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\DAL\\Context.cs",
+              "RelativeDocumentMoniker": "DAL\\Context.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\DAL\\Context.cs",
+              "RelativeToolTip": "DAL\\Context.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T08:48:21.593Z"
+              "WhenOpened": "2025-03-17T07:51:09.114Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "ProductService.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\ProductService.cs",
-              "RelativeDocumentMoniker": "Services\\ProductService.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\ProductService.cs",
-              "RelativeToolTip": "Services\\ProductService.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Repositories\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\IUserRepository.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Repositories\\IUserRepository.cs",
+              "RelativeToolTip": "Repositories\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T08:48:17.465Z"
+              "WhenOpened": "2025-03-17T07:47:23.99Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "SummaryService.cs",
-              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\SummaryService.cs",
-              "RelativeDocumentMoniker": "Services\\SummaryService.cs",
-              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\SummaryService.cs",
-              "RelativeToolTip": "Services\\SummaryService.cs",
-              "ViewState": "AgIAANcAAAAAAAAAAAAwwPEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T02:00:43.825Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 10,
               "Title": "RequestService.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\RequestService.cs",
               "RelativeDocumentMoniker": "Services\\RequestService.cs",
@@ -515,7 +359,259 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAswBgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-11T02:57:35.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PasswordHashingService.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\PasswordHashingService.cs",
+              "RelativeDocumentMoniker": "Services\\PasswordHashingService.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\PasswordHashingService.cs",
+              "RelativeToolTip": "Services\\PasswordHashingService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T08:48:26.33Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PermissionService.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\PermissionService.cs",
+              "RelativeDocumentMoniker": "Services\\PermissionService.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\PermissionService.cs",
+              "RelativeToolTip": "Services\\PermissionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T08:48:24.265Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-17T01:44:16.641Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CountRequestsQueryHandler.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\CountRequestsQueryHandler.cs",
+              "RelativeDocumentMoniker": "Features\\Request\\Handlers\\CountRequestsQueryHandler.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\CountRequestsQueryHandler.cs",
+              "RelativeToolTip": "Features\\Request\\Handlers\\CountRequestsQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T01:29:45.425Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-17T01:44:19.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Office supplies management.http",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Office supplies management.http",
+              "RelativeDocumentMoniker": "Office supplies management.http",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Office supplies management.http",
+              "RelativeToolTip": "Office supplies management.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-03-17T01:44:21.426Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ApproveRequestSupLeadHandler.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestSupLeadHandler.cs",
+              "RelativeDocumentMoniker": "Features\\Request\\Handlers\\ApproveRequestSupLeadHandler.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestSupLeadHandler.cs",
+              "RelativeToolTip": "Features\\Request\\Handlers\\ApproveRequestSupLeadHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T01:29:41.876Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ApproveRequestFinEmployeeCommandHandler.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestFinEmployeeCommandHandler.cs",
+              "RelativeDocumentMoniker": "Features\\Request\\Handlers\\ApproveRequestFinEmployeeCommandHandler.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestFinEmployeeCommandHandler.cs",
+              "RelativeToolTip": "Features\\Request\\Handlers\\ApproveRequestFinEmployeeCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T01:29:38.118Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ApproveRequestDepLeaderCommandHandler.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestDepLeaderCommandHandler.cs",
+              "RelativeDocumentMoniker": "Features\\Request\\Handlers\\ApproveRequestDepLeaderCommandHandler.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\ApproveRequestDepLeaderCommandHandler.cs",
+              "RelativeToolTip": "Features\\Request\\Handlers\\ApproveRequestDepLeaderCommandHandler.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T01:29:30.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "AddRequestCommandHandler.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\AddRequestCommandHandler.cs",
+              "RelativeDocumentMoniker": "Features\\Request\\Handlers\\AddRequestCommandHandler.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\AddRequestCommandHandler.cs",
+              "RelativeToolTip": "Features\\Request\\Handlers\\AddRequestCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T01:29:29.14Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T01:28:06Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AuthenticateUserCommandHandler.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\AuthenticateUser\\Handlers\\AuthenticateUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "Features\\AuthenticateUser\\Handlers\\AuthenticateUserCommandHandler.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\AuthenticateUser\\Handlers\\AuthenticateUserCommandHandler.cs",
+              "RelativeToolTip": "Features\\AuthenticateUser\\Handlers\\AuthenticateUserCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T01:27:23.234Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "UserTypeService.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\UserTypeService.cs",
+              "RelativeDocumentMoniker": "Services\\UserTypeService.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\UserTypeService.cs",
+              "RelativeToolTip": "Services\\UserTypeService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T08:43:52.523Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "UserType_PermissionService.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\UserType_PermissionService.cs",
+              "RelativeDocumentMoniker": "Services\\UserType_PermissionService.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\UserType_PermissionService.cs",
+              "RelativeToolTip": "Services\\UserType_PermissionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T08:45:05.578Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 24,
+              "Title": "JWTService.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\JWTService.cs",
+              "RelativeDocumentMoniker": "Services\\JWTService.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\JWTService.cs",
+              "RelativeToolTip": "Services\\JWTService.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwDsAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T08:43:17.544Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "IUserTypeService.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\IUserTypeService.cs",
+              "RelativeDocumentMoniker": "Services\\IUserTypeService.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\IUserTypeService.cs",
+              "RelativeToolTip": "Services\\IUserTypeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T08:48:31.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "IUserType_PermissionService.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\IUserType_PermissionService.cs",
+              "RelativeDocumentMoniker": "Services\\IUserType_PermissionService.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\IUserType_PermissionService.cs",
+              "RelativeToolTip": "Services\\IUserType_PermissionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T08:48:33.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Product_RequestService.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\Product_RequestService.cs",
+              "RelativeDocumentMoniker": "Services\\Product_RequestService.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\Product_RequestService.cs",
+              "RelativeToolTip": "Services\\Product_RequestService.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T08:48:21.593Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\ProductService.cs",
+              "RelativeDocumentMoniker": "Services\\ProductService.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\ProductService.cs",
+              "RelativeToolTip": "Services\\ProductService.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T08:48:17.465Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "SummaryService.cs",
+              "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\SummaryService.cs",
+              "RelativeDocumentMoniker": "Services\\SummaryService.cs",
+              "ToolTip": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\SummaryService.cs",
+              "RelativeToolTip": "Services\\SummaryService.cs",
+              "ViewState": "AgIAANcAAAAAAAAAAAAwwPEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-14T02:00:43.825Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
               "Title": "SummaryController.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Controllers\\SummaryController.cs",
               "RelativeDocumentMoniker": "Controllers\\SummaryController.cs",
@@ -527,7 +623,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 31,
               "Title": "RequestController.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Controllers\\RequestController.cs",
               "RelativeDocumentMoniker": "Controllers\\RequestController.cs",
@@ -539,7 +635,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 32,
               "Title": "IRequestService.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\IRequestService.cs",
               "RelativeDocumentMoniker": "Services\\IRequestService.cs",
@@ -551,7 +647,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 33,
               "Title": "GetRequestsInDateRangeQueryHandler.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Handlers\\GetRequestsInDateRangeQueryHandler.cs",
               "RelativeDocumentMoniker": "Features\\Request\\Handlers\\GetRequestsInDateRangeQueryHandler.cs",
@@ -563,7 +659,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 34,
               "Title": "GetRequestsInDateRangeQuery.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Queries\\GetRequestsInDateRangeQuery.cs",
               "RelativeDocumentMoniker": "Features\\Request\\Queries\\GetRequestsInDateRangeQuery.cs",
@@ -575,7 +671,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 35,
               "Title": "GetSummariesWithRequestsByDateRangeHandler.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Summary\\Handlers\\GetSummariesWithRequestsByDateRangeHandler.cs",
               "RelativeDocumentMoniker": "Features\\Summary\\Handlers\\GetSummariesWithRequestsByDateRangeHandler.cs",
@@ -587,7 +683,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 36,
               "Title": "GetSummariesWithRequestsByDateRangeQuery.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Summary\\Queries\\GetSummariesWithRequestsByDateRangeQuery.cs",
               "RelativeDocumentMoniker": "Features\\Summary\\Queries\\GetSummariesWithRequestsByDateRangeQuery.cs",
@@ -599,7 +695,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 37,
               "Title": "ISummaryService.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Services\\ISummaryService.cs",
               "RelativeDocumentMoniker": "Services\\ISummaryService.cs",
@@ -611,7 +707,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 38,
               "Title": "GetAllRequestQuery.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Queries\\GetAllRequestQuery.cs",
               "RelativeDocumentMoniker": "Features\\Request\\Queries\\GetAllRequestQuery.cs",
@@ -623,7 +719,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 39,
               "Title": "GetRequestsByUserIDQuery.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Request\\Queries\\GetRequestsByUserIDQuery.cs",
               "RelativeDocumentMoniker": "Features\\Request\\Queries\\GetRequestsByUserIDQuery.cs",
@@ -635,7 +731,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 40,
               "Title": "RequestDto.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\DTOs\\Request\\RequestDto.cs",
               "RelativeDocumentMoniker": "DTOs\\Request\\RequestDto.cs",
@@ -647,7 +743,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 41,
               "Title": "Product_RequestProfile.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Mappings\\Product_RequestProfile.cs",
               "RelativeDocumentMoniker": "Mappings\\Product_RequestProfile.cs",
@@ -659,7 +755,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 42,
               "Title": "ProductRequestDto.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\DTOs\\ProductRequest\\ProductRequestDto.cs",
               "RelativeDocumentMoniker": "DTOs\\ProductRequest\\ProductRequestDto.cs",
@@ -671,7 +767,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 43,
               "Title": "ProductDto.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\DTOs\\Product\\ProductDto.cs",
               "RelativeDocumentMoniker": "DTOs\\Product\\ProductDto.cs",
@@ -683,7 +779,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 44,
               "Title": "CreateProductDto.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\DTOs\\Product\\CreateProductDto.cs",
               "RelativeDocumentMoniker": "DTOs\\Product\\CreateProductDto.cs",
@@ -695,7 +791,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 45,
               "Title": "GetAllProductsQueryHandler.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Features\\Product\\Handlers\\GetAllProductsQueryHandler.cs",
               "RelativeDocumentMoniker": "Features\\Product\\Handlers\\GetAllProductsQueryHandler.cs",
@@ -707,7 +803,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 47,
               "Title": "20250311084729_addPropsForFinalChecking.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Migrations\\20250311084729_addPropsForFinalChecking.cs",
               "RelativeDocumentMoniker": "Migrations\\20250311084729_addPropsForFinalChecking.cs",
@@ -719,7 +815,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 48,
               "Title": "20250311084443_addPropsForFinalChecking.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Migrations\\20250311084443_addPropsForFinalChecking.cs",
               "RelativeDocumentMoniker": "Migrations\\20250311084443_addPropsForFinalChecking.cs",
@@ -731,7 +827,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 46,
               "Title": "User.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
@@ -743,7 +839,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 49,
               "Title": "CreateRequestDto.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\DTOs\\Request\\CreateRequestDto.cs",
               "RelativeDocumentMoniker": "DTOs\\Request\\CreateRequestDto.cs",
@@ -755,7 +851,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 50,
               "Title": "UpdateRequestDto.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\DTOs\\Request\\UpdateRequestDto.cs",
               "RelativeDocumentMoniker": "DTOs\\Request\\UpdateRequestDto.cs",
@@ -767,7 +863,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 51,
               "Title": "IPermissionRepository.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Repositories\\IPermissionRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\IPermissionRepository.cs",
@@ -779,7 +875,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 52,
               "Title": "Permission.cs",
               "DocumentMoniker": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Models\\Permission.cs",
               "RelativeDocumentMoniker": "Models\\Permission.cs",

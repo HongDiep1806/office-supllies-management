@@ -51,6 +51,14 @@ namespace Office_supplies_management.Controllers
             var user = await _mediator.Send(query);
             return Ok(user);
         }
+        [HttpGet("getNameById{id}")]
+        public async Task<IActionResult> GetNameById (int id)
+        {
+            var query = new GetUserNameByIdQuery(id);
+            var userName =  await _mediator.Send(query);
+            return Ok(userName);    
+        }
+        
 
         [HttpGet("department")]
         [Authorize(Policy = "DepartmentQuery")]

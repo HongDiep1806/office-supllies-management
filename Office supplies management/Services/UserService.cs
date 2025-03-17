@@ -89,5 +89,10 @@ namespace Office_supplies_management.Services
         {
             return _userRepository.GetByIdAsync(id);
         }
+
+        public async Task<string> GetNameById(int id)
+        {
+            return await _userRepository.GetNameById(id);    
+        }
     }
 }

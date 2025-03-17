@@ -18,7 +18,7 @@ namespace Office_supplies_management.Services
 
         public async Task<List<PermissionDto>> GetPermissionListByUserTypeIDAsync(int usertypeId)
         {
-            Console.WriteLine("doooo");
+            //Console.WriteLine("doooo");
             var permissionIDs = new List<int>();
             var allUserType_Permission = await _userType_PermissionRepository.GetAllAsync();
             permissionIDs = allUserType_Permission
@@ -33,7 +33,7 @@ namespace Office_supplies_management.Services
             foreach (var permissionID in permissionIDs)
             {
                 permissions.Add(await _permissionService.GetById(permissionID));
-                Console.WriteLine("hh: "+permissionID.ToString());
+                //Console.WriteLine("hh: "+permissionID.ToString());
             }
             return permissions;
         }

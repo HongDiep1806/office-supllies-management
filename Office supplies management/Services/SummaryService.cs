@@ -215,19 +215,26 @@ namespace Office_supplies_management.Services
             return summaries.Where(s => s.IsApprovedBySupLead).ToList();
         }
 
-        public async Task<Dictionary<int, List<RequestDto>>> GetSummariesWithRequestsByDateRange(DateTime startDate, DateTime endDate)
+        public async Task<List<RequestDto>> GetSummariesWithRequestsByDateRange(DateTime startDate, DateTime endDate)
         {
             var summaries = await _summaryRepository.GetAllAsync();
             var filteredSummaries = summaries.Where(s => s.CreatedDate.Date >= startDate && s.CreatedDate.Date <= endDate && s.IsApprovedBySupLead).ToList();
             var result = new Dictionary<int, List<RequestDto>>();
-
+            var results = new List<RequestDto>();   
             foreach (var summary in filteredSummaries)
             {
-                var requests = await GetRequestsBySummaryId(summary.SummaryID);
-                result.Add(summary.SummaryID, requests);
+                var requests = await GetRequestsBySummaryIdWithProductDetails(summary.SummaryID);
+                results.AddRange(requests);
             }
 
-            return result;
+            return results;
+        }
+
+        private async Task<List<RequestDto>> GetRequestsBySummaryIdWithProductDetails(int summaryId)
+        {
+            var requests = await _requestRepository.GetAllInclude(r => r.Product_Requests);
+            var filteredRequests = requests.Where(r => r.SummaryID == summaryId).ToList();
+            return _mapper.Map<List<RequestDto>>(filteredRequests);
         }
 
     }

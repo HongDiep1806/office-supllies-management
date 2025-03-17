@@ -5166,11 +5166,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "E:\\Intership Project\\2303 OSBE\\office-supllies-management\\Office supplies management\\Office supplies management.csproj",
       "projectName": "Office supplies management",
       "projectPath": "E:\\Intership Project\\2303 OSBE\\office-supllies-management\\Office supplies management\\Office supplies management.csproj",
       "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
       "outputPath": "E:\\Intership Project\\2303 OSBE\\office-supllies-management\\Office supplies management\\obj\\",
+=======
+      "projectUniqueName": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Office supplies management.csproj",
+      "projectName": "Office supplies management",
+      "projectPath": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\Office supplies management.csproj",
+      "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+      "outputPath": "E:\\Intership Project\\office-supllies-management\\Office supplies management\\obj\\",
+>>>>>>> cc4a445815e83f4f60916e17d7d352e27c11307e
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

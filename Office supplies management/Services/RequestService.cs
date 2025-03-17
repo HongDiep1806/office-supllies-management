@@ -60,14 +60,14 @@ namespace Office_supplies_management.Services
             var productsInRequest = await _productRequestService.GetByRequestID(request.RequestID);
             var requestDto = _mapper.Map<RequestDto>(request);
             requestDto.Product_Requests = productsInRequest;
-            if (productsInRequest.Count > 0)
-            {
-                Console.WriteLine("co san pham ne");
-            }
-            else
-            {
-                Console.WriteLine("khong co san pham");
-            }
+            //if (productsInRequest.Count > 0)
+            //{
+            //    Console.WriteLine("co san pham ne");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("khong co san pham");
+            //}
             return requestDto;
         }
 
@@ -214,11 +214,11 @@ namespace Office_supplies_management.Services
             var collectedRequestDtos = new List<RequestDto>();
 
             // Log the request IDs that pass the filter
-            Console.WriteLine("Request IDs that pass the filter:");
-            foreach (var request in collectedRequests)
-            {
-                Console.WriteLine(request.RequestID);
-            }
+            //Console.WriteLine("Request IDs that pass the filter:");
+            //foreach (var request in collectedRequests)
+            //{
+            //    Console.WriteLine(request.RequestID);
+            //}
 
             foreach (var request in collectedRequests)
             {
@@ -245,6 +245,15 @@ namespace Office_supplies_management.Services
             }
 
             return approvedSummaryRequestDtos;
+        }
+        public async Task<List<RequestDto>> GetRequestsInDateRange(DateTime startDate, DateTime endDate)
+        {
+            var requests = await _requestRepository.GetAllInclude(r => r.Product_Requests);
+            var filteredRequests = requests
+                .Where(r => r.CreatedDate.Date >= startDate && r.CreatedDate.Date <= endDate && r.IsSummaryBeApproved)
+                .ToList();
+
+            return _mapper.Map<List<RequestDto>>(filteredRequests);
         }
 
 

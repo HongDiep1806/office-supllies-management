@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42234554-21e3-4bd9-9ce9-237aa6bb3708" name="Changes" comment="push merge 14/03" />
+    <list default="true" id="42234554-21e3-4bd9-9ce9-237aa6bb3708" name="Changes" comment="push merge 14/03">
+      <change beforePath="$PROJECT_DIR$/.vs/Office supplies management/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Office supplies management/v17/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/Office supplies management/v17/DocumentLayout.backup.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Office supplies management/v17/DocumentLayout.backup.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/Office supplies management/v17/DocumentLayout.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Office supplies management/v17/DocumentLayout.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,10 +46,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop",
+    "git-widget-placeholder": "test-1103",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Intership Project/office-supllies-management/Office supplies management",
+    "last_opened_file_path": "E:/2602/vue-light-bootstrap-dashboard-master (1)",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -78,6 +82,7 @@
       <workItem from="1741937664402" duration="53000" />
       <workItem from="1741945451666" duration="36000" />
       <workItem from="1741945694264" duration="679000" />
+      <workItem from="1742185309547" duration="640000" />
     </task>
     <task id="LOCAL-00001" summary="push">
       <option name="closed" value="true" />

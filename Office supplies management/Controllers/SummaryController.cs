@@ -163,6 +163,15 @@ namespace Office_supplies_management.Controllers
             return Ok(result);
         }
 
+        [HttpGet("count")]
+        public async Task<IActionResult> Count()
+        {
+            var query = new GetNumberOfTotalSummariesQuery();
+            var result = await _mediator.Send(query); 
+            return Ok(result+1);
+        }
+
+
 
     }
 }

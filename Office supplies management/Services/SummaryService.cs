@@ -32,6 +32,7 @@ namespace Office_supplies_management.Services
             var requestsOfSummary = requests.Where(r => createSummaryDto.RequestIDs.Contains(r.RequestID)).ToList();
             var newSummary = new Summary
             {
+                SummaryCode = createSummaryDto.SummaryCode,
                 UserID = createSummaryDto.UserID,
                 Requests = requestsOfSummary,
                 TotalPrice = requestsOfSummary.Sum(r => r.TotalPrice),
@@ -237,5 +238,9 @@ namespace Office_supplies_management.Services
             return _mapper.Map<List<RequestDto>>(filteredRequests);
         }
 
+        public async Task<int> CountSummaries()
+        {
+            return await _summaryRepository.Count();
+        }
     }
 }

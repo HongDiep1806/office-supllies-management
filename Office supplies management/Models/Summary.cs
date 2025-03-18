@@ -6,6 +6,7 @@ namespace Office_supplies_management.Models
     {
         public int SummaryID { get; set; }
         public int UserID { get; set; }
+        public string SummaryCode { get; set; }
         public User User { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime ExpiredTime { get; set; } = DateTime.Now.AddMinutes(2);

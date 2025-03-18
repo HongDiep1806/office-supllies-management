@@ -20,6 +20,7 @@ namespace Office_supplies_management.Controllers
             _mediator = mediator;
         }
         [HttpPost]
+        [Authorize(Policy = "RequireFinanceEmployee")]
         //[Authorize(Policy = "RequireFinanceEmployee")]
         public async Task<IActionResult> Create([FromBody] CreateSummaryDto createSummaryDto)
         {
@@ -31,7 +32,7 @@ namespace Office_supplies_management.Controllers
             }
             return BadRequest();
         }
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -39,7 +40,7 @@ namespace Office_supplies_management.Controllers
             var summaries = await _mediator.Send(query);
             return Ok(summaries);
         }
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpPut("update")]
         //[Authorize(Policy = "RequireSupLeaderRole")]
         public async Task<IActionResult> UpdateSummary([FromBody] UpdateSummaryCommand command)
@@ -76,7 +77,7 @@ namespace Office_supplies_management.Controllers
         //    }
         //    return NotFound();
         //}
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("user/{userId}")]
         //[Authorize(Policy = "RequireFinanceEmployee")]
         //[Authorize(Policy = "RequireSupLeaderRole")]
@@ -90,7 +91,7 @@ namespace Office_supplies_management.Controllers
             }
             return NotFound();
         }
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("{summaryId}")]
         //[Authorize(Policy = "RequireFinanceEmployee")]
         //[Authorize(Policy = "RequireSupLeaderRole")]
@@ -104,7 +105,7 @@ namespace Office_supplies_management.Controllers
             }
             return NotFound();
         }
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("report")]
         //[Authorize(Policy = "RequireFinanceEmployee")]
         public async Task<IActionResult> GetDepartmentUsageReport([FromQuery] string department, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
@@ -113,7 +114,7 @@ namespace Office_supplies_management.Controllers
             var report = await _mediator.Send(query);
             return Ok(report);
         }
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("summariesByDateRange")]
         //[Authorize(Policy = "RequireFinanceEmployee")]
         public async Task<IActionResult> GetSummariesByDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
@@ -126,7 +127,7 @@ namespace Office_supplies_management.Controllers
             }
             return NotFound();
         }
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("{summaryId}/requests")]
         public async Task<ActionResult<List<RequestDto>>> GetRequestsBySummaryId(int summaryId)
         {
@@ -138,6 +139,7 @@ namespace Office_supplies_management.Controllers
             }
             return Ok(requests);
         }
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("department-costs")]
         public async Task<IActionResult> GetDepartmentCosts([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
@@ -145,7 +147,7 @@ namespace Office_supplies_management.Controllers
             var result = await _mediator.Send(query);
             return Ok(result);
         }
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("approved-summaries-with-requests")]
         public async Task<IActionResult> GetApprovedSummariesWithRequests()
         {
@@ -153,8 +155,8 @@ namespace Office_supplies_management.Controllers
             var result = await _mediator.Send(query);
             return Ok(result);
         }
-        
 
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("summaries-with-requests-date-range")]
         public async Task<IActionResult> GetSummariesWithRequestsByDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
@@ -162,7 +164,7 @@ namespace Office_supplies_management.Controllers
             var result = await _mediator.Send(query);
             return Ok(result);
         }
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("count")]
         public async Task<IActionResult> Count()
         {

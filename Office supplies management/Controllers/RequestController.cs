@@ -102,6 +102,7 @@ namespace Office_supplies_management.Controllers
             var requests = await _mediator.Send(query);
             return Ok(requests);
         }
+        [Authorize(Policy = "DepartmentQuery")]
         [HttpPut("approveByDepLeader/{requestId}")]
         public async Task<IActionResult> ApproveRequestByDepLeader(int requestId)
         {
@@ -116,33 +117,7 @@ namespace Office_supplies_management.Controllers
                 return BadRequest("Can not find request by id");
             }
         }
-
-        [HttpPut("approveRequestByFinEmployee/{requestId}")]
-        //[Authorize(Policy = "RequireFinanceEmployee")]
-        public async Task<IActionResult> ApproveRequestSupLead(int requestId)
-        {
-            var command = new ApproveRequestFinEmployeeCommand(requestId);
-            var result = await _mediator.Send(command);
-            return Ok(result);
-        }
-
-        [HttpGet("approved-requests-list")]
-        [Authorize(Policy = "RequireFinanceEmployee")]
-        public async Task<IActionResult> GetApprovedRequestsByDepLeader()
-        {
-            var query = new GetApprovedRequestsQuery();
-            var approvedRequests = await _mediator.Send(query);
-            return Ok(approvedRequests);
-        }
-
-        [HttpGet("all-requests")]
-        [Authorize(Policy = "RequireSupLeaderRole")] // Change the authorization policy
-        public async Task<IActionResult> GetAllRequestsForSupLeader()
-        {
-            var query = new GetAllRequestsForFinEmployeeQuery();
-            var requests = await _mediator.Send(query);
-            return Ok(requests);
-        }
+        [Authorize(Policy = "DepartmentQuery")]
         [HttpPut("notapproveByDepLeader/{requestId}")]
         public async Task<IActionResult> NotApproveRequestByDepLeader(int requestId)
         {
@@ -157,6 +132,32 @@ namespace Office_supplies_management.Controllers
                 return BadRequest("Can not find request by id");
             }
         }
+        [Authorize(Policy = "RequireFinanceEmployee")]
+        [HttpPut("approveRequestByFinEmployee/{requestId}")]
+        //[Authorize(Policy = "RequireFinanceEmployee")]
+        public async Task<IActionResult> ApproveRequestSupLead(int requestId)
+        {
+            var command = new ApproveRequestFinEmployeeCommand(requestId);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+        [HttpGet("all-requests")]
+        [Authorize(Policy = "RequireSupLeaderRole")] // Change the authorization policy
+        public async Task<IActionResult> GetAllRequestsForSupLeader()
+        {
+            var query = new GetAllRequestsForFinEmployeeQuery();
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
+        }
+        [HttpGet("approved-requests-list")]
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        public async Task<IActionResult> GetApprovedRequestsByDepLeader()
+        {
+            var query = new GetApprovedRequestsQuery();
+            var approvedRequests = await _mediator.Send(query);
+            return Ok(approvedRequests);
+        }
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpPut("notapproveByFinEmployee/{requestId}")]
         public async Task<IActionResult> NotApproveRequestByFinEmployee(int requestId)
         {
@@ -199,6 +200,7 @@ namespace Office_supplies_management.Controllers
         //    var requests = await _mediator.Send(query);
         //    return Ok(requests);
         //}
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("requests-in-approved-summary")]
         public async Task<IActionResult> GetRequestsInApprovedSummary()
         {
@@ -206,6 +208,7 @@ namespace Office_supplies_management.Controllers
             var requests = await _mediator.Send(query);
             return Ok(requests);
         }
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("requests-in-date-range")]
         public async Task<IActionResult> GetRequestsInDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
@@ -256,7 +259,14 @@ namespace Office_supplies_management.Controllers
         //    var requests = await _requestService.GetAllRequestsForSupLeader();
         //    return Ok(requests);
         //}
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        [HttpGet("approved-requests-by-department")]
+        public async Task<IActionResult> GetApprovedRequestsByDepartment([FromQuery] string department)
+        {
+            var query = new GetApprovedRequestsByDepartmentQuery { Department = department };
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
+        }
 
 
     }

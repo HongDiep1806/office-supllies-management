@@ -48,7 +48,7 @@ namespace Office_supplies_management.Controllers
 
             return Ok(product);
         }
-
+        [Authorize(Policy = "RequireFinanceEmployee")]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateProductDto request)
         {
@@ -62,7 +62,7 @@ namespace Office_supplies_management.Controllers
 
             return Ok();
         }
-
+        [Authorize(Policy = "RequireFinanceEmployee")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

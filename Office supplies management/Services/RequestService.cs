@@ -256,6 +256,23 @@ namespace Office_supplies_management.Services
             return _mapper.Map<List<RequestDto>>(filteredRequests);
         }
 
+        public async Task<List<RequestDto>> GetApprovedRequestsByDepartment(string department)
+        {
+            var requests = await _requestRepository.GetAllInclude(r => r.User);
+            var approvedRequests = requests
+                .Where(r => r.IsSummaryBeApproved && r.User != null && r.User.Department != null && r.User.Department.ToLower() == department.ToLower())
+                .ToList();
+
+            var approvedRequestDtos = _mapper.Map<List<RequestDto>>(approvedRequests);
+
+            //foreach (var requestDto in approvedRequestDtos)
+            //{
+            //    var productsInRequest = await _productRequestService.GetByRequestID(requestDto.RequestID);
+            //    requestDto.Product_Requests = productsInRequest;
+            //}
+
+            return approvedRequestDtos;
+        }
 
 
 

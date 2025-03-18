@@ -273,6 +273,23 @@ namespace Office_supplies_management.Services
 
             return approvedRequestDtos;
         }
+        public async Task<List<RequestDto>> GetApprovedRequestsByDateRangeAndDepartment(DateTime startDate, DateTime endDate, string department)
+        {
+            var requests = await _requestRepository.GetAllInclude(r => r.User);
+            var filteredRequests = requests
+                .Where(r => r.IsSummaryBeApproved && r.CreatedDate.Date >= startDate && r.CreatedDate.Date <= endDate && r.User != null && r.User.Department != null && r.User.Department.ToLower() == department.ToLower())
+                .ToList();
+
+            var requestDtos = _mapper.Map<List<RequestDto>>(filteredRequests);
+
+            //foreach (var requestDto in requestDtos)
+            //{
+            //    var productsInRequest = await _productRequestService.GetByRequestID(requestDto.RequestID);
+            //    requestDto.Product_Requests = productsInRequest;
+            //}
+
+            return requestDtos;
+        }
 
 
 

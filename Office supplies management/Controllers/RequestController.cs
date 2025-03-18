@@ -267,6 +267,14 @@ namespace Office_supplies_management.Controllers
             var requests = await _mediator.Send(query);
             return Ok(requests);
         }
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        [HttpGet("approved-requests-by-date-range-and-department")]
+        public async Task<IActionResult> GetApprovedRequestsByDateRangeAndDepartment([FromQuery] DateTime startDate, [FromQuery] DateTime endDate, [FromQuery] string department)
+        {
+            var query = new GetApprovedRequestsByDateRangeAndDepartmentQuery { StartDate = startDate, EndDate = endDate, Department = department };
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
+        }
 
 
     }

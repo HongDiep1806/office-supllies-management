@@ -24,5 +24,6 @@ namespace Office_supplies_management.Services
         Task<List<RequestDto>> GetRequestsInApprovedSummary(); // New method
         Task<List<RequestDto>> GetRequestsInDateRange(DateTime startDate, DateTime endDate);
         Task<List<RequestDto>> GetApprovedRequestsByDepartment(string department);
+        Task<List<RequestDto>> GetApprovedRequestsByDateRangeAndDepartment(DateTime startDate, DateTime endDate, string department);
     }
 }

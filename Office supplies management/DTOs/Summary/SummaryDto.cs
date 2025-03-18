@@ -4,6 +4,7 @@
     {
         public int SummaryID { get; set; }
         public int UserID { get; set; }
+        public string SummaryCode { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ExpiredTime { get; set; }
         public int TotalPrice { get; set; }

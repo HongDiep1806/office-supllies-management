@@ -18,5 +18,7 @@ namespace Office_supplies_management.Services
         Task<Dictionary<int, List<RequestDto>>> GetApprovedSummariesWithRequests();
         Task<List<RequestDto>> GetSummariesWithRequestsByDateRange(DateTime startDate, DateTime endDate);
         Task<int> CountSummaries();
+        Task<bool> UpdateSummaryApprovalAsync(int summaryId, bool isApproved);
+        Task<SummaryDto> GetSummaryByCodeAsync(string summaryCode);
     }
 }

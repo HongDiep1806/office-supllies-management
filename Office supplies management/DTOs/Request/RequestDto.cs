@@ -15,4 +15,8 @@ public class RequestDto
     public int UserID { get; set; }
     public int? SummaryID { get; set; }
     public List<ProductRequestDto> Product_Requests { get; set; } // Ensure this is included
+    public DateTime DateDepLeadApprove { get; set; }
+    public string NoteDepLead { get; set; }
+    public DateTime DateSupLeadApprove { get; set; }
+    public string NoteSupLead { get; set; }
 }

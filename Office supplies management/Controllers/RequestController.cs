@@ -119,9 +119,9 @@ namespace Office_supplies_management.Controllers
         }
         [Authorize(Policy = "DepartmentQuery")]
         [HttpPut("notapproveByDepLeader/{requestId}")]
-        public async Task<IActionResult> NotApproveRequestByDepLeader(int requestId)
+        public async Task<IActionResult> NotApproveRequestByDepLeader(int requestId,string note)
         {
-            var command = new NotApproveRequestByDepLeaderCommand(requestId);
+            var command = new NotApproveRequestByDepLeaderCommand(requestId,note);
             var result = await _mediator.Send(command);
             if (result)
             {
@@ -159,9 +159,9 @@ namespace Office_supplies_management.Controllers
         }
         [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpPut("notapproveByFinEmployee/{requestId}")]
-        public async Task<IActionResult> NotApproveRequestByFinEmployee(int requestId)
+        public async Task<IActionResult> NotApproveRequestByFinEmployee(int requestId,string note)
         {
-            var command = new NotApproveRequestByFinEmployeeCommand(requestId);
+            var command = new NotApproveRequestByFinEmployeeCommand(requestId,note);
             var result = await _mediator.Send(command);
             if (result)
             {
@@ -269,12 +269,22 @@ namespace Office_supplies_management.Controllers
         }
         [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("approved-requests-by-date-range-and-department")]
-        public async Task<IActionResult> GetApprovedRequestsByDateRangeAndDepartment([FromQuery] DateTime startDate, [FromQuery] DateTime endDate, [FromQuery] string department)
+        public async Task<IActionResult> GetApprovedRequestsByDateRangeAndDepartment([FromQuery] DateTime startDate, [FromQuery] DateTime endDate, [FromQuery] string department = null)
         {
-            var query = new GetApprovedRequestsByDateRangeAndDepartmentQuery { StartDate = startDate, EndDate = endDate, Department = department };
-            var requests = await _mediator.Send(query);
-            return Ok(requests);
+            if (string.IsNullOrEmpty(department))
+            {
+                var query = new GetRequestsInDateRangeQuery { StartDate = startDate, EndDate = endDate };
+                var requests = await _mediator.Send(query);
+                return Ok(requests);
+            }
+            else
+            {
+                var query = new GetApprovedRequestsByDateRangeAndDepartmentQuery { StartDate = startDate, EndDate = endDate, Department = department };
+                var requests = await _mediator.Send(query);
+                return Ok(requests);
+            }
         }
+
 
 
     }

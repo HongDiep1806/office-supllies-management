@@ -19,7 +19,8 @@ namespace Office_supplies_management.Features.Products.Handlers
 
         public async Task<bool> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
-            return await _productService.Create(request.createRequest);
+            var product = await _productService.Create(request.createRequest);
+            return product != null;
         }
     }
 }

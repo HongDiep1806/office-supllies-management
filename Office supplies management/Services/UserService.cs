@@ -94,5 +94,23 @@ namespace Office_supplies_management.Services
         {
             return await _userRepository.GetNameById(id);    
         }
+        public async Task<UserDto> GetDepartmentLeaderAsync(string department)
+        {
+            var users = await _userRepository.GetAllAsync();
+            var leader = users.FirstOrDefault(u => u.Department == department && u.UserTypeID == 3);
+
+            if (leader == null)
+            {
+                return null;
+            }
+
+            return _mapper.Map<UserDto>(leader);
+        }
+        public async Task<List<UserDto>> GetAllUsersByTypeAsync(int userTypeID)
+        {
+            var users = await _userRepository.GetAllAsync();
+            var filteredUsers = users.Where(u => u.UserTypeID == userTypeID).ToList();
+            return _mapper.Map<List<UserDto>>(filteredUsers);
+        }
     }
 }

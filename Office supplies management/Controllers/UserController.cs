@@ -101,8 +101,24 @@ namespace Office_supplies_management.Controllers
             }
             return NotFound();
         }
-
-
+        [HttpGet("department-leader")]
+        public async Task<IActionResult> GetDepartmentLeader([FromQuery] string department)
+        {
+            var query = new GetDepartmentLeaderQuery { Department = department };
+            var leader = await _mediator.Send(query);
+            if (leader == null)
+            {
+                return NotFound("Department leader not found.");
+            }
+            return Ok(leader);
+        }
+        [HttpGet("users-by-type-id")]
+        public async Task<IActionResult> GetAllUsersByType([FromQuery] int userTypeID)
+        {
+            var query = new GetAllUsersByTypeQuery { UserTypeID = userTypeID };
+            var users = await _mediator.Send(query);
+            return Ok(users);
+        }
 
 
     }

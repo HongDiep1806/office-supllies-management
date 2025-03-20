@@ -22,6 +22,37 @@ namespace Office_supplies_management.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Notification", b =>
+                {
+                    b.Property<int>("NotificationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotificationID"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("NotificationID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Notifications");
+                });
+
             modelBuilder.Entity("Office_supplies_management.Models.Permission", b =>
                 {
                     b.Property<int>("PermissionID")
@@ -295,6 +326,17 @@ namespace Office_supplies_management.Migrations
                     b.ToTable("PermissionUserType");
                 });
 
+            modelBuilder.Entity("Notification", b =>
+                {
+                    b.HasOne("Office_supplies_management.Models.User", "User")
+                        .WithMany("Notifications")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Office_supplies_management.Models.Product_Request", b =>
                 {
                     b.HasOne("Office_supplies_management.Models.Product", "Product")
@@ -405,6 +447,8 @@ namespace Office_supplies_management.Migrations
 
             modelBuilder.Entity("Office_supplies_management.Models.User", b =>
                 {
+                    b.Navigation("Notifications");
+
                     b.Navigation("Requests");
 
                     b.Navigation("Summaries");

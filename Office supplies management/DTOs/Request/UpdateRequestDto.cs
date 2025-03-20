@@ -16,6 +16,10 @@ namespace Office_supplies_management.DTOs.Request
         public bool IsSummaryBeProcessed { get; set; }
         public bool IsSummaryBeApproved { get; set; }
         public bool IsCollectedInSummary { get; set; }
+        public DateTime DateDepLeadApprove { get; set; }
+        public string NoteDepLead { get; set; }
+        public DateTime DateSupLeadApprove { get; set; }
+        public string NoteSupLead { get; set; }
 
     }
 }

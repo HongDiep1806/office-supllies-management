@@ -33,7 +33,10 @@ namespace Office_supplies_management.Services
                 UserID = createRequest.UserID,
                 RequestCode = createRequest.RequestCode,
                 TotalPrice = createRequest.TotalPrice,
-                //IsProcessedByDepLead = true
+                DateDepLeadApprove = createRequest.DateDepLeadApprove,
+                NoteDepLead = createRequest.NoteDepLead,
+                DateSupLeadApprove = createRequest.DateSupLeadApprove,
+                NoteSupLead = createRequest.NoteSupLead
             };
             await _requestRepository.CreateAsync(newRequest);
             var productRequests = createRequest.Products
@@ -60,14 +63,6 @@ namespace Office_supplies_management.Services
             var productsInRequest = await _productRequestService.GetByRequestID(request.RequestID);
             var requestDto = _mapper.Map<RequestDto>(request);
             requestDto.Product_Requests = productsInRequest;
-            //if (productsInRequest.Count > 0)
-            //{
-            //    Console.WriteLine("co san pham ne");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("khong co san pham");
-            //}
             return requestDto;
         }
 
@@ -89,19 +84,24 @@ namespace Office_supplies_management.Services
                     await _productRequestService.DeleteForever(pr.Product_RequestID);
                 }
                 var productRequests = updateRequest.Products
-                                               .Select(p => new Product_Request
-                                               {
-                                                   RequestID = updateRequest.RequestID,
-                                                   ProductID = p.ProductID,
-                                                   Quantity = p.Quantity,
-                                               }).ToList();
+                                                   .Select(p => new Product_Request
+                                                   {
+                                                       RequestID = updateRequest.RequestID,
+                                                       ProductID = p.ProductID,
+                                                       Quantity = p.Quantity,
+                                                   }).ToList();
                 await _productRequestService.AddRanges(productRequests);
             }
             else
             {
                 return false;
             }
-            return await _requestRepository.UpdateAsync(updateRequest.RequestID, _mapper.Map<Models.Request>(updateRequest));
+            var updatedRequest = _mapper.Map<Models.Request>(updateRequest);
+            updatedRequest.DateDepLeadApprove = updateRequest.DateDepLeadApprove;
+            updatedRequest.NoteDepLead = updateRequest.NoteDepLead;
+            updatedRequest.DateSupLeadApprove = updateRequest.DateSupLeadApprove;
+            updatedRequest.NoteSupLead = updateRequest.NoteSupLead;
+            return await _requestRepository.UpdateAsync(updateRequest.RequestID, updatedRequest);
         }
 
         public async Task<bool> DeleteByID(int id)
@@ -167,25 +167,27 @@ namespace Office_supplies_management.Services
             var requests = await _requestRepository.GetAllAsync();
             return _mapper.Map<List<RequestDto>>(requests);
         }
-        public async Task<bool> NotApproveRequestByDepLeader(int requestID)
+        public async Task<bool> NotApproveRequestByDepLeader(int requestID, string note)
         {
             var request = await _requestRepository.GetByIdAsync(requestID);
             if (request != null)
             {
                 request.IsProcessedByDepLead = true;
                 request.IsApprovedByDepLead = false;
+                request.NoteDepLead = note;
                 await _requestRepository.UpdateAsync(requestID, request);
                 return true;
             }
             return false;
         }
-        public async Task<bool> NotApproveRequestByFinEmployee(int requestID)
+        public async Task<bool> NotApproveRequestByFinEmployee(int requestID, string note)
         {
             var request = await _requestRepository.GetByIdAsync(requestID);
             if (request != null)
             {
                 request.IsProcessedByDepLead = false;
                 request.IsApprovedByDepLead = true;
+                request.NoteSupLead = note;
                 await _requestRepository.UpdateAsync(requestID, request);
                 return true;
             }

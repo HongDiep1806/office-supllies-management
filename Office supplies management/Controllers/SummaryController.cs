@@ -172,8 +172,27 @@ namespace Office_supplies_management.Controllers
             var result = await _mediator.Send(query); 
             return Ok(result+1);
         }
-
-
+        [HttpPut("update-approval")]
+        public async Task<IActionResult> UpdateSummaryApproval([FromBody] UpdateSummaryApprovalCommand command)
+        {
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok("Summary approval status updated successfully.");
+            }
+            return BadRequest("Failed to update summary approval status.");
+        }
+        [HttpGet("get-by-code")]
+        public async Task<IActionResult> GetSummaryByCode([FromQuery] string summaryCode)
+        {
+            var query = new GetSummaryByCodeQuery { SummaryCode = summaryCode };
+            var summary = await _mediator.Send(query);
+            if (summary == null)
+            {
+                return NotFound("Summary not found.");
+            }
+            return Ok(summary);
+        }
 
     }
 }

@@ -1,13 +1,13 @@
 using MediatR;
 
-namespace Office_supplies_management.Features.Request.Commands
+public class NotApproveRequestByFinEmployeeCommand : IRequest<bool>
 {
-    public class NotApproveRequestByFinEmployeeCommand : IRequest<bool>
+    public int RequestID { get; set; }
+    public string Note { get; set; }
+
+    public NotApproveRequestByFinEmployeeCommand(int requestID, string note)
     {
-        public int RequestID { get; set; }
-        public NotApproveRequestByFinEmployeeCommand(int requestID)
-        {
-            RequestID = requestID;
-        }
+        RequestID = requestID;
+        Note = note;
     }
 }

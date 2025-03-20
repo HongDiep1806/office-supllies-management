@@ -11,5 +11,9 @@ namespace Office_supplies_management.DTOs.Request
         public int UserID { get; set; }
         public List<ProductRequestDto> Products { get; set; }
         public bool IsProcessedByDepLead { get; set; }
+        public DateTime DateDepLeadApprove { get; set; }
+        public string NoteDepLead { get; set; }
+        public DateTime DateSupLeadApprove { get; set; }
+        public string NoteSupLead { get; set; }
     }
 }

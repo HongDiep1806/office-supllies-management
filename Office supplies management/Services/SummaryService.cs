@@ -242,5 +242,38 @@ namespace Office_supplies_management.Services
         {
             return await _summaryRepository.Count();
         }
+        public async Task<bool> UpdateSummaryApprovalAsync(int summaryId, bool isApproved)
+        {
+            var summary = await _summaryRepository.GetByIdAsync(summaryId);
+            if (summary == null)
+            {
+                return false;
+            }
+
+            summary.IsApprovedBySupLead = isApproved;
+            await _summaryRepository.UpdateAsync(summary.SummaryID, summary);
+
+            if (!isApproved)
+            {
+                var requests = await _requestRepository.GetAllAsync();
+                var requestsInSummary = requests.Where(r => r.SummaryID == summaryId).ToList();
+
+                foreach (var request in requestsInSummary)
+                {
+                    request.IsProcessedByDepLead = false;
+                    request.IsApprovedByDepLead = true;
+                    request.IsApprovedBySupLead = false;
+                    await _requestRepository.UpdateAsync(request.RequestID, request);
+                }
+            }
+
+            return true;
+        }
+        public async Task<SummaryDto> GetSummaryByCodeAsync(string summaryCode)
+        {
+            var summaries = await _summaryRepository.GetAllAsync();
+            var summary = summaries.FirstOrDefault(s => s.SummaryCode == summaryCode);
+            return _mapper.Map<SummaryDto>(summary);
+        }
     }
 }

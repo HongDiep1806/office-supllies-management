@@ -27,4 +27,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\Notification\" />
+    <Folder Include="Features\Notification\Commands\" />
+    <Folder Include="Features\Notification\Handlers\" />
+    <Folder Include="Features\Notification\Queries\" />
+  </ItemGroup>
+
 </Project>

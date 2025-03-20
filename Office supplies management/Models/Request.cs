@@ -20,5 +20,9 @@ namespace Office_supplies_management.Models
         public int? SummaryID { get; set; }
         [ForeignKey("SummaryID")]
         public virtual Summary? Summary { get; set; }
+        public DateTime DateDepLeadApprove { get; set; }
+        public string NoteDepLead { get; set; }
+        public DateTime DateSupLeadApprove { get; set; }
+        public string NoteSupLead { get; set; }
     }
 } 

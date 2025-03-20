@@ -17,7 +17,7 @@ namespace Office_supplies_management.Features.Request.Handlers
 
         public async Task<bool> Handle(NotApproveRequestByDepLeaderCommand command, CancellationToken cancellationToken)
         {
-            return await _requestService.NotApproveRequestByDepLeader(command.RequestID);
+            return await _requestService.NotApproveRequestByDepLeader(command.RequestID, command.Note);
         }
     }
 }

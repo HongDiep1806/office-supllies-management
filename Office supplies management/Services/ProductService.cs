@@ -19,17 +19,21 @@ namespace Office_supplies_management.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> Create(CreateProductDto dto)
+        public async Task<ProductDto> Create(CreateProductDto createProductDto)
         {
-            var existedProductCode = await GetByCode(dto.Code);
-            if (!existedProductCode)
+            var newProduct = new Product
             {
-                var newProduct = _mapper.Map<Product>(dto);
-                await _productRepository.CreateAsync(newProduct);
-                return true;
-            }
-            return false;
-
+                Name = createProductDto.Name,
+                Code = createProductDto.Code,
+                UnitCurrency = createProductDto.UnitCurrency,
+                UnitPrice = createProductDto.UnitPrice,
+                UserIDCreate = createProductDto.UserIDCreate,
+                CreateDate = DateTime.Now,
+                UserIDAdjust = createProductDto.UserIDAdjust,
+                AdjustDate = DateTime.Now
+            };
+            await _productRepository.CreateAsync(newProduct);
+            return _mapper.Map<ProductDto>(newProduct);
         }
 
         public async Task<List<ProductDto>> GetAll()
@@ -44,16 +48,22 @@ namespace Office_supplies_management.Services
             return _mapper.Map<ProductDto>(product);
         }
 
-        public async Task<bool> Update(UpdateProductDto dto)
+        public async Task<bool> Update(UpdateProductDto updateProductDto)
         {
-            var updatedProduct = _mapper.Map<Product>(dto);
-            return await _productRepository.UpdateAsync(dto.ProductID, updatedProduct);
+            var currentProduct = await _productRepository.GetByIdAsync(updateProductDto.ProductID);
+            var updatedProduct = _mapper.Map<Product>(updateProductDto);
+            updatedProduct.UserIDCreate = currentProduct.UserIDCreate; // Preserve existing value
+            updatedProduct.CreateDate = currentProduct.CreateDate; // Preserve existing value
+            updatedProduct.UserIDAdjust = updateProductDto.UserIDAdjust; // Set new value
+            updatedProduct.AdjustDate = DateTime.Now; // Set new value
+            return await _productRepository.UpdateAsync(updateProductDto.ProductID, updatedProduct);
         }
+
         public async Task<bool> Delete(int productId)
         {
             return await _productRepository.DeleteAsync(productId);
-
         }
+
         public async Task<bool> GetByCode(string code)
         {
             var products = await GetAll();

@@ -48,6 +48,13 @@ namespace Office_supplies_management.Controllers
 
             return Ok(product);
         }
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchProducts([FromQuery] string? name, [FromQuery] string? code, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice)
+        {
+            var query = new SearchProductsQuery { Name = name, Code = code, MinPrice = minPrice, MaxPrice = maxPrice };
+            var products = await _mediator.Send(query);
+            return Ok(products);
+        }
         [Authorize(Policy = "RequireFinanceEmployee")]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateProductDto request)
@@ -85,5 +92,6 @@ namespace Office_supplies_management.Controllers
             var createdProduct = await _mediator.Send(command);
             return Ok(createdProduct);
         }
+        
     }
 }

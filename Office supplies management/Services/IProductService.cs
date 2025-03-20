@@ -8,4 +8,5 @@ public interface IProductService
     Task<ProductDto> Create(CreateProductDto request);
     Task<bool> Delete(int productId);
     Task<bool> Update(UpdateProductDto request);
+    Task<List<ProductDto>> SearchProductsAsync(string name, string code, decimal? minPrice, decimal? maxPrice);
 }

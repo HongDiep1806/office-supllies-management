@@ -80,5 +80,31 @@ namespace Office_supplies_management.Services
             var products = await _productRepository.AllAsync();
             return _mapper.Map<List<ProductDto>>(products);
         }
+        public async Task<List<ProductDto>> SearchProductsAsync(string? name, string? code, decimal? minPrice, decimal? maxPrice)
+        {
+            var products = await _productRepository.GetAllAsync();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                products = products.Where(p => p.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(code))
+            {
+                products = products.Where(p => p.Code.Contains(code, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            if (minPrice.HasValue)
+            {
+                products = products.Where(p => decimal.Parse(p.UnitPrice) >= minPrice.Value).ToList();
+            }
+
+            if (maxPrice.HasValue)
+            {
+                products = products.Where(p => decimal.Parse(p.UnitPrice) <= maxPrice.Value).ToList();
+            }
+
+            return _mapper.Map<List<ProductDto>>(products);
+        }
     }
 }

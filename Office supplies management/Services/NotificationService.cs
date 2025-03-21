@@ -54,5 +54,24 @@ namespace Office_supplies_management.Services
             await _notificationRepository.UpdateAsync(notificationId, notification);
             return true;
         }
+        public async Task<List<NotificationDto>> GetUnreadNotificationsByUserAsync(int userId)
+        {
+            var notifications = await _notificationRepository.GetAllAsync();
+            var unreadNotifications = notifications.Where(n => n.UserID == userId && !n.IsRead).ToList();
+            return _mapper.Map<List<NotificationDto>>(unreadNotifications);
+        }
+        public async Task<bool> MarkAllAsReadAsync(int userId)
+        {
+            var notifications = await _notificationRepository.GetAllAsync();
+            var userNotifications = notifications.Where(n => n.UserID == userId && !n.IsRead).ToList();
+
+            foreach (var notification in userNotifications)
+            {
+                notification.IsRead = true;
+                await _notificationRepository.UpdateAsync(notification.NotificationID, notification);
+            }
+
+            return true;
+        }
     }
 }

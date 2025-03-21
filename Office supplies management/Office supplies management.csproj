@@ -30,8 +30,6 @@
   <ItemGroup>
     <Folder Include="DTOs\Notification\" />
     <Folder Include="Features\Notification\Commands\" />
-    <Folder Include="Features\Notification\Handlers\" />
-    <Folder Include="Features\Notification\Queries\" />
   </ItemGroup>
 
 </Project>

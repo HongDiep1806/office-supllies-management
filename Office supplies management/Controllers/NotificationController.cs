@@ -41,5 +41,19 @@ namespace Office_supplies_management.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+        [HttpPut("mark-all-as-read/{userId}")]
+        public async Task<IActionResult> MarkAllAsRead(int userId)
+        {
+            var command = new MarkAllAsReadCommand(userId);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+        [HttpGet("unread-by-user")]
+        public async Task<IActionResult> GetUnreadNotificationsByUser([FromQuery] int userId)
+        {
+            var query = new GetUnreadNotificationsByUserQuery { UserId = userId };
+            var notifications = await _mediator.Send(query);
+            return Ok(notifications);
+        }
     }
 }

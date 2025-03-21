@@ -55,6 +55,24 @@ namespace Office_supplies_management.Controllers
             var products = await _mediator.Send(query);
             return Ok(products);
         }
+        [HttpGet("get-by-code")]
+        public async Task<IActionResult> GetProductByCode([FromQuery] string code)
+        {
+            if (string.IsNullOrEmpty(code))
+            {
+                return BadRequest("Code is required.");
+            }
+
+            var query = new GetProductByCodeQuery { Code = code };
+            var product = await _mediator.Send(query);
+
+            if (product == null)
+            {
+                return NotFound($"Product with code {code} not found.");
+            }
+
+            return Ok(product);
+        }
         [Authorize(Policy = "RequireFinanceEmployee")]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateProductDto request)

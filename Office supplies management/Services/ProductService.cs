@@ -106,5 +106,11 @@ namespace Office_supplies_management.Services
 
             return _mapper.Map<List<ProductDto>>(products);
         }
+        public async Task<ProductDto> GetProductByCodeAsync(string code)
+        {
+            var products = await _productRepository.GetAllAsync();
+            var product = products.FirstOrDefault(p => p.Code.Equals(code, StringComparison.OrdinalIgnoreCase));
+            return _mapper.Map<ProductDto>(product);
+        }
     }
 }

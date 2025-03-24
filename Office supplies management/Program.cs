@@ -42,15 +42,18 @@ namespace Office_supplies_management
                     ClockSkew = TimeSpan.Zero
                 };
 
-                // 🛠️ Add this logging code to check if `sub` is available
+                // Add logging to check if `sub` is available
                 options.Events = new JwtBearerEvents
                 {
                     OnTokenValidated = context =>
                     {
                         Console.WriteLine("✅ Token Validated Successfully");
-                        foreach (var claim in context.Principal.Claims)
+                        if (context.Principal != null)
                         {
-                            Console.WriteLine($"Claim: {claim.Type} => {claim.Value}");
+                            foreach (var claim in context.Principal.Claims)
+                            {
+                                Console.WriteLine($"Claim: {claim.Type} => {claim.Value}");
+                            }
                         }
                         return Task.CompletedTask;
                     },
@@ -61,8 +64,6 @@ namespace Office_supplies_management
                     }
                 };
             });
-
-
 
             builder.Services.AddAuthorization(options =>
             {
@@ -75,8 +76,6 @@ namespace Office_supplies_management
                 options.AddPolicy("RequireSupLeaderRole", policy =>
                     policy.RequireClaim("Permission", "ViewAllRequests")); // Ensure this policy is correctly set
             });
-
-
 
             builder.Services.AddMediatR(cfg => cfg.AsScoped(), typeof(Program).Assembly);
 
@@ -116,7 +115,6 @@ namespace Office_supplies_management
             builder.Services.AddScoped<IProduct_RequestRepository, Product_RequestRepository>();
             builder.Services.AddScoped<ISummaryRepository, SummaryRepository>();
             builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
-
 
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IUserService, UserService>();
@@ -209,3 +207,4 @@ namespace Office_supplies_management
         }
     }
 }
+

@@ -20,7 +20,13 @@ namespace Office_supplies_management.Controllers
         {
             _mediator = mediator;
         }
-
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateUserDto request)
+        {
+            var command = new AddUserCommand(request);
+            return Ok(await _mediator.Send(command));
+        }
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -28,14 +34,7 @@ namespace Office_supplies_management.Controllers
             var users = await _mediator.Send(query);
             return Ok(users);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateUserDto request)
-        {
-            var command = new AddUserCommand(request);
-            return Ok(await _mediator.Send(command));
-        }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("{email}")]
         public async Task<IActionResult> GetByEmail(string email)
         {
@@ -43,7 +42,7 @@ namespace Office_supplies_management.Controllers
             var user = await _mediator.Send(query);
             return Ok(user);
         }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("getbyid/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -51,15 +50,14 @@ namespace Office_supplies_management.Controllers
             var user = await _mediator.Send(query);
             return Ok(user);
         }
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("getNameById{id}")]
-        public async Task<IActionResult> GetNameById (int id)
+        public async Task<IActionResult> GetNameById(int id)
         {
             var query = new GetUserNameByIdQuery(id);
-            var userName =  await _mediator.Send(query);
-            return Ok(userName);    
+            var userName = await _mediator.Send(query);
+            return Ok(userName);
         }
-        
-
         [HttpGet("department")]
         [Authorize(Policy = "DepartmentQuery")]
         public async Task<IActionResult> GetUsersByDepartment()
@@ -90,6 +88,7 @@ namespace Office_supplies_management.Controllers
             var users = await _mediator.Send(query);
             return Ok(users);
         }
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("unique-departments")]
         public async Task<IActionResult> GetUniqueDepartments()
         {
@@ -101,6 +100,7 @@ namespace Office_supplies_management.Controllers
             }
             return NotFound();
         }
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("department-leader")]
         public async Task<IActionResult> GetDepartmentLeader([FromQuery] string department)
         {
@@ -112,6 +112,7 @@ namespace Office_supplies_management.Controllers
             }
             return Ok(leader);
         }
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("users-by-type-id")]
         public async Task<IActionResult> GetAllUsersByType([FromQuery] int userTypeID)
         {

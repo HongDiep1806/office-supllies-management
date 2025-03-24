@@ -26,7 +26,7 @@ namespace Office_supplies_management.Controllers
         {
             _mediator = mediator;
         }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateRequestDto request)
         {
@@ -34,14 +34,7 @@ namespace Office_supplies_management.Controllers
             var createdRequest = await _mediator.Send(command);
             return Ok(createdRequest);
         }
-        [HttpGet]
-        public async Task<IActionResult> GetAllRequest()
-        {
-            var query = new GetAllRequestQuery();
-            var requests = await _mediator.Send(query);
-            return Ok(requests);
-        }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRequestsByUserID(int id)
         {
@@ -50,7 +43,7 @@ namespace Office_supplies_management.Controllers
             var requests = await _mediator.Send(new GetRequestsByUserIDQuery(id));
             return Ok(requests);
         }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("count")]
         public async Task<IActionResult> GetRequestNumber()
         {
@@ -58,7 +51,7 @@ namespace Office_supplies_management.Controllers
             var number = await _mediator.Send(query);
             return Ok(number);
         }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("getbyid/{id}")]
         public async Task<IActionResult> GetRequestByID(int id)
         {
@@ -66,7 +59,7 @@ namespace Office_supplies_management.Controllers
             var request = await _mediator.Send(query);
             return Ok(request);
         }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -81,7 +74,7 @@ namespace Office_supplies_management.Controllers
                 return BadRequest();
             }
         }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateRequestDto updateRequestDto)
         {
@@ -93,7 +86,14 @@ namespace Office_supplies_management.Controllers
             }
             return BadRequest(result);
         }
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllRequest()
+        {
+            var query = new GetAllRequestQuery();
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
+        }
         [HttpGet("department/{departmentName}")]
         [Authorize(Policy = "DepartmentQuery")]
         public async Task<IActionResult> GetRequestsByDepartment(string departmentName)
@@ -141,8 +141,23 @@ namespace Office_supplies_management.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-        [HttpGet("all-requests")]
-        [Authorize(Policy = "RequireSupLeaderRole")] // Change the authorization policy
+        [Authorize(Policy = "RequireFinanceEmployee")]
+        [HttpPut("notapproveByFinEmployee/{requestId}")]
+        public async Task<IActionResult> NotApproveRequestByFinEmployee(int requestId, string note)
+        {
+            var command = new NotApproveRequestByFinEmployeeCommand(requestId, note);
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest("Can not find request by id");
+            }
+        }
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        [HttpGet("all-requests")] // Change the authorization policy
         public async Task<IActionResult> GetAllRequestsForSupLeader()
         {
             var query = new GetAllRequestsForFinEmployeeQuery();
@@ -157,22 +172,6 @@ namespace Office_supplies_management.Controllers
             var approvedRequests = await _mediator.Send(query);
             return Ok(approvedRequests);
         }
-        [Authorize(Policy = "RequireSupLeaderRole")]
-        [HttpPut("notapproveByFinEmployee/{requestId}")]
-        public async Task<IActionResult> NotApproveRequestByFinEmployee(int requestId,string note)
-        {
-            var command = new NotApproveRequestByFinEmployeeCommand(requestId,note);
-            var result = await _mediator.Send(command);
-            if (result)
-            {
-                return Ok(result);
-            }
-            else
-            {
-                return BadRequest("Can not find request by id");
-            }
-        }
-
         [HttpPost("approve-request/{requestId}")]
         [Authorize(Policy = "DepartmentQuery")]
         public async Task<IActionResult> ApproveRequestDepLeader(int requestId)

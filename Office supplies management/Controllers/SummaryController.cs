@@ -172,6 +172,7 @@ namespace Office_supplies_management.Controllers
             var result = await _mediator.Send(query); 
             return Ok(result+1);
         }
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpPut("update-approval")]
         public async Task<IActionResult> UpdateSummaryApproval([FromBody] UpdateSummaryApprovalCommand command)
         {
@@ -182,6 +183,7 @@ namespace Office_supplies_management.Controllers
             }
             return BadRequest("Failed to update summary approval status.");
         }
+        [Authorize(Policy = "RequireSupLeaderRole")]
         [HttpGet("get-by-code")]
         public async Task<IActionResult> GetSummaryByCode([FromQuery] string summaryCode)
         {

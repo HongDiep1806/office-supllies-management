@@ -28,13 +28,13 @@ namespace Office_supplies_management.Controllers
             var products = await _mediator.Send(query);
             return Ok(products);
         }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("allproductsincludedeleted")]
         public async Task<IActionResult> AllProducts()
         {
             return Ok(await _mediator.Send(new AllProductsQuery()));
         }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(int id)
         {
@@ -48,6 +48,7 @@ namespace Office_supplies_management.Controllers
 
             return Ok(product);
         }
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("search")]
         public async Task<IActionResult> SearchProducts([FromQuery] string? name, [FromQuery] string? code, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice)
         {
@@ -55,6 +56,7 @@ namespace Office_supplies_management.Controllers
             var products = await _mediator.Send(query);
             return Ok(products);
         }
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("get-by-code")]
         public async Task<IActionResult> GetProductByCode([FromQuery] string code)
         {

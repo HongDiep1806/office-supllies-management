@@ -17,13 +17,15 @@ namespace Office_supplies_management.Services
         private readonly IRequestRepository _requestRepository;
         private readonly IProduct_RequestService _productRequestService;
         private readonly IUserRepository _userRepository;
+        private readonly IProductService _productService;
         private readonly IMapper _mapper;
-        public RequestService(IUserRepository userRepository,IRequestRepository requestRepository, IMapper mapper, IProduct_RequestService productRequestService)
+        public RequestService(IUserRepository userRepository,IRequestRepository requestRepository, IMapper mapper, IProduct_RequestService productRequestService, IProductService productService)
         {
             _requestRepository = requestRepository;
             _mapper = mapper;
             _productRequestService = productRequestService;
             _userRepository = userRepository;
+            _productService = productService;
         }
 
         public async Task<RequestDto> Create(CreateRequestDto createRequest)
@@ -291,6 +293,47 @@ namespace Office_supplies_management.Services
             //}
 
             return requestDtos;
+        }
+
+        public async Task<List<RequestDto>> GetRequestsByProductID(int productID)
+        {
+            var requests = await _requestRepository.GetAllInclude(r => r.Product_Requests);
+            var filteredRequests = requests
+                .Where(r => r.Product_Requests != null && r.Product_Requests.Any(pr => pr.ProductID == productID))
+                .ToList();
+
+            var requestDtos = _mapper.Map<List<RequestDto>>(filteredRequests);
+
+            foreach (var requestDto in requestDtos)
+            {
+                var productsInRequest = await _productRequestService.GetByRequestID(requestDto.RequestID);
+                requestDto.Product_Requests = productsInRequest;
+            }
+
+            return requestDtos;
+        }
+        public async Task<bool> RecalculateTotalPrice(int requestID)
+        {
+            var request = await _requestRepository.GetByIdAsync(requestID);
+            if (request == null)
+            {
+                return false;
+            }
+
+            var productRequests = await _productRequestService.GetByRequestID(requestID);
+            int totalPrice = 0;
+
+            foreach (var productRequest in productRequests)
+            {
+                var product = await _productService.GetById(productRequest.ProductID); // Fixed method name
+                if (product != null)
+                {
+                    totalPrice += int.Parse(product.UnitPrice) * productRequest.Quantity;
+                }
+            }
+
+            request.TotalPrice = totalPrice;
+            return await _requestRepository.UpdateAsync(requestID, request);
         }
 
 

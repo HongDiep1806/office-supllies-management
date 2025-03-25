@@ -283,7 +283,25 @@ namespace Office_supplies_management.Controllers
                 return Ok(requests);
             }
         }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
+        [HttpPost("recalculate-total-price")]
+        public async Task<IActionResult> RecalculateTotalPrice([FromBody] UpdateTotalPriceCommand command)
+        {
+            var result = await _mediator.Send(command);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+        [Authorize(Policy = "AllRolesCanAccess")]
+        [HttpGet("requests-by-product/{productId}")]
+        public async Task<IActionResult> GetRequestsByProductID(int productId)
+        {
+            var query = new GetRequestsByProductIDQuery(productId);
+            var requests = await _mediator.Send(query);
+            return Ok(requests);
+        }
 
 
     }

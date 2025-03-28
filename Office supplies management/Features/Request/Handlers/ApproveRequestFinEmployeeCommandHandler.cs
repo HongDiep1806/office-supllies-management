@@ -16,11 +16,9 @@ namespace Office_supplies_management.Features.Request.Handlers
             _requestService = requestService;
         }
 
-
         public async Task<bool> Handle(ApproveRequestFinEmployeeCommand command, CancellationToken cancellationToken)
         {
-
-            return await _requestService.ApproveByFinEmployee(command.RequestId);
+            return await _requestService.ApproveByFinEmployee(command.RequestId, command.Note);
         }
     }
 }

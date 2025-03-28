@@ -58,5 +58,12 @@ namespace Office_supplies_management.Controllers
             var notifications = await _mediator.Send(query);
             return Ok(notifications);
         }
+        [Authorize(Policy = "AllRolesCanAccess")]
+        [HttpGet("unread/count/{userId}")]
+        public async Task<IActionResult> GetUnreadNotificationCount(int userId)
+        {
+            var count = await _mediator.Send(new GetUnreadNotificationCountCommand(userId));
+            return Ok(count);
+        }
     }
 }

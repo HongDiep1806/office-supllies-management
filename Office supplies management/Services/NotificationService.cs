@@ -73,5 +73,11 @@ namespace Office_supplies_management.Services
 
             return true;
         }
+        public async Task<int> GetUnreadNotificationCountByUserAsync(int userId)
+        {
+            var notifications = await _notificationRepository.GetAllAsync();
+            var unreadCount = notifications.Count(n => n.UserID == userId && !n.IsRead);
+            return unreadCount;
+        }
     }
 }

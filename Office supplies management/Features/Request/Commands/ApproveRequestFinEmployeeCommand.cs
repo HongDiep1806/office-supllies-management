@@ -1,15 +1,14 @@
-﻿using MediatR;
+﻿
+using MediatR;
 
-namespace Office_supplies_management.Features.Request.Commands
+public class ApproveRequestFinEmployeeCommand : IRequest<bool>
 {
-    public class ApproveRequestFinEmployeeCommand:IRequest<bool>
+    public int RequestId { get; set; }
+    public string Note { get; set; } // Added property
+
+    public ApproveRequestFinEmployeeCommand(int requestId, string note)
     {
-        public int RequestId { get; set; }
-
-        public ApproveRequestFinEmployeeCommand(int requestId)
-        {
-            RequestId = requestId;
-
-        }
+        RequestId = requestId;
+        Note = note;
     }
 }

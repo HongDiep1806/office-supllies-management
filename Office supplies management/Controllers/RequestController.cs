@@ -104,9 +104,9 @@ namespace Office_supplies_management.Controllers
         }
         [Authorize(Policy = "DepartmentQuery")]
         [HttpPut("approveByDepLeader/{requestId}")]
-        public async Task<IActionResult> ApproveRequestByDepLeader(int requestId)
+        public async Task<IActionResult> ApproveRequestByDepLeader(int requestId, string note)
         {
-            var command = new ApproveRequestByDepLeaderCommand(requestId);
+            var command = new ApproveRequestByDepLeaderCommand(requestId, note);
             var result = await _mediator.Send(command);
             if (result)
             {
@@ -135,9 +135,9 @@ namespace Office_supplies_management.Controllers
         [Authorize(Policy = "RequireFinanceEmployee")]
         [HttpPut("approveRequestByFinEmployee/{requestId}")]
         //[Authorize(Policy = "RequireFinanceEmployee")]
-        public async Task<IActionResult> ApproveRequestSupLead(int requestId)
+        public async Task<IActionResult> ApproveRequestSupLead(int requestId, string note)
         {
-            var command = new ApproveRequestFinEmployeeCommand(requestId);
+            var command = new ApproveRequestFinEmployeeCommand(requestId, note);
             var result = await _mediator.Send(command);
             return Ok(result);
         }

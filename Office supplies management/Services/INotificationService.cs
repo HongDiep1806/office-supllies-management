@@ -9,5 +9,6 @@ namespace Office_supplies_management.Services
         Task<bool> MarkAsRead(int notificationId);
         Task<List<NotificationDto>> GetUnreadNotificationsByUserAsync(int userId);
         Task<bool> MarkAllAsReadAsync(int userId);
+        Task<int> GetUnreadNotificationCountByUserAsync(int userId);
     }
 }

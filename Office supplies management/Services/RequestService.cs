@@ -131,13 +131,14 @@ namespace Office_supplies_management.Services
             return _mapper.Map<List<RequestDto>>(requestOfUsersInDepartment);
         }
 
-        public async Task<bool> ApproveByDepLeader(int requestID)
+        public async Task<bool> ApproveByDepLeader(int requestID, string note)
         {
             var request = await _requestRepository.GetByIdAsync(requestID);
             if (request != null)
             {
                 request.IsProcessedByDepLead = true;
                 request.IsApprovedByDepLead = true;
+                request.NoteDepLead = note;
                 await _requestRepository.UpdateAsync(requestID, request);
                 return true;
             }
@@ -151,7 +152,7 @@ namespace Office_supplies_management.Services
             return _mapper.Map<List<RequestDto>>(approvedRequests);
         }
 
-        public async Task<bool> ApproveByFinEmployee(int requestId)
+        public async Task<bool> ApproveByFinEmployee(int requestId, string note)
         {
             var requestEntity = await _requestRepository.GetByIdAsync(requestId);
             if (requestEntity == null)
@@ -160,6 +161,7 @@ namespace Office_supplies_management.Services
             }
 
             requestEntity.IsApprovedBySupLead = true;
+            requestEntity.NoteSupLead = note;
             await _requestRepository.UpdateAsync(requestId, requestEntity);
             return true;
         }

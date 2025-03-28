@@ -13,7 +13,7 @@ namespace Office_supplies_management.Features.Request.Handlers
         }
         public async Task<bool> Handle(ApproveRequestByDepLeaderCommand request, CancellationToken cancellationToken)
         {
-            return await _requestService.ApproveByDepLeader(request.RequestID);
+            return await _requestService.ApproveByDepLeader(request.RequestID, request.Note);
         }
     }
 }

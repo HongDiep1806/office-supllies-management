@@ -6,6 +6,8 @@ using Office_supplies_management.Features.Product.Queries;
 using Office_supplies_management.Features.Products.Commands;
 using Office_supplies_management.Features.Products.Queries;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace Office_supplies_management.Controllers
 {
@@ -14,6 +16,7 @@ namespace Office_supplies_management.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly HttpClient _httpClient;
 
         public ProductController(IMediator mediator)
         {

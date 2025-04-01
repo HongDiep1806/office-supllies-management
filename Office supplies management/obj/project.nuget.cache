@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ru9kYhe6nKA=",
+  "dgSpecHash": "SUjoAQWd90s=",
   "success": true,
-  "projectFilePath": "E:\\vpp_6\\Office supplies management\\Office supplies management.csproj",
+  "projectFilePath": "E:\\vpp_7\\Office supplies management\\Office supplies management.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\doduc\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\doduc\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

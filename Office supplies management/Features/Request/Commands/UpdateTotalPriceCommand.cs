@@ -1,11 +1,14 @@
 using MediatR;
 
-public class UpdateTotalPriceCommand : IRequest<bool>
+namespace Office_supplies_management.Features.Request.Commands
 {
-    public int RequestID { get; set; }
-
-    public UpdateTotalPriceCommand(int requestID)
+    public class UpdateTotalPriceCommand : IRequest<bool>
     {
-        RequestID = requestID;
+        public int RequestID { get; set; }
+
+        public UpdateTotalPriceCommand(int requestID)
+        {
+            RequestID = requestID;
+        }
     }
 }

@@ -275,5 +275,18 @@ namespace Office_supplies_management.Services
             var summary = summaries.FirstOrDefault(s => s.SummaryCode == summaryCode);
             return _mapper.Map<SummaryDto>(summary);
         }
+        public async Task<bool> RecalculateAllSummariesTotalPrice()
+        {
+            var summaries = await _summaryRepository.GetAllAsync();
+            foreach (var summary in summaries)
+            {
+                var requests = await _requestRepository.GetAllAsync();
+                var requestsOfSummary = requests.Where(r => r.SummaryID == summary.SummaryID).ToList();
+                summary.TotalPrice = requestsOfSummary.Sum(r => r.TotalPrice);
+                await _summaryRepository.UpdateAsync(summary.SummaryID, summary);
+            }
+            return true;
+        }
+
     }
 }

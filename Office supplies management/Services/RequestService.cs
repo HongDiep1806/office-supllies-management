@@ -321,7 +321,11 @@ namespace Office_supplies_management.Services
             {
                 return false;
             }
-
+            if (request.SummaryID != null)
+            {
+                //do nothing instead of return false
+                return true;
+            }
             var productRequests = await _productRequestService.GetByRequestID(requestID);
             int totalPrice = 0;
 
@@ -336,6 +340,28 @@ namespace Office_supplies_management.Services
 
             request.TotalPrice = totalPrice;
             return await _requestRepository.UpdateAsync(requestID, request);
+        }
+        public async Task<bool> RecalculateAllRequestsTotalPrice()
+        {
+            var requests = await _requestRepository.GetAllAsync();
+            foreach (var request in requests)
+            {
+                var productRequests = await _productRequestService.GetByRequestID(request.RequestID);
+                int totalPrice = 0;
+
+                foreach (var productRequest in productRequests)
+                {
+                    var product = await _productService.GetById(productRequest.ProductID);
+                    if (product != null)
+                    {
+                        totalPrice += int.Parse(product.UnitPrice) * productRequest.Quantity;
+                    }
+                }
+
+                request.TotalPrice = totalPrice;
+                await _requestRepository.UpdateAsync(request.RequestID, request);
+            }
+            return true;
         }
 
 

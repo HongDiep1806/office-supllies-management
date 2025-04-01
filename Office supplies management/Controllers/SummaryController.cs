@@ -195,6 +195,17 @@ namespace Office_supplies_management.Controllers
             }
             return Ok(summary);
         }
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        [HttpPost("recalculate-total-price")]
+        public async Task<IActionResult> RecalculateAllSummariesTotalPrice()
+        {
+            var result = await _mediator.Send(new RecalculateAllSummariesTotalPriceCommand());
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
 
     }
 }

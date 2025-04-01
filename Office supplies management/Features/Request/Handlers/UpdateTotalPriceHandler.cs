@@ -3,17 +3,20 @@ using Office_supplies_management.Services;
 using System.Threading;
 using System.Threading.Tasks;
 
-public class UpdateTotalPriceHandler : IRequestHandler<UpdateTotalPriceCommand, bool>
+namespace Office_supplies_management.Features.Request.Commands
 {
-    private readonly IRequestService _requestService;
-
-    public UpdateTotalPriceHandler(IRequestService requestService)
+    public class UpdateTotalPriceHandler : IRequestHandler<UpdateTotalPriceCommand, bool>
     {
-        _requestService = requestService;
-    }
+        private readonly IRequestService _requestService;
 
-    public async Task<bool> Handle(UpdateTotalPriceCommand command, CancellationToken cancellationToken)
-    {
-        return await _requestService.RecalculateTotalPrice(command.RequestID);
+        public UpdateTotalPriceHandler(IRequestService requestService)
+        {
+            _requestService = requestService;
+        }
+
+        public async Task<bool> Handle(UpdateTotalPriceCommand request, CancellationToken cancellationToken)
+        {
+            return await _requestService.RecalculateTotalPrice(request.RequestID);
+        }
     }
 }

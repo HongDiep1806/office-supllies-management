@@ -20,5 +20,6 @@ namespace Office_supplies_management.Services
         Task<int> CountSummaries();
         Task<bool> UpdateSummaryApprovalAsync(int summaryId, bool isApproved);
         Task<SummaryDto> GetSummaryByCodeAsync(string summaryCode);
+        Task<bool> RecalculateAllSummariesTotalPrice();
     }
 }

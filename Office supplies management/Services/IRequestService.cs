@@ -27,5 +27,6 @@ namespace Office_supplies_management.Services
         Task<List<RequestDto>> GetApprovedRequestsByDateRangeAndDepartment(DateTime startDate, DateTime endDate, string department);
         Task<List<RequestDto>> GetRequestsByProductID(int productID);
         Task<bool> RecalculateTotalPrice(int requestID);
+        Task<bool> RecalculateAllRequestsTotalPrice();
     }
 }

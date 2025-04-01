@@ -302,7 +302,17 @@ namespace Office_supplies_management.Controllers
             var requests = await _mediator.Send(query);
             return Ok(requests);
         }
-
+        [Authorize(Policy = "AllRolesCanAccess")]
+        [HttpPost("recalculate-all-total-price")]
+        public async Task<IActionResult> RecalculateAllRequestsTotalPrice()
+        {
+            var result = await _mediator.Send(new RecalculateAllRequestsTotalPriceCommand());
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
 
     }
 }

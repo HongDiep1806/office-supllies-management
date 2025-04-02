@@ -19,4 +19,5 @@ public class RequestDto
     public string NoteDepLead { get; set; }
     public DateTime DateSupLeadApprove { get; set; }
     public string NoteSupLead { get; set; }
+    public bool IsDeleted { get; set; } // Add this property
 }

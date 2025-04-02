@@ -65,6 +65,7 @@ namespace Office_supplies_management.Services
             var productsInRequest = await _productRequestService.GetByRequestID(request.RequestID);
             var requestDto = _mapper.Map<RequestDto>(request);
             requestDto.Product_Requests = productsInRequest;
+            requestDto.IsDeleted = request.IsDeleted; // Ensure this is included
             return requestDto;
         }
 

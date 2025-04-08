@@ -7,6 +7,7 @@ namespace Office_supplies_management.DTOs.Request
         public int SummaryID { get; set; }
         public bool IsProcessedBySupLead { get; set; }
         public bool IsApprovedBySupLead { get; set; }
+        public DateTime? UpdateDate { get; set; } // Add this property
 
     }
 }

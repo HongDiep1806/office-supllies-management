@@ -11,5 +11,6 @@
         public bool IsProcessedBySupLead { get; set; }
         public bool IsApprovedBySupLead { get; set; }
         public List<int> RequestIDs { get; set; }
+        public DateTime? UpdateDate { get; set; } // Add this property
     }
 }

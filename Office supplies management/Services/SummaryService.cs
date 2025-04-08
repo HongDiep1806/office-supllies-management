@@ -251,6 +251,7 @@ namespace Office_supplies_management.Services
             }
 
             summary.IsApprovedBySupLead = isApproved;
+            summary.UpdateDate = DateTime.UtcNow; // Update the UpdateDate field
             await _summaryRepository.UpdateAsync(summary.SummaryID, summary);
 
             if (!isApproved)
@@ -283,6 +284,16 @@ namespace Office_supplies_management.Services
                 var requests = await _requestRepository.GetAllAsync();
                 var requestsOfSummary = requests.Where(r => r.SummaryID == summary.SummaryID).ToList();
                 summary.TotalPrice = requestsOfSummary.Sum(r => r.TotalPrice);
+                await _summaryRepository.UpdateAsync(summary.SummaryID, summary);
+            }
+            return true;
+        }
+        public async Task<bool> SetUpdateDateToCreatedDate()
+        {
+            var summaries = await _summaryRepository.GetAllAsync();
+            foreach (var summary in summaries)
+            {
+                summary.UpdateDate = summary.CreatedDate; // Set UpdateDate to CreatedDate
                 await _summaryRepository.UpdateAsync(summary.SummaryID, summary);
             }
             return true;

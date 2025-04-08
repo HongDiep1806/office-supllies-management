@@ -91,7 +91,7 @@ namespace Office_supplies_management.Controllers
             }
             return NotFound();
         }
-        [Authorize(Policy = "RequireSupLeaderRole")]
+        [Authorize(Policy = "AllRolesCanAccess")]
         [HttpGet("{summaryId}")]
         //[Authorize(Policy = "RequireFinanceEmployee")]
         //[Authorize(Policy = "RequireSupLeaderRole")]
@@ -205,6 +205,17 @@ namespace Office_supplies_management.Controllers
                 return Ok();
             }
             return BadRequest();
+        }
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        [HttpPost("set-update-date-to-created-date")]
+        public async Task<IActionResult> SetUpdateDateToCreatedDate()
+        {
+            var result = await _mediator.Send(new SetUpdateDateToCreatedDateCommand());
+            if (result)
+            {
+                return Ok("UpdateDate has been set to CreatedDate for all summaries.");
+            }
+            return BadRequest("Failed to update UpdateDate.");
         }
 
     }

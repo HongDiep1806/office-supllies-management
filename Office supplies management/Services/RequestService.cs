@@ -139,6 +139,7 @@ namespace Office_supplies_management.Services
             {
                 request.IsProcessedByDepLead = true;
                 request.IsApprovedByDepLead = true;
+                request.DateDepLeadApprove = DateTime.UtcNow; // Update the approval date
                 request.NoteDepLead = note;
                 await _requestRepository.UpdateAsync(requestID, request);
                 return true;
@@ -163,6 +164,7 @@ namespace Office_supplies_management.Services
 
             requestEntity.IsApprovedBySupLead = true;
             requestEntity.NoteSupLead = note;
+            requestEntity.DateSupLeadApprove = DateTime.UtcNow; // Update the
             await _requestRepository.UpdateAsync(requestId, requestEntity);
             return true;
         }
@@ -179,6 +181,7 @@ namespace Office_supplies_management.Services
             {
                 request.IsProcessedByDepLead = true;
                 request.IsApprovedByDepLead = false;
+                request.DateDepLeadApprove = DateTime.UtcNow; // Update the approval d
                 request.NoteDepLead = note;
                 await _requestRepository.UpdateAsync(requestID, request);
                 return true;
@@ -193,6 +196,7 @@ namespace Office_supplies_management.Services
                 request.IsProcessedByDepLead = false;
                 request.IsApprovedByDepLead = true;
                 request.NoteSupLead = note;
+                request.DateSupLeadApprove = DateTime.UtcNow; // Update the approval date
                 await _requestRepository.UpdateAsync(requestID, request);
                 return true;
             }

@@ -15,5 +15,6 @@ namespace Office_supplies_management.Models
         public int TotalPrice { get; set; }
         public bool IsProcessedBySupLead { get; set; } = false;
         public bool IsApprovedBySupLead { get; set; } = false ;
+        public DateTime? UpdateDate { get; set; } // Add this property
     }
 }

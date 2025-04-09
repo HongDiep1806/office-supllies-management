@@ -19,13 +19,15 @@ namespace Office_supplies_management.Services
         private readonly IUserRepository _userRepository;
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
-        public RequestService(IUserRepository userRepository,IRequestRepository requestRepository, IMapper mapper, IProduct_RequestService productRequestService, IProductService productService)
+        private readonly ISummaryRepository _summaryRepository;
+        public RequestService(IUserRepository userRepository,IRequestRepository requestRepository, IMapper mapper, IProduct_RequestService productRequestService, IProductService productService, ISummaryRepository summaryRepository)
         {
             _requestRepository = requestRepository;
             _mapper = mapper;
             _productRequestService = productRequestService;
             _userRepository = userRepository;
             _productService = productService;
+            _summaryRepository = summaryRepository; // Initialize the field
         }
 
         public async Task<RequestDto> Create(CreateRequestDto createRequest)
@@ -139,7 +141,7 @@ namespace Office_supplies_management.Services
             {
                 request.IsProcessedByDepLead = true;
                 request.IsApprovedByDepLead = true;
-                request.DateDepLeadApprove = DateTime.UtcNow; // Update the approval date
+                request.DateDepLeadApprove = DateTime.UtcNow.AddHours(7); // Update the approval date
                 request.NoteDepLead = note;
                 await _requestRepository.UpdateAsync(requestID, request);
                 return true;
@@ -164,7 +166,7 @@ namespace Office_supplies_management.Services
 
             requestEntity.IsApprovedBySupLead = true;
             requestEntity.NoteSupLead = note;
-            requestEntity.DateSupLeadApprove = DateTime.UtcNow; // Update the
+            requestEntity.DateSupLeadApprove = DateTime.UtcNow.AddHours(7); // Update the
             await _requestRepository.UpdateAsync(requestId, requestEntity);
             return true;
         }
@@ -181,7 +183,7 @@ namespace Office_supplies_management.Services
             {
                 request.IsProcessedByDepLead = true;
                 request.IsApprovedByDepLead = false;
-                request.DateDepLeadApprove = DateTime.UtcNow; // Update the approval d
+                request.DateDepLeadApprove = DateTime.UtcNow.AddHours(7); // Update the approval d
                 request.NoteDepLead = note;
                 await _requestRepository.UpdateAsync(requestID, request);
                 return true;
@@ -196,7 +198,7 @@ namespace Office_supplies_management.Services
                 request.IsProcessedByDepLead = false;
                 request.IsApprovedByDepLead = true;
                 request.NoteSupLead = note;
-                request.DateSupLeadApprove = DateTime.UtcNow; // Update the approval date
+                request.DateSupLeadApprove = DateTime.UtcNow.AddHours(7); // Update the approval date
                 await _requestRepository.UpdateAsync(requestID, request);
                 return true;
             }
@@ -369,6 +371,30 @@ namespace Office_supplies_management.Services
             return true;
         }
 
+        public async Task<bool> AdjustDatesByAdding7Hours()
+        {
+            // Adjust dates for requests
+            var requests = await _requestRepository.GetAllAsync();
+            foreach (var request in requests)
+            {
+                request.DateDepLeadApprove = request.DateDepLeadApprove.AddHours(7);
+                request.DateSupLeadApprove = request.DateSupLeadApprove.AddHours(7);
+                await _requestRepository.UpdateAsync(request.RequestID, request);
+            }
+
+            // Adjust dates for summaries
+            var summaries = await _summaryRepository.GetAllAsync();
+            foreach (var summary in summaries)
+            {
+                if (summary.UpdateDate.HasValue)
+                {
+                    summary.UpdateDate = summary.UpdateDate.Value.AddHours(7);
+                }
+                await _summaryRepository.UpdateAsync(summary.SummaryID, summary);
+            }
+
+            return true;
+        }
 
 
 

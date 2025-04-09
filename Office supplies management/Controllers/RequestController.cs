@@ -313,6 +313,18 @@ namespace Office_supplies_management.Controllers
             }
             return BadRequest();
         }
+        //[Authorize(Policy = "RequireSupLeaderRole")]
+        //[HttpPost("adjust-dates-by-adding-7-hours")]
+        //public async Task<IActionResult> AdjustDatesByAdding7Hours()
+        //{
+        //    var result = await _mediator.Send(new AdjustDatesByAdding7HoursCommand());
+        //    if (result)
+        //    {
+        //        return Ok("Dates have been adjusted by adding 7 hours.");
+        //    }
+        //    return BadRequest("Failed to adjust dates.");
+        //}
+
 
     }
 }

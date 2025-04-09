@@ -28,5 +28,6 @@ namespace Office_supplies_management.Services
         Task<List<RequestDto>> GetRequestsByProductID(int productID);
         Task<bool> RecalculateTotalPrice(int requestID);
         Task<bool> RecalculateAllRequestsTotalPrice();
+        Task<bool> AdjustDatesByAdding7Hours();
     }
 }

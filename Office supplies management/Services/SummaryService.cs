@@ -251,7 +251,7 @@ namespace Office_supplies_management.Services
             }
 
             summary.IsApprovedBySupLead = isApproved;
-            summary.UpdateDate = DateTime.UtcNow; // Update the UpdateDate field
+            summary.UpdateDate = DateTime.UtcNow.AddHours(7); // Adjust to GMT+7
             await _summaryRepository.UpdateAsync(summary.SummaryID, summary);
 
             if (!isApproved)

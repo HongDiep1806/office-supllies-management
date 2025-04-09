@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging; // Add logging
-
+using ClosedXML.Excel;
 namespace Office_supplies_management.Services
 {
     public class SummaryService : ISummaryService
@@ -362,6 +362,91 @@ namespace Office_supplies_management.Services
 
             return productCounts;
         }
+        public async Task<byte[]> GenerateProductReportExcel(DateTime startDate, DateTime endDate)
+        {
+            // Step 1: Get product counts
+            var productCounts = await GetProductCountForApprovedSummariesInDateRange(startDate, endDate);
+
+            // Log product counts for debugging
+            _logger.LogInformation("Product counts: {@ProductCounts}", productCounts);
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Product Report");
+
+                // Step 2: Add headers
+                var titleCell = worksheet.Cell(1, 1);
+                titleCell.Value = "Báo cáo chi tiết sản phẩm trong phiếu yêu cầu đã được tổng hợp";
+                titleCell.Style.Font.Bold = true; // Make the title bold
+                worksheet.Range(1, 1, 1, 5).Merge(); // Merge cells for the title
+                worksheet.Row(1).Height = 20; // Adjust row height for the title
+
+                worksheet.Cell(2, 1).Value = "Từ:";
+                worksheet.Cell(2, 2).Value = startDate.ToString("dd/MM/yyyy");
+                worksheet.Cell(2, 3).Value = "Đến:";
+                worksheet.Cell(2, 4).Value = endDate.ToString("dd/MM/yyyy");
+
+                // Step 3: Add table headers
+                worksheet.Cell(4, 1).Value = "STT";
+                worksheet.Cell(4, 2).Value = "Tên sản phẩm";
+                worksheet.Cell(4, 3).Value = "Đơn Giá Hiện Hành";
+                worksheet.Cell(4, 4).Value = "Số lượng";
+                worksheet.Cell(4, 5).Value = "Tổng";
+
+                // Make table headers bold
+                worksheet.Range(4, 1, 4, 5).Style.Font.Bold = true;
+
+                int row = 5;
+                int index = 1;
+
+                // Step 4: Populate data
+                foreach (var product in productCounts)
+                {
+                    var productName = product.Key; // Use product name as the key
+
+                    // Fetch product details by searching for the product name
+                    var products = await _productService.SearchProductsAsync(productName, null, null, null);
+                    var productDetails = products?.FirstOrDefault(p => p.Name.Equals(productName, StringComparison.OrdinalIgnoreCase));
+
+                    if (productDetails == null)
+                    {
+                        _logger.LogWarning($"Product not found: {productName}");
+                        continue;
+                    }
+
+                    if (!decimal.TryParse(productDetails.UnitPrice, out var unitPrice))
+                    {
+                        _logger.LogWarning($"Invalid unit price for product: {productName}");
+                        continue;
+                    }
+
+                    worksheet.Cell(row, 1).Value = index++; // Serial number
+                    worksheet.Cell(row, 2).Value = productName; // Product Name
+                    worksheet.Cell(row, 3).Value = unitPrice; // Unit Price
+                    worksheet.Cell(row, 4).Value = product.Value; // Quantity
+                    worksheet.Cell(row, 5).Value = unitPrice * product.Value; // Total = Price * Quantity
+                    row++;
+                }
+
+                // Step 5: Add total row
+                worksheet.Cell(row, 4).Value = "Tổng giá trị:"; // Correct column placement
+                worksheet.Cell(row, 5).FormulaA1 = $"SUM(E5:E{row - 1})";
+                worksheet.Cell(row, 4).Style.Font.Bold = true; // Make the total label bold
+                worksheet.Cell(row, 5).Style.Font.Bold = true; // Make the total value bold
+
+                // Step 6: Adjust column widths
+                worksheet.Columns(1, 5).AdjustToContents(); // Automatically adjust column widths
+
+                // Step 7: Return Excel file as byte array
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    return stream.ToArray();
+                }
+            }
+        }
+
+
 
 
 

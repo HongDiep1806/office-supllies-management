@@ -225,5 +225,14 @@ namespace Office_supplies_management.Controllers
             var result = await _mediator.Send(query);
             return Ok(result);
         }
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        [HttpGet("export-product-report")]
+        public async Task<IActionResult> ExportProductReport([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        {
+            var query = new GenerateProductReportExcelQuery(startDate, endDate);
+            var excelFile = await _mediator.Send(query);
+
+            return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ProductReport.xlsx");
+        }
     }
 }

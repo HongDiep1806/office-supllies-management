@@ -23,6 +23,7 @@ namespace Office_supplies_management.Services
         Task<bool> RecalculateAllSummariesTotalPrice();
         Task<bool> SetUpdateDateToCreatedDate();
         Task<Dictionary<string, int>> GetProductCountForApprovedSummariesInDateRange(DateTime startDate, DateTime endDate);
+        Task<byte[]> GenerateProductReportExcel(DateTime startDate, DateTime endDate); // Added for Excel generation
 
     }
 }

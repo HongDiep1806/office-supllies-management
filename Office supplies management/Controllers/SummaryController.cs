@@ -217,6 +217,13 @@ namespace Office_supplies_management.Controllers
             }
             return BadRequest("Failed to update UpdateDate.");
         }
-
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        [HttpGet("product-count")]
+        public async Task<IActionResult> GetProductCountForApprovedSummaries([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        {
+            var query = new GetProductCountForApprovedSummariesQuery(startDate, endDate);
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
     }
 }

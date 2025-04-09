@@ -18,13 +18,22 @@ namespace Office_supplies_management.Services
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<SummaryService> _logger;
-        public SummaryService(IUserRepository userRepository, ISummaryRepository summaryRepository, IRequestRepository requestRepository, IMapper mapper, ILogger<SummaryService> logger)
+        private readonly IProductService _productService; // Add this field
+
+        public SummaryService(
+            IUserRepository userRepository,
+            ISummaryRepository summaryRepository,
+            IRequestRepository requestRepository,
+            IMapper mapper,
+            ILogger<SummaryService> logger,
+            IProductService productService) // Add this parameter
         {
             _summaryRepository = summaryRepository;
             _requestRepository = requestRepository;
             _userRepository = userRepository;
             _mapper = mapper;
             _logger = logger;
+            _productService = productService; // Initialize the field
         }
         public async Task<SummaryDto> CreateSummary(CreateSummaryDto createSummaryDto)
         {
@@ -298,6 +307,64 @@ namespace Office_supplies_management.Services
             }
             return true;
         }
+        public async Task<Dictionary<string, int>> GetProductCountForApprovedSummariesInDateRange(DateTime startDate, DateTime endDate)
+        {
+            // Step 1: Get summaries that are approved and within the date range
+            var summaries = await _summaryRepository.GetAllAsync();
+            var filteredSummaryIds = summaries
+                .Where(s => s.CreatedDate.Date >= startDate && s.CreatedDate.Date <= endDate && s.IsApprovedBySupLead)
+                .Select(s => s.SummaryID)
+                .ToList();
+
+            if (!filteredSummaryIds.Any())
+            {
+                return new Dictionary<string, int>();
+            }
+
+            // Step 2: Get requests associated with the filtered summaries
+            var requests = await _requestRepository.GetAllAsync();
+            var filteredRequestIds = requests
+                .Where(r => filteredSummaryIds.Contains(r.SummaryID ?? 0))
+                .Select(r => r.RequestID)
+                .ToList();
+
+            if (!filteredRequestIds.Any())
+            {
+                return new Dictionary<string, int>();
+            }
+
+            // Step 3: Get product counts from Product_Requests
+            var productRequests = await _requestRepository.GetAllInclude(r => r.Product_Requests);
+            var filteredProductRequests = productRequests
+                .Where(r => filteredRequestIds.Contains(r.RequestID))
+                .SelectMany(r => r.Product_Requests)
+                .GroupBy(pr => pr.ProductID)
+                .ToDictionary(
+                    g => g.Key, // ProductID
+                    g => g.Sum(pr => pr.Quantity) // Total Quantity
+                );
+
+            if (!filteredProductRequests.Any())
+            {
+                return new Dictionary<string, int>();
+            }
+
+            // Step 4: Map ProductID to ProductName and include the count
+            var productCounts = new Dictionary<string, int>();
+            foreach (var productRequest in filteredProductRequests)
+            {
+                var product = await _productService.GetById(productRequest.Key);
+                if (product != null)
+                {
+                    productCounts[product.Name] = productRequest.Value;
+                }
+            }
+
+            return productCounts;
+        }
+
+
+
 
     }
 }

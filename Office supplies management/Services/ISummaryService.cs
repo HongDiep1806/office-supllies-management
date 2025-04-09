@@ -22,5 +22,7 @@ namespace Office_supplies_management.Services
         Task<SummaryDto> GetSummaryByCodeAsync(string summaryCode);
         Task<bool> RecalculateAllSummariesTotalPrice();
         Task<bool> SetUpdateDateToCreatedDate();
+        Task<Dictionary<string, int>> GetProductCountForApprovedSummariesInDateRange(DateTime startDate, DateTime endDate);
+
     }
 }

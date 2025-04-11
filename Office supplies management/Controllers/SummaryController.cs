@@ -238,5 +238,16 @@ namespace Office_supplies_management.Controllers
             // Return the file with the dynamic name
             return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        [HttpGet("export-summary-detail")]
+        public async Task<IActionResult> ExportSummaryDetail([FromQuery] int summaryId)
+        {
+            var query = new GenerateSummaryDetailExcelQuery(summaryId);
+            var excelFile = await _mediator.Send(query);
+
+            var fileName = $"summary-detail-{summaryId}.xlsx";
+            return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+        }
+
     }
 }

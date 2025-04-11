@@ -447,6 +447,103 @@ namespace Office_supplies_management.Services
                 }
             }
         }
+        public async Task<byte[]> GenerateSummaryDetailExcel(int summaryId)
+        {
+            var summary = await _summaryRepository.GetByIdIncludeAsync(summaryId, s => s.Requests);
+            if (summary == null)
+                throw new KeyNotFoundException($"Summary with ID {summaryId} not found.");
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Summary Detail");
+
+                // Add title
+                worksheet.Cell(1, 1).Value = $"Phiếu tổng hợp VPP {summary.SummaryCode}";
+                worksheet.Cell(1, 1).Style.Font.Bold = true;
+                worksheet.Range(1, 1, 1, 6).Merge();
+                User user = await _userRepository.GetByIdAsync(summary.UserID);
+                worksheet.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                // Add metadata
+                worksheet.Cell(2, 1).Value = $"Người thực hiện: {user.FullName}";
+                worksheet.Cell(2, 5).Value = $"Phòng Ban: {user.Department}";
+                worksheet.Cell(3, 5).Value = $"Ngày thực hiện: {summary.CreatedDate:dd/MM/yyyy}";
+                var statusCell = worksheet.Cell(4, 1);
+                if (!summary.IsProcessedBySupLead && !summary.IsApprovedBySupLead)
+                {
+                    statusCell.Value = "Chưa duyệt";
+                    statusCell.Style.Fill.BackgroundColor = XLColor.Orange;
+                }
+                else if (summary.IsProcessedBySupLead && summary.IsApprovedBySupLead)
+                {
+                    statusCell.Value = "Đã duyệt";
+                    statusCell.Style.Fill.BackgroundColor = XLColor.Green;
+                }
+                else if (summary.IsProcessedBySupLead && !summary.IsApprovedBySupLead)
+                {
+                    statusCell.Value = "Không duyệt";
+                    statusCell.Style.Fill.BackgroundColor = XLColor.Red;
+                }
+                statusCell.Style.Font.Bold = true;
+                statusCell.Style.Font.FontColor = XLColor.White;
+
+                // Add table headers
+                worksheet.Cell(5, 1).Value = "STT";
+                worksheet.Cell(5, 2).Value = "Tên VPP";
+                worksheet.Cell(5, 3).Value = "Đơn vị tính";
+                worksheet.Cell(5, 4).Value = "Số lượng";
+                worksheet.Cell(5, 5).Value = "Đơn giá dự kiến";
+                worksheet.Cell(5, 6).Value = "Thành tiền";
+
+                worksheet.Range(5, 1, 5, 6).Style.Font.Bold = true;
+
+                // Populate data
+                int row = 6;
+                var requests = await _requestRepository.GetAllInclude(r => r.Product_Requests);
+                var filteredRequests = requests.Where(r => r.SummaryID == summaryId).ToList();
+
+                foreach (var request in filteredRequests)
+                {
+                    User requestUser = await _userRepository.GetByIdAsync(request.UserID);
+                    // Add "Phiếu yêu cầu" row
+                    worksheet.Cell(row, 1).Value = $"Phiếu: {request.RequestCode} - {requestUser.FullName} - {requestUser.Department} - {request.CreatedDate:dd/MM/yyyy}";
+                    worksheet.Range(row, 1, row, 6).Merge();
+                    worksheet.Cell(row, 6).Style.Fill.BackgroundColor = XLColor.LightGray; // Apply light gray to column F only
+                    worksheet.Row(row).Style.Font.Bold = true;
+                    row++;
+                    int index = 1;
+                    foreach (var productRequest in request.Product_Requests)
+                    {
+                        var product = await _productService.GetById(productRequest.ProductID);
+
+                        worksheet.Cell(row, 1).Value = index++;
+                        worksheet.Cell(row, 2).Value = product.Name;
+                        worksheet.Cell(row, 3).Value = product.UnitCurrency; // Example unit
+                        worksheet.Cell(row, 4).Value = productRequest.Quantity;
+                        worksheet.Cell(row, 5).Value = decimal.Parse(product.UnitPrice);
+                        worksheet.Cell(row, 6).Value = productRequest.Quantity * decimal.Parse(product.UnitPrice);
+                        row++;
+                    }
+                }
+
+
+                // Add total row
+                worksheet.Cell(row, 5).Value = "Tổng cộng:";
+                worksheet.Cell(row, 5).Style.Font.Bold = true;
+                worksheet.Cell(row, 6).FormulaA1 = $"SUM(F6:F{row - 1})";
+                worksheet.Cell(row, 6).Style.Font.Bold = true;
+
+                // Adjust column widths
+                worksheet.Columns().AdjustToContents();
+
+                // Return Excel file as byte array
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    return stream.ToArray();
+                }
+            }
+        }
+
 
 
 

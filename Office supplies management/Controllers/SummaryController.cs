@@ -248,6 +248,20 @@ namespace Office_supplies_management.Controllers
             var fileName = $"summary-detail-{summaryId}.xlsx";
             return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
+        [Authorize(Policy = "RequireSupLeaderRole")]
+        [HttpGet("export-approved-requests")]
+        public async Task<IActionResult> ExportApprovedRequests(
+    [FromQuery] DateTime startDate,
+    [FromQuery] DateTime endDate,
+    [FromQuery] string? department = null)
+        {
+            var query = new GenerateApprovedRequestsExcelQuery(startDate, endDate, department);
+            var excelFile = await _mediator.Send(query);
 
+            var fileName = string.IsNullOrEmpty(department)
+    ? $"PYC-da-duyet-{startDate:yyyy-MM-dd}-{endDate:yyyy-MM-dd}.xlsx"
+    : $"PYC-da-duyet-{department}-{startDate:yyyy-MM-dd}-{endDate:yyyy-MM-dd}.xlsx";
+            return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+        }
     }
 }

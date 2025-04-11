@@ -543,6 +543,103 @@ namespace Office_supplies_management.Services
                 }
             }
         }
+        public async Task<byte[]> GenerateApprovedRequestsExcel(DateTime startDate, DateTime endDate, string? department)
+        {
+            var summaries = await _summaryRepository.GetAllAsync();
+            var approvedSummaries = summaries
+                .Where(s => s.IsApprovedBySupLead)
+                .ToList();
+
+            var summaryIds = approvedSummaries.Select(s => s.SummaryID).ToList();
+
+            var users = await _userRepository.GetAllAsync();
+            var userIds = string.IsNullOrEmpty(department)
+                ? users.Select(u => u.UserID).ToList()
+                : users.Where(u => u.Department == department).Select(u => u.UserID).ToList();
+
+            var requests = await _requestRepository.GetAllInclude(r => r.Product_Requests);
+            var filteredRequests = requests
+                .Where(r => r.CreatedDate.Date >= startDate.Date && r.CreatedDate.Date <= endDate.Date && summaryIds.Contains(r.SummaryID ?? 0) && userIds.Contains(r.UserID))
+                .ToList();
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Yêu cầu đã duyệt");
+
+                // Add title
+                worksheet.Cell(1, 1).Value = "Báo cáo chi tiết yêu cầu đã được duyệt";
+                worksheet.Cell(1, 1).Style.Font.Bold = true;
+                worksheet.Range(1, 1, 1, 6).Merge();
+                worksheet.Row(1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                // Add metadata
+                worksheet.Cell(2, 1).Value = "Từ:";
+                worksheet.Cell(2, 2).Value = startDate.ToString("dd/MM/yyyy");
+                worksheet.Cell(2, 3).Value = "Đến:";
+                worksheet.Cell(2, 4).Value = endDate.ToString("dd/MM/yyyy");
+                if (!string.IsNullOrEmpty(department))
+                {
+                    worksheet.Cell(3, 1).Value = "Phòng ban:";
+                    worksheet.Cell(3, 2).Value = department;
+                }
+
+                // Add table headers
+                worksheet.Cell(5, 1).Value = "STT";
+                worksheet.Cell(5, 2).Value = "Tên VPP";
+                worksheet.Cell(5, 3).Value = "Đơn vị tính";
+                worksheet.Cell(5, 4).Value = "Số lượng";
+                worksheet.Cell(5, 5).Value = "Đơn giá dự kiến";
+                worksheet.Cell(5, 6).Value = "Thành tiền";
+
+                worksheet.Range(5, 1, 5, 6).Style.Font.Bold = true;
+
+                // Populate data
+                int row = 6;
+                foreach (var request in filteredRequests)
+                {
+                    var user = await _userRepository.GetByIdAsync(request.UserID);
+
+                    // Add PYC row
+                    worksheet.Cell(row, 1).Value = $"Phiếu: {request.RequestCode} - {user.FullName} - {user.Department} - {request.CreatedDate:dd/MM/yyyy}";
+                    worksheet.Range(row, 1, row, 6).Merge();
+                    worksheet.Row(row).Style.Font.Bold = true;
+                    row++;
+
+                    // Add product request details
+                    int productIndex = 1;
+                    foreach (var productRequest in request.Product_Requests)
+                    {
+                        var product = await _productService.GetById(productRequest.ProductID);
+
+                        worksheet.Cell(row, 1).Value = productIndex++;
+                        worksheet.Cell(row, 2).Value = product.Name;
+                        worksheet.Cell(row, 3).Value = product.UnitCurrency;
+                        worksheet.Cell(row, 4).Value = productRequest.Quantity;
+                        worksheet.Cell(row, 5).Value = decimal.Parse(product.UnitPrice);
+                        worksheet.Cell(row, 6).Value = productRequest.Quantity * decimal.Parse(product.UnitPrice);
+                        row++;
+                    }
+                }
+
+                // Add total row
+                worksheet.Cell(row, 5).Value = "Tổng cộng:";
+                worksheet.Cell(row, 5).Style.Font.Bold = true;
+                worksheet.Cell(row, 6).FormulaA1 = $"SUM(F6:F{row - 1})";
+                worksheet.Cell(row, 6).Style.Font.Bold = true;
+
+                // Adjust column widths
+                worksheet.Columns().AdjustToContents();
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    return stream.ToArray();
+                }
+            }
+        }
+
+
+
 
 
 

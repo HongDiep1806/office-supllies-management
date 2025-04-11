@@ -25,6 +25,8 @@ namespace Office_supplies_management.Services
         Task<Dictionary<string, int>> GetProductCountForApprovedSummariesInDateRange(DateTime startDate, DateTime endDate);
         Task<byte[]> GenerateProductReportExcel(DateTime startDate, DateTime endDate); // Added for Excel generation
         Task<byte[]> GenerateSummaryDetailExcel(int summaryId);
+        Task<byte[]> GenerateApprovedRequestsExcel(DateTime startDate, DateTime endDate, string? department);
+
 
     }
 }

@@ -438,10 +438,12 @@ namespace Office_supplies_management.Services
                 worksheet.Columns(1, 5).AdjustToContents(); // Automatically adjust column widths
 
                 // Step 7: Return Excel file as byte array
+                var fileName = $"report-{startDate:yyyy-MM-dd}-{endDate:yyyy-MM-dd}.xlsx"; // Dynamic file name
                 using (var stream = new MemoryStream())
                 {
-                    workbook.SaveAs(stream);
-                    return stream.ToArray();
+                    workbook.SaveAs(stream); // Save the workbook to the stream
+                    _logger.LogInformation($"Report generated with file name: {fileName}");
+                    return stream.ToArray(); // Return the byte array
                 }
             }
         }

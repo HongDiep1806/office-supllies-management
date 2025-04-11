@@ -232,7 +232,11 @@ namespace Office_supplies_management.Controllers
             var query = new GenerateProductReportExcelQuery(startDate, endDate);
             var excelFile = await _mediator.Send(query);
 
-            return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ProductReport.xlsx");
+            // Generate the dynamic file name
+            var fileName = $"report-{startDate:yyyy-MM-dd}-{endDate:yyyy-MM-dd}.xlsx";
+
+            // Return the file with the dynamic name
+            return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
     }
 }

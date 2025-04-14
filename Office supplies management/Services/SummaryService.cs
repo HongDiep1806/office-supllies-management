@@ -9,6 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging; // Add logging
 using ClosedXML.Excel;
+using System.Globalization;
+using System.Globalization;
 namespace Office_supplies_management.Services
 {
     public class SummaryService : ISummaryService
@@ -366,20 +368,20 @@ namespace Office_supplies_management.Services
         {
             // Step 1: Get product counts
             var productCounts = await GetProductCountForApprovedSummariesInDateRange(startDate, endDate);
-
-            // Log product counts for debugging
             _logger.LogInformation("Product counts: {@ProductCounts}", productCounts);
 
             using (var workbook = new XLWorkbook())
             {
-                var worksheet = workbook.Worksheets.Add("Product Report");
+                // Set culture to use comma as thousands separator
 
+                var worksheet = workbook.Worksheets.Add("Product Report");
+                CultureInfo cultureInfo = new CultureInfo("en-US");
                 // Step 2: Add headers
                 var titleCell = worksheet.Cell(1, 1);
                 titleCell.Value = "Báo cáo chi tiết sản phẩm trong phiếu yêu cầu đã được tổng hợp";
-                titleCell.Style.Font.Bold = true; // Make the title bold
-                worksheet.Range(1, 1, 1, 5).Merge(); // Merge cells for the title
-                worksheet.Row(1).Height = 20; // Adjust row height for the title
+                titleCell.Style.Font.Bold = true;
+                worksheet.Range(1, 1, 1, 5).Merge();
+                worksheet.Row(1).Height = 20;
 
                 worksheet.Cell(2, 1).Value = "Từ:";
                 worksheet.Cell(2, 2).Value = startDate.ToString("dd/MM/yyyy");
@@ -398,13 +400,12 @@ namespace Office_supplies_management.Services
 
                 int row = 5;
                 int index = 1;
+                decimal totalSum = 0;
 
                 // Step 4: Populate data
                 foreach (var product in productCounts)
                 {
-                    var productName = product.Key; // Use product name as the key
-
-                    // Fetch product details by searching for the product name
+                    var productName = product.Key;
                     var products = await _productService.SearchProductsAsync(productName, null, null, null);
                     var productDetails = products?.FirstOrDefault(p => p.Name.Equals(productName, StringComparison.OrdinalIgnoreCase));
 
@@ -420,30 +421,44 @@ namespace Office_supplies_management.Services
                         continue;
                     }
 
-                    worksheet.Cell(row, 1).Value = index++; // Serial number
-                    worksheet.Cell(row, 2).Value = productName; // Product Name
-                    worksheet.Cell(row, 3).Value = unitPrice; // Unit Price
-                    worksheet.Cell(row, 4).Value = product.Value; // Quantity
-                    worksheet.Cell(row, 5).Value = unitPrice * product.Value; // Total = Price * Quantity
+                    decimal rowTotal = unitPrice * product.Value;
+                    totalSum += rowTotal;
+
+                    worksheet.Cell(row, 1).Value = index++;
+                    worksheet.Cell(row, 2).Value = productName;
+
+                    var unitPriceCell = worksheet.Cell(row, 3);
+                    unitPriceCell.Value = unitPrice;
+                    unitPriceCell.Style.NumberFormat.Format = "#,##0";
+
+                    var quantityCell = worksheet.Cell(row, 4);
+                    quantityCell.Value = product.Value;
+                    quantityCell.Style.NumberFormat.Format = "#,##0";
+
+                    var totalCell = worksheet.Cell(row, 5);
+                    totalCell.Value = rowTotal;
+                    totalCell.Style.NumberFormat.Format = "#,##0";
+
                     row++;
                 }
 
                 // Step 5: Add total row
-                worksheet.Cell(row, 4).Value = "Tổng giá trị:"; // Correct column placement
-                worksheet.Cell(row, 5).FormulaA1 = $"SUM(E5:E{row - 1})";
-                worksheet.Cell(row, 4).Style.Font.Bold = true; // Make the total label bold
-                worksheet.Cell(row, 5).Style.Font.Bold = true; // Make the total value bold
+                worksheet.Cell(row, 4).Value = "Tổng giá trị:";
+                worksheet.Cell(row, 4).Style.Font.Bold = true;
+
+                var sumCell = worksheet.Cell(row, 5);
+                sumCell.Value = totalSum;
+                sumCell.Style.NumberFormat.Format = "#,##0";
+                sumCell.Style.Font.Bold = true;
 
                 // Step 6: Adjust column widths
-                worksheet.Columns(1, 5).AdjustToContents(); // Automatically adjust column widths
+                worksheet.Columns(1, 5).AdjustToContents();
 
                 // Step 7: Return Excel file as byte array
-                var fileName = $"report-{startDate:yyyy-MM-dd}-{endDate:yyyy-MM-dd}.xlsx"; // Dynamic file name
                 using (var stream = new MemoryStream())
                 {
-                    workbook.SaveAs(stream); // Save the workbook to the stream
-                    _logger.LogInformation($"Report generated with file name: {fileName}");
-                    return stream.ToArray(); // Return the byte array
+                    workbook.SaveAs(stream);
+                    return stream.ToArray();
                 }
             }
         }
@@ -455,18 +470,23 @@ namespace Office_supplies_management.Services
 
             using (var workbook = new XLWorkbook())
             {
-                var worksheet = workbook.Worksheets.Add("Summary Detail");
+                // Set culture to use comma as thousands separator
+               
 
+                var worksheet = workbook.Worksheets.Add("Summary Detail");
+                CultureInfo cultureInfo = new CultureInfo("en-US");
                 // Add title
                 worksheet.Cell(1, 1).Value = $"Phiếu tổng hợp VPP {summary.SummaryCode}";
                 worksheet.Cell(1, 1).Style.Font.Bold = true;
                 worksheet.Range(1, 1, 1, 6).Merge();
                 User user = await _userRepository.GetByIdAsync(summary.UserID);
                 worksheet.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
                 // Add metadata
                 worksheet.Cell(2, 1).Value = $"Người thực hiện: {user.FullName}";
                 worksheet.Cell(2, 5).Value = $"Phòng Ban: {user.Department}";
                 worksheet.Cell(3, 5).Value = $"Ngày thực hiện: {summary.CreatedDate:dd/MM/yyyy}";
+
                 var statusCell = worksheet.Cell(4, 1);
                 if (!summary.IsProcessedBySupLead && !summary.IsApprovedBySupLead)
                 {
@@ -500,6 +520,7 @@ namespace Office_supplies_management.Services
                 int row = 6;
                 var requests = await _requestRepository.GetAllInclude(r => r.Product_Requests);
                 var filteredRequests = requests.Where(r => r.SummaryID == summaryId).ToList();
+                decimal totalSum = 0;
 
                 foreach (var request in filteredRequests)
                 {
@@ -507,30 +528,46 @@ namespace Office_supplies_management.Services
                     // Add "Phiếu yêu cầu" row
                     worksheet.Cell(row, 1).Value = $"Phiếu: {request.RequestCode} - {requestUser.FullName} - {requestUser.Department} - {request.CreatedDate:dd/MM/yyyy}";
                     worksheet.Range(row, 1, row, 6).Merge();
-                    worksheet.Cell(row, 6).Style.Fill.BackgroundColor = XLColor.LightGray; // Apply light gray to column F only
+                    worksheet.Cell(row, 6).Style.Fill.BackgroundColor = XLColor.LightGray;
                     worksheet.Row(row).Style.Font.Bold = true;
                     row++;
+
                     int index = 1;
                     foreach (var productRequest in request.Product_Requests)
                     {
                         var product = await _productService.GetById(productRequest.ProductID);
+                        decimal unitPrice = decimal.Parse(product.UnitPrice);
+                        decimal rowTotal = unitPrice * productRequest.Quantity;
+                        totalSum += rowTotal;
 
                         worksheet.Cell(row, 1).Value = index++;
                         worksheet.Cell(row, 2).Value = product.Name;
-                        worksheet.Cell(row, 3).Value = product.UnitCurrency; // Example unit
-                        worksheet.Cell(row, 4).Value = productRequest.Quantity;
-                        worksheet.Cell(row, 5).Value = decimal.Parse(product.UnitPrice);
-                        worksheet.Cell(row, 6).Value = productRequest.Quantity * decimal.Parse(product.UnitPrice);
+                        worksheet.Cell(row, 3).Value = product.UnitCurrency;
+
+                        var quantityCell = worksheet.Cell(row, 4);
+                        quantityCell.Value = productRequest.Quantity;
+                        quantityCell.Style.NumberFormat.Format = "#,##0";
+
+                        var unitPriceCell = worksheet.Cell(row, 5);
+                        unitPriceCell.Value = unitPrice;
+                        unitPriceCell.Style.NumberFormat.Format = "#,##0";
+
+                        var totalCell = worksheet.Cell(row, 6);
+                        totalCell.Value = rowTotal;
+                        totalCell.Style.NumberFormat.Format = "#,##0";
+
                         row++;
                     }
                 }
 
-
                 // Add total row
                 worksheet.Cell(row, 5).Value = "Tổng cộng:";
                 worksheet.Cell(row, 5).Style.Font.Bold = true;
-                worksheet.Cell(row, 6).FormulaA1 = $"SUM(F6:F{row - 1})";
-                worksheet.Cell(row, 6).Style.Font.Bold = true;
+
+                var sumCell = worksheet.Cell(row, 6);
+                sumCell.Value = totalSum;
+                sumCell.Style.NumberFormat.Format = "#,##0";
+                sumCell.Style.Font.Bold = true;
 
                 // Adjust column widths
                 worksheet.Columns().AdjustToContents();
@@ -559,13 +596,16 @@ namespace Office_supplies_management.Services
 
             var requests = await _requestRepository.GetAllInclude(r => r.Product_Requests);
             var filteredRequests = requests
-                .Where(r => r.CreatedDate.Date >= startDate.Date && r.CreatedDate.Date <= endDate.Date && summaryIds.Contains(r.SummaryID ?? 0) && userIds.Contains(r.UserID))
+                .Where(r => r.CreatedDate.Date >= startDate.Date && r.CreatedDate.Date <= endDate.Date &&
+                       summaryIds.Contains(r.SummaryID ?? 0) && userIds.Contains(r.UserID))
                 .ToList();
 
             using (var workbook = new XLWorkbook())
             {
-                var worksheet = workbook.Worksheets.Add("Yêu cầu đã duyệt");
+                // Set culture to use comma as thousands separator
 
+                var worksheet = workbook.Worksheets.Add("Yêu cầu đã duyệt");
+                CultureInfo cultureInfo = new CultureInfo("en-US");
                 // Add title
                 worksheet.Cell(1, 1).Value = "Báo cáo chi tiết yêu cầu đã được duyệt";
                 worksheet.Cell(1, 1).Style.Font.Bold = true;
@@ -595,6 +635,8 @@ namespace Office_supplies_management.Services
 
                 // Populate data
                 int row = 6;
+                decimal totalSum = 0;
+
                 foreach (var request in filteredRequests)
                 {
                     var user = await _userRepository.GetByIdAsync(request.UserID);
@@ -610,13 +652,26 @@ namespace Office_supplies_management.Services
                     foreach (var productRequest in request.Product_Requests)
                     {
                         var product = await _productService.GetById(productRequest.ProductID);
+                        decimal unitPrice = decimal.Parse(product.UnitPrice);
+                        decimal rowTotal = unitPrice * productRequest.Quantity;
+                        totalSum += rowTotal;
 
                         worksheet.Cell(row, 1).Value = productIndex++;
                         worksheet.Cell(row, 2).Value = product.Name;
                         worksheet.Cell(row, 3).Value = product.UnitCurrency;
-                        worksheet.Cell(row, 4).Value = productRequest.Quantity;
-                        worksheet.Cell(row, 5).Value = decimal.Parse(product.UnitPrice);
-                        worksheet.Cell(row, 6).Value = productRequest.Quantity * decimal.Parse(product.UnitPrice);
+
+                        var quantityCell = worksheet.Cell(row, 4);
+                        quantityCell.Value = productRequest.Quantity;
+                        quantityCell.Style.NumberFormat.Format = "#,##0";
+
+                        var unitPriceCell = worksheet.Cell(row, 5);
+                        unitPriceCell.Value = unitPrice;
+                        unitPriceCell.Style.NumberFormat.Format = "#,##0";
+
+                        var totalCell = worksheet.Cell(row, 6);
+                        totalCell.Value = rowTotal;
+                        totalCell.Style.NumberFormat.Format = "#,##0";
+
                         row++;
                     }
                 }
@@ -624,8 +679,11 @@ namespace Office_supplies_management.Services
                 // Add total row
                 worksheet.Cell(row, 5).Value = "Tổng cộng:";
                 worksheet.Cell(row, 5).Style.Font.Bold = true;
-                worksheet.Cell(row, 6).FormulaA1 = $"SUM(F6:F{row - 1})";
-                worksheet.Cell(row, 6).Style.Font.Bold = true;
+
+                var sumCell = worksheet.Cell(row, 6);
+                sumCell.Value = totalSum;
+                sumCell.Style.NumberFormat.Format = "#,##0";
+                sumCell.Style.Font.Bold = true;
 
                 // Adjust column widths
                 worksheet.Columns().AdjustToContents();

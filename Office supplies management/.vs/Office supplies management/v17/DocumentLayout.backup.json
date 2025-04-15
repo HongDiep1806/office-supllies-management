@@ -638,7 +638,7 @@
               "RelativeDocumentMoniker": "Services\\SummaryService.cs",
               "ToolTip": "E:\\vpp_7\\Office supplies management\\Services\\SummaryService.cs",
               "RelativeToolTip": "Services\\SummaryService.cs",
-              "ViewState": "AgIAAFUCAAAAAAAAAAAiwGICAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAAEsCAAAAAAAAAADwv10CAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-14T02:00:43.825Z",
               "EditorCaption": ""
@@ -654,10 +654,6 @@
               "ViewState": "AgIAAO8AAAAAAAAAAAAYwAYBAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-14T02:01:06.747Z"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
@@ -2425,11 +2421,15 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             },
             {
               "$type": "Bookmark",

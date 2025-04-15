@@ -70,6 +70,7 @@ namespace Office_supplies_management.Services
 
             summary.IsProcessedBySupLead = updateSummaryDto.IsProcessedBySupLead;
             summary.IsApprovedBySupLead = updateSummaryDto.IsApprovedBySupLead;
+            summary.UpdateDate = DateTime.UtcNow.AddHours(7); // Adjust to GMT+7
             await _summaryRepository.UpdateAsync(summary.SummaryID, summary);
             return true;
         }

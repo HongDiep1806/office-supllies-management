@@ -324,6 +324,17 @@ namespace Office_supplies_management.Controllers
         //    }
         //    return BadRequest("Failed to adjust dates.");
         //}
+        [HttpPut("reset-approval-dates")]
+        public async Task<IActionResult> ResetApprovalDates()
+        {
+            var result = await _mediator.Send(new ResetApprovalDatesCommand());
+            if (!result)
+            {
+                return BadRequest("Failed to reset approval dates.");
+            }
+            return Ok("Approval dates reset successfully for all requests.");
+        }
+
 
 
     }

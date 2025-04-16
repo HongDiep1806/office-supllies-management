@@ -396,7 +396,30 @@ namespace Office_supplies_management.Services
             return true;
         }
 
+        public async Task<bool> ResetApprovalDatesAsync()
+        {
+            // Fetch all requests
+            var allRequests = await _requestRepository.GetAllAsync();
 
+            // Iterate through each request and reset dates based on conditions
+            foreach (var requestEntity in allRequests)
+            {
+                if (!requestEntity.IsApprovedByDepLead)
+                {
+                    requestEntity.DateDepLeadApprove = DateTime.MinValue; // Reset to blank date
+                }
+
+                if (!requestEntity.IsApprovedBySupLead)
+                {
+                    requestEntity.DateSupLeadApprove = DateTime.MinValue; // Reset to blank date
+                }
+
+                // Update the request in the database
+                await _requestRepository.UpdateAsync(requestEntity.RequestID, requestEntity);
+            }
+
+            return true;
+        }
 
 
 

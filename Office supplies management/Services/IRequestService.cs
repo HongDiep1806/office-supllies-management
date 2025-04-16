@@ -29,5 +29,6 @@ namespace Office_supplies_management.Services
         Task<bool> RecalculateTotalPrice(int requestID);
         Task<bool> RecalculateAllRequestsTotalPrice();
         Task<bool> AdjustDatesByAdding7Hours();
+        Task<bool> ResetApprovalDatesAsync();
     }
 }
